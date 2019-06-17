@@ -3,20 +3,19 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BeerQuest.Models
+namespace Domain
 {
-    public class Business
+    public class Member
     {
         [Key]
         public int Id { get; set; }
 
-        public string Address { get; set; }
-        public bool Premium { get; set; }
-        public bool IsFree { get; set; }
+        public string Title { get; set; }
+        public double Points { get; set; }
         public string Name { get; set; }
+        public List<Stop> Stops{ get; set; }
         //[ForeignKey("ApplicationUser")]
         //public string ApplicationId { get; set; }
         //public ApplicationUser ApplicationUser { get; set; }
-
     }
 }
