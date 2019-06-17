@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BeerQuest.Models
+namespace Domain
 {
     public class Stop
     {
@@ -12,7 +12,6 @@ namespace BeerQuest.Models
         public int BusinessId { get; set; }
         public bool Complete { get; set; }
         public bool IsFree { get; set; }
-
         public DateTime DateTime { get; set; }
         [ForeignKey("Member")]
         public int MemberID { get; set; }
