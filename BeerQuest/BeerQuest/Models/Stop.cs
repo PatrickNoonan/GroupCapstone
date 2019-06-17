@@ -12,6 +12,7 @@ namespace BeerQuest.Models
         public int BusinessId { get; set; }
         public bool Complete { get; set; }
         public bool IsFree { get; set; }
+
         public DateTime DateTime { get; set; }
         [ForeignKey("Member")]
         public int MemberID { get; set; }
