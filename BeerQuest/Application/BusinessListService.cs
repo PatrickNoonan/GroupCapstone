@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Infrastructure
+namespace Application
 {
-    public interface IMemberRepository
+    class BusinessListService : IBusinessListService
     {
-        void Edit();
     }
 }

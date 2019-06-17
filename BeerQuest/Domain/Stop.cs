@@ -7,18 +7,18 @@ namespace Domain
     public class Stop
     {
         [Key]
-        public int id { get; set; }
+        public int Id { get; set; }
         
-        public int businessId { get; set; }
-        public bool complete { get; set; }
-        public bool isFree { get; set; }
-        public DateTime dateTime { get; set; }
+        public int BusinessId { get; set; }
+        public bool Complete { get; set; }
+        public bool IsFree { get; set; }
+        public DateTime DateTime { get; set; }
         [ForeignKey("Member")]
-        public int memberID { get; set; }
-        public Member member { get; set; }
+        public int MemberID { get; set; }
+        public Member Member { get; set; }
         [ForeignKey("Business")]
-        public int businessID { get; set; }
-        public Business business { get; set; }
+        public int BusinessID { get; set; }
+        public Business Business { get; set; }
 
 
 

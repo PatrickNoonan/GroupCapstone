@@ -1,18 +1,19 @@
 ﻿using Domain;
-using Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Infrastructure.Data;
 
 namespace Application
 {
     class MemberListService : IMemberListService
     {
-        private IMemberListRepository _memberListRepository;
+        private readonly ApplicationDbContext _context;
 
-        public MemberListService(IMemberListRepository memberListRepository)
+
+        public MemberListService()
         {
-            _memberListRepository = memberListRepository;
+            
         }
         public void Add()
         {
