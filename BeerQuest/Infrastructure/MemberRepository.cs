@@ -2,7 +2,11 @@
 
 namespace Infrastructure
 {
-    public class MemberRepository
+    public class MemberRepository : IMemberRepository
     {
+        public void Edit()
+        {
+
+        }
     }
 }

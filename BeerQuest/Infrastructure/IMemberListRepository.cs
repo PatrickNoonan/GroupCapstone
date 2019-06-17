@@ -1,15 +1,14 @@
-﻿using System;
+﻿using Domain;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Infrastructure
 {
-    interface IMemberListRepository
+    public interface IMemberListRepository
     {
         List<Member> GetAll();
 
-        void Add();
-
-        void Edit();
+        void Add(Member member);
     }
 }

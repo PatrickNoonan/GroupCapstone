@@ -1,6 +1,6 @@
-﻿using System;
-using Domain;
+﻿using Domain;
 using Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,7 +8,7 @@ namespace Application
 {
     class MemberListService : IMemberListService
     {
-        private MemberListRepository _memberListRepository;
+        private IMemberListRepository _memberListRepository;
 
         public MemberListService(IMemberListRepository memberListRepository)
         {

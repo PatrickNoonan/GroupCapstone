@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Infrastructure
 {
-    interface IMemberRepository
+    public interface IMemberRepository
     {
+        void Edit();
     }
 }
