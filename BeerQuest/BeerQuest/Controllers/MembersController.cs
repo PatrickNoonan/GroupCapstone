@@ -159,19 +159,64 @@ namespace BeerQuest.Controllers
             return _context.Members.Any(e => e.Id == id);
         }
 
-        public void CreatePassport()
+        public ActionResult CustomerPassport()
         {
-            //this.user
+            Passport passport;
+            passport = CreatePassport();
+            return View(passport);
+        }
+
+        public Passport CreatePassport()
+        {
             var potentialStops = _context.Businesses.ToList();
             Passport passport = new Passport();
-            passport.StopOne = new Stop();
-            int total = _context.Businesses.Count();
+            ChooseStop(potentialStops, passport.StopOne, true);
+            ChooseStop(potentialStops, passport.StopTwo, false);
+            ChooseStop(potentialStops, passport.StopThree, false);
+            ChooseStop(potentialStops, passport.StopFour, true);
+            return passport;
+            
+        }
 
+        public void ChooseStop(List<Business> list, Stop stop, bool premium)
+        {
+            int total = list.Count();
             Random r = new Random();
             int offset = r.Next(0, total);
-            var newStop = _context.Businesses.Skip(offset).FirstOrDefault();
-            //if business.id is already in passport, try again
-
+            if (premium == true)
+            {
+                var newStop = list.Skip(offset).FirstOrDefault();
+                while(newStop.Premium == false)
+                {
+                    newStop = list.Skip(offset).FirstOrDefault();
+                }
+                list.Remove(newStop);
+                stop.BusinessID = newStop.Id;
+                //stop.MemberID = this.User.Identity.GetId();
+            }
+            else
+            {
+                var newStop = list.Skip(offset).FirstOrDefault();
+                list.Remove(newStop);
+                stop.BusinessID = newStop.Id;
+                //stop.MemberID = this.User.Identity.GetId();
+            }
         }
+
+        public bool BusinessCheckIn(Stop stop, int pin)
+        {
+            if(pin == stop.Business.Pin)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        //Some method that generates the fifth stop if the first four are complete.
+        
+
     }
 }

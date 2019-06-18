@@ -48,5 +48,21 @@
 <p id="#prompt"></p>
 <table id="#map"></table>
 
+@*@{
+    if (this.User.ActivePassport == true)
+    {
+        
+        <script>
+            //map logic
+        </script>
+        
+    }
+    else
+    {
+       
+        <p>Would you like to start a new passport?</p>
+        <a asp-controller="Members" asp-action="CreatePassport">Add Two Products</a>
+    }
+}*@
 
 
