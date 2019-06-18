@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Domain
+namespace BeerQuest.Models
 {
     public class Member
     {
@@ -13,9 +13,10 @@ namespace Domain
         public string Title { get; set; }
         public double Points { get; set; }
         public string Name { get; set; }
-        public List<Stop> Stops{ get; set; }
-        //[ForeignKey("ApplicationUser")]
-        //public string ApplicationId { get; set; }
-        //public ApplicationUser ApplicationUser { get; set; }
+        //public List<Stop> Stops{ get; set; }
+        [ForeignKey("ApplicationUser")]
+        public string ApplicationId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
+        public ApplicationRole ApplicationRole { get; set; }
     }
 }

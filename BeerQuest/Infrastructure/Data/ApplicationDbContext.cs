@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Domain;
+using BeerQuest.Models;
 
 namespace Infrastructure.Data
 {
@@ -12,6 +13,8 @@ namespace Infrastructure.Data
     {
         public DbSet<Member> Members { get; set; }
         public DbSet<Business> Businesses { get; set; }
+        public DbSet<ApplicationRole> Role { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

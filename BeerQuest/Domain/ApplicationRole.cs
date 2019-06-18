@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace BeerQuest.Models
 {
-    public class ApplicationRole:IdentityRole
+    public class ApplicationRole:IdentityUser
     {
         public ApplicationRole() : base() { }
 
-        public ApplicationRole(string roleName):base(roleName)
+        public ApplicationRole(string roleName):base()
         {
 
         }
