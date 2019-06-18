@@ -15,9 +15,9 @@ namespace Application
         {
             
         }
-        public void Add()
+        public void Add(Member member)
         {
-            throw new NotImplementedException();
+            _context.Add(member);
         }
 
         public List<Member> GetAll()
