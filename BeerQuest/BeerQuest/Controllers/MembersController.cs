@@ -214,6 +214,11 @@ namespace BeerQuest.Controllers
                 return false;
             }
         }
+        public List<Message> GetMesssageList()
+        {
+            var messageList = _context.Messages.ToList();
+            return messageList;
+        }
 
         //Some method that generates the fifth stop if the first four are complete.
         
