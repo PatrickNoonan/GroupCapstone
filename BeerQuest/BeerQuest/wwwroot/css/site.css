@@ -18,7 +18,8 @@ body {
     line-height: 1.4;
 }
 
-.carousel-inner .item img {
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
     width: 100%;
 }
 
@@ -29,6 +30,7 @@ body {
 
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
+    /* Hide captions */
     .carousel-caption {
         display: none;
     }

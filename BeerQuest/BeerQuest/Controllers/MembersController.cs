@@ -10,6 +10,7 @@ using Infrastructure.Data;
 
 namespace BeerQuest.Controllers
 {
+    //This currently pulls a list of all the members. We want it to only function for a single user.
     public class MembersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,6 +23,14 @@ namespace BeerQuest.Controllers
         // GET: Members
         public async Task<IActionResult> Index()
         {
+            //TODO: Prompt new Quest or Display details of current
+            //Get the current logged in user
+            //string id = User.Identity.GetUserId();
+            //if (id != null)
+            //{
+            //    Member member = _context.Members.Where(m => m.ApplicationId == id).FirstOrDefault();
+            //    return View(member);
+            //}
             return View(await _context.Members.ToListAsync());
         }
 
@@ -149,5 +158,70 @@ namespace BeerQuest.Controllers
         {
             return _context.Members.Any(e => e.Id == id);
         }
+
+        public ActionResult CustomerPassport()
+        {
+            Passport passport;
+            passport = CreatePassport();
+            return View(passport);
+        }
+
+        public Passport CreatePassport()
+        {
+            var potentialStops = _context.Businesses.ToList();
+            Passport passport = new Passport();
+            ChooseStop(potentialStops, passport.StopOne, true);
+            ChooseStop(potentialStops, passport.StopTwo, false);
+            ChooseStop(potentialStops, passport.StopThree, false);
+            ChooseStop(potentialStops, passport.StopFour, true);
+            return passport;
+            
+        }
+
+        public void ChooseStop(List<Business> list, Stop stop, bool premium)
+        {
+            int total = list.Count();
+            Random r = new Random();
+            int offset = r.Next(0, total);
+            if (premium == true)
+            {
+                var newStop = list.Skip(offset).FirstOrDefault();
+                while(newStop.Premium == false)
+                {
+                    newStop = list.Skip(offset).FirstOrDefault();
+                }
+                list.Remove(newStop);
+                stop.BusinessID = newStop.Id;
+                //stop.MemberID = this.User.Identity.GetId();
+            }
+            else
+            {
+                var newStop = list.Skip(offset).FirstOrDefault();
+                list.Remove(newStop);
+                stop.BusinessID = newStop.Id;
+                //stop.MemberID = this.User.Identity.GetId();
+            }
+        }
+
+        public bool BusinessCheckIn(Stop stop, int pin)
+        {
+            if(pin == stop.Business.Pin)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public List<Message> GetMesssageList()
+        {
+            var messageList = _context.Messages.ToList();
+            return messageList;
+        }
+
+        //Some method that generates the fifth stop if the first four are complete.
+        
+
     }
 }

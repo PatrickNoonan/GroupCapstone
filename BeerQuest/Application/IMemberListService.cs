@@ -9,6 +9,6 @@ namespace Application
     {
         List<Member> GetAll();
 
-        void Add();
+        void Add(Member member);
     }
 }
