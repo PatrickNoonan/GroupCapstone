@@ -19,7 +19,6 @@ namespace BeerQuest.Helper
             requestObject.Method = "GET";
             HttpWebResponse responseObject = null;
             responseObject = (HttpWebResponse)requestObject.GetResponse();
-
             string urlResult = null;
             using (Stream stream = responseObject.GetResponseStream())
             {
@@ -71,6 +70,7 @@ namespace BeerQuest.Helper
         public float lat { get; set; }
         public float lng { get; set; }
     }
+
 }
 
 
