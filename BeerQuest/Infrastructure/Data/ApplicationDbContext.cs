@@ -14,6 +14,7 @@ namespace Infrastructure.Data
         public DbSet<Business> Businesses { get; set; }
         public DbSet<Passport> Passports { get; set; }
         public DbSet<Stop> Stops { get; set; }
+        public DbSet<ApplicationRole> Role { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

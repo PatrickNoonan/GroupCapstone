@@ -13,9 +13,10 @@ namespace Domain
         public string Title { get; set; }
         public double Points { get; set; }
         public string Name { get; set; }
-        public List<Stop> Stops{ get; set; }
-        //[ForeignKey("ApplicationUser")]
-        //public string ApplicationId { get; set; }
-        //public ApplicationUser ApplicationUser { get; set; }
+        //public List<Stop> Stops{ get; set; }
+        [ForeignKey("ApplicationUser")]
+        public string ApplicationId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
+        public ApplicationRole ApplicationRole { get; set; }
     }
 }

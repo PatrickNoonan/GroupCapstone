@@ -4,17 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BeerQuest.Models
+namespace Domain
 {
+
     public class ApplicationRole : IdentityRole
+
     {
         public ApplicationRole() : base() { }
 
-        public ApplicationRole(string roleName):base(roleName)
+        public ApplicationRole(string roleName) : base()
         {
 
         }
-        public ApplicationRole(string roleName,string description,DateTime creationDate):base(roleName)
+        public ApplicationRole(string roleName, string description, DateTime creationDate) : base(roleName)
         {
             this.Description = description;
             this.CreationDate = creationDate;
