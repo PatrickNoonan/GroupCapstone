@@ -41,9 +41,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<bool>("Premium");
 
-                    b.Property<string>("Role");
-
                     b.Property<string>("State");
+
+                    b.Property<string>("UserRole");
 
                     b.HasKey("Id");
 
@@ -68,9 +68,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<double>("Points");
 
-                    b.Property<string>("Role");
-
                     b.Property<string>("Title");
+
+                    b.Property<string>("UserRole");
 
                     b.HasKey("Id");
 
@@ -339,7 +339,7 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("LastName");
 
-                    b.Property<string>("Role");
+                    b.Property<string>("RoleString");
 
                     b.ToTable("ApplicationUser");
 
