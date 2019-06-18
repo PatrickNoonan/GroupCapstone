@@ -16,16 +16,22 @@ namespace BeerQuest.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        //private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        //private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-        private readonly RoleManager<IdentityRole> _roleManager;
+        //private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly RoleManager<ApplicationRole> _roleManager;
 
         public RegisterModel(
-            RoleManager<IdentityRole>roleManager,
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
+            //RoleManager<IdentityRole>roleManager,
+            RoleManager<ApplicationRole> roleManager,
+            //UserManager<IdentityUser> userManager,
+            UserManager<ApplicationUser> userManager,
+            //SignInManager<IdentityUser> signInManager,
+            SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
@@ -75,6 +81,11 @@ namespace BeerQuest.Areas.Identity.Pages.Account
             [StringLength(50, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [Display(Name = "User Name")]
             public string UserName { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Role")]
+            public string Role { get; set; }
         }
 
         public void OnGet(string returnUrl = null)
@@ -95,6 +106,7 @@ namespace BeerQuest.Areas.Identity.Pages.Account
                     Email = Input.Email,
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
+                    Role = Input.Role
 
                 };
 

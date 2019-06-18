@@ -18,5 +18,7 @@ namespace Domain
         public string ApplicationId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
         public ApplicationRole ApplicationRole { get; set; }
+        public string Role { get; set; }
+
     }
 }
