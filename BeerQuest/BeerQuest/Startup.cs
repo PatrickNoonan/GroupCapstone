@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Infrastructure.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using BeerQuest.Models;
+using Domain;
 
 namespace BeerQuest
 {
@@ -39,11 +39,12 @@ namespace BeerQuest
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<IdentityUser, IdentityRole>(
+            services.AddIdentity<ApplicationUser, ApplicationRole>(
                 options => options.Stores.MaxLengthForKeys = 128)
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultUI()
                 .AddDefaultTokenProviders();
+
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -74,7 +75,7 @@ namespace BeerQuest
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-            DuummyData.Initialize(context,userManager,roleManager).Wait();
+            //DuummyData.Initialize(context,userManager,roleManager).Wait();
         }
     }
 }

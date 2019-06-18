@@ -4,7 +4,6 @@ using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Domain;
-using BeerQuest.Models;
 
 namespace Infrastructure.Data
 {

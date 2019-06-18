@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Domain;
 using Infrastructure.Data;
-using BeerQuest.Models;
+using Domain;
 
 namespace BeerQuest.Controllers
 {

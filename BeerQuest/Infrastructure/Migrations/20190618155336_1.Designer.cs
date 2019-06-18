@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190618133756_7")]
-    partial class _7
+    [Migration("20190618155336_1")]
+    partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,13 +29,25 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("Address");
 
+                    b.Property<string>("ApplicationId");
+
+                    b.Property<string>("ApplicationRoleId");
+
+                    b.Property<string>("City");
+
                     b.Property<bool>("IsFree");
 
                     b.Property<string>("Name");
 
                     b.Property<bool>("Premium");
 
+                    b.Property<string>("State");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ApplicationId");
+
+                    b.HasIndex("ApplicationRoleId");
 
                     b.ToTable("Businesses");
                 });
@@ -46,6 +58,10 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ApplicationId");
+
+                    b.Property<string>("ApplicationRoleId");
+
                     b.Property<string>("Name");
 
                     b.Property<double>("Points");
@@ -54,34 +70,11 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ApplicationId");
+
+                    b.HasIndex("ApplicationRoleId");
+
                     b.ToTable("Members");
-                });
-
-            modelBuilder.Entity("Domain.Stop", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("BusinessID");
-
-                    b.Property<int>("BusinessId");
-
-                    b.Property<bool>("Complete");
-
-                    b.Property<DateTime>("DateTime");
-
-                    b.Property<bool>("IsFree");
-
-                    b.Property<int>("MemberID");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BusinessID");
-
-                    b.HasIndex("MemberID");
-
-                    b.ToTable("Stop");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -91,6 +84,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
 
                     b.Property<string>("Name")
                         .HasMaxLength(256);
@@ -106,6 +102,8 @@ namespace Infrastructure.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityRole");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -137,6 +135,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
@@ -177,6 +178,8 @@ namespace Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -249,17 +252,52 @@ namespace Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Domain.Stop", b =>
+            modelBuilder.Entity("Domain.ApplicationRole", b =>
                 {
-                    b.HasOne("Domain.Business", "Business")
-                        .WithMany()
-                        .HasForeignKey("BusinessID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityRole");
 
-                    b.HasOne("Domain.Member", "Member")
-                        .WithMany("Stops")
-                        .HasForeignKey("MemberID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.Property<DateTime>("CreationDate");
+
+                    b.Property<string>("Description");
+
+                    b.ToTable("ApplicationRole");
+
+                    b.HasDiscriminator().HasValue("ApplicationRole");
+                });
+
+            modelBuilder.Entity("Domain.ApplicationUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
+
+                    b.ToTable("ApplicationUser");
+
+                    b.HasDiscriminator().HasValue("ApplicationUser");
+                });
+
+            modelBuilder.Entity("Domain.Business", b =>
+                {
+                    b.HasOne("Domain.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationId");
+
+                    b.HasOne("Domain.ApplicationRole", "ApplicationRole")
+                        .WithMany()
+                        .HasForeignKey("ApplicationRoleId");
+                });
+
+            modelBuilder.Entity("Domain.Member", b =>
+                {
+                    b.HasOne("Domain.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationId");
+
+                    b.HasOne("Domain.ApplicationRole", "ApplicationRole")
+                        .WithMany()
+                        .HasForeignKey("ApplicationRoleId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

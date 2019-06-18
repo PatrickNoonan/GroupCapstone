@@ -1,4 +1,4 @@
-﻿using BeerQuest.Models;
+﻿using Domain;
 using Domain;
 using System;
 using System.Collections.Generic;
