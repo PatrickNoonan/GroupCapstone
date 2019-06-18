@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190618155336_1")]
-    partial class _1
+    [Migration("20190618181207_13377")]
+    partial class _13377
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,6 +38,8 @@ namespace Infrastructure.Migrations
                     b.Property<bool>("IsFree");
 
                     b.Property<string>("Name");
+
+                    b.Property<int>("Pin");
 
                     b.Property<bool>("Premium");
 
@@ -75,6 +77,68 @@ namespace Infrastructure.Migrations
                     b.HasIndex("ApplicationRoleId");
 
                     b.ToTable("Members");
+                });
+
+            modelBuilder.Entity("Domain.Passport", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CurrentStop");
+
+                    b.Property<DateTime>("StartDate");
+
+                    b.Property<DateTime>("StopDate");
+
+                    b.Property<int?>("StopFiveId");
+
+                    b.Property<int?>("StopFourId");
+
+                    b.Property<int?>("StopOneId");
+
+                    b.Property<int?>("StopThreeId");
+
+                    b.Property<int?>("StopTwoId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StopFiveId");
+
+                    b.HasIndex("StopFourId");
+
+                    b.HasIndex("StopOneId");
+
+                    b.HasIndex("StopThreeId");
+
+                    b.HasIndex("StopTwoId");
+
+                    b.ToTable("Passports");
+                });
+
+            modelBuilder.Entity("Domain.Stop", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BusinessID");
+
+                    b.Property<DateTime>("CheckInDate");
+
+                    b.Property<bool>("Complete");
+
+                    b.Property<bool>("IsFree");
+
+                    b.Property<int>("MemberID");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BusinessID");
+
+                    b.HasIndex("MemberID");
+
+                    b.ToTable("Stops");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -273,6 +337,8 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("LastName");
 
+                    b.Property<string>("Role");
+
                     b.ToTable("ApplicationUser");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
@@ -298,6 +364,42 @@ namespace Infrastructure.Migrations
                     b.HasOne("Domain.ApplicationRole", "ApplicationRole")
                         .WithMany()
                         .HasForeignKey("ApplicationRoleId");
+                });
+
+            modelBuilder.Entity("Domain.Passport", b =>
+                {
+                    b.HasOne("Domain.Stop", "StopFive")
+                        .WithMany()
+                        .HasForeignKey("StopFiveId");
+
+                    b.HasOne("Domain.Stop", "StopFour")
+                        .WithMany()
+                        .HasForeignKey("StopFourId");
+
+                    b.HasOne("Domain.Stop", "StopOne")
+                        .WithMany()
+                        .HasForeignKey("StopOneId");
+
+                    b.HasOne("Domain.Stop", "StopThree")
+                        .WithMany()
+                        .HasForeignKey("StopThreeId");
+
+                    b.HasOne("Domain.Stop", "StopTwo")
+                        .WithMany()
+                        .HasForeignKey("StopTwoId");
+                });
+
+            modelBuilder.Entity("Domain.Stop", b =>
+                {
+                    b.HasOne("Domain.Business", "Business")
+                        .WithMany()
+                        .HasForeignKey("BusinessID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Domain.Member", "Member")
+                        .WithMany()
+                        .HasForeignKey("MemberID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
