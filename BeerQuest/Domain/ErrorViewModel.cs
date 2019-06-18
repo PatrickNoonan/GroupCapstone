@@ -1,6 +1,6 @@
 using System;
 
-namespace BeerQuest.Models
+namespace Domain
 {
     public class ErrorViewModel
     {

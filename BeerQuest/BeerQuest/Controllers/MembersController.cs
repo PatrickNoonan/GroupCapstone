@@ -10,6 +10,7 @@ using Infrastructure.Data;
 
 namespace BeerQuest.Controllers
 {
+    //This currently pulls a list of all the members. We want it to only function for a single user.
     public class MembersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,6 +23,8 @@ namespace BeerQuest.Controllers
         // GET: Members
         public async Task<IActionResult> Index()
         {
+            //TODO: Prompt new Quest or Display details of current
+            //Get the current logged in user
             return View(await _context.Members.ToListAsync());
         }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BeerQuest.Models
 {
-    public class ApplicationRole:IdentityRole
+    public class ApplicationRole : IdentityRole
     {
         public ApplicationRole() : base() { }
 
