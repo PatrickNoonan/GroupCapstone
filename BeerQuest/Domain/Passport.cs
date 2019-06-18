@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Domain
 {
-    class Passport
+    public class Passport
     {
         [Key]
         public int Id { get; set; }

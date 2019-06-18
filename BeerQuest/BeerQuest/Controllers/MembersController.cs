@@ -25,6 +25,12 @@ namespace BeerQuest.Controllers
         {
             //TODO: Prompt new Quest or Display details of current
             //Get the current logged in user
+            //string id = User.Identity.GetUserId();
+            //if (id != null)
+            //{
+            //    Member member = _context.Members.Where(m => m.ApplicationId == id).FirstOrDefault();
+            //    return View(member);
+            //}
             return View(await _context.Members.ToListAsync());
         }
 
@@ -151,6 +157,21 @@ namespace BeerQuest.Controllers
         private bool MemberExists(int id)
         {
             return _context.Members.Any(e => e.Id == id);
+        }
+
+        public void CreatePassport()
+        {
+            //this.user
+            var potentialStops = _context.Businesses.ToList();
+            Passport passport = new Passport();
+            passport.StopOne = new Stop();
+            int total = _context.Businesses.Count();
+
+            Random r = new Random();
+            int offset = r.Next(0, total);
+            var newStop = _context.Businesses.Skip(offset).FirstOrDefault();
+            //if business.id is already in passport, try again
+
         }
     }
 }

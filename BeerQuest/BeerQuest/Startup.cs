@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Infrastructure.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using BeerQuest.Models;
+
 
 namespace BeerQuest
 {
