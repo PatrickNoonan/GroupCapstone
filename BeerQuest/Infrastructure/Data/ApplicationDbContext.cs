@@ -7,6 +7,7 @@ using Domain;
 
 namespace Infrastructure.Data
 {
+    //public class ApplicationDbContext : IdentityDbContext<ApplicationUser,ApplicationRole,string>
     public class ApplicationDbContext : IdentityDbContext
     {
         public DbSet<Member> Members { get; set; }
