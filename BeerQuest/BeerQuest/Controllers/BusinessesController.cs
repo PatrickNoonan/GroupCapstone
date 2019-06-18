@@ -149,5 +149,10 @@ namespace BeerQuest.Controllers
         {
             return _context.Businesses.Any(e => e.Id == id);
         }
+        public void GetPremium(Business business)
+        {
+            business.Premium = true;
+            _context.SaveChanges();
+        }
     }
 }

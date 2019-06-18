@@ -9,8 +9,6 @@ namespace Domain
     {
         [Key]
         public int Id { get; set; }
-        
-        
         public bool Complete { get; set; }
         public bool IsFree { get; set; }
         public DateTime CheckInDate { get; set; }
@@ -20,8 +18,6 @@ namespace Domain
         [ForeignKey("Business")]
         public int BusinessID { get; set; }
         public Business Business { get; set; }
-
-
 
     }
 }
