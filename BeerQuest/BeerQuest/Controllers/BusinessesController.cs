@@ -165,5 +165,46 @@ namespace BeerQuest.Controllers
             business.Premium = true;
             _context.SaveChanges();
         }
+<<<<<<< HEAD
+        
+        public void GetMembersVisited(Business business)
+        {
+            var membersList = _context.Members.ToList();
+            var relevantMembersList = new List<Member>();
+            
+            foreach (Member el in membersList)
+            {
+                //if ( el.passport.completedVisitAt == business.location ){
+                //relevantMembersList.Add(el);
+                //}
+            }
+        }
+        public List<BusinessData> GetData()
+        {
+            List<BusinessData> data = new List<BusinessData>();
+            List<DateTime> allDates = new List<DateTime>();
+            var messageList = _context.Messages.ToList();
+            var startDate = messageList[0].CurrentDay;
+            DateTime now = DateTime.Now;
+            for (DateTime date = startDate; date < now; date = date.AddDays(1))
+            {
+                allDates.Add(date);
+            }
+
+            for (int i = 0; i < allDates.Count; i++)
+                {
+                    BusinessData businessData = new BusinessData();
+                List<Message> dateList = _context.Messages.Where(c => c.CurrentDay == allDates[i]).ToList();
+                businessData.date = allDates[i];
+                businessData.count = dateList.Count;
+                data.Add(businessData);
+
+                }
+            return data;
+            
+
+        }
+=======
+>>>>>>> dfba83c642beb221aa7fdcf9834875cf0bb76fe0
     }
 }
