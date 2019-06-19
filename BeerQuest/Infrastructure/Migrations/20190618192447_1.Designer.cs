@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190618181518_3")]
-    partial class _3
+    [Migration("20190618192447_1")]
+    partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -43,9 +43,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<bool>("Premium");
 
-                    b.Property<string>("Role");
-
                     b.Property<string>("State");
+
+                    b.Property<string>("UserRole");
 
                     b.HasKey("Id");
 
@@ -70,9 +70,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<double>("Points");
 
-                    b.Property<string>("Role");
-
                     b.Property<string>("Title");
+
+                    b.Property<string>("UserRole");
 
                     b.HasKey("Id");
 
@@ -341,7 +341,7 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("LastName");
 
-                    b.Property<string>("Role");
+                    b.Property<string>("RoleString");
 
                     b.ToTable("ApplicationUser");
 

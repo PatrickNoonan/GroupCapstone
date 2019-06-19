@@ -2,7 +2,7 @@
 
 namespace Infrastructure.Migrations
 {
-    public partial class _1337 : Migration
+    public partial class removeduselessdbset : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

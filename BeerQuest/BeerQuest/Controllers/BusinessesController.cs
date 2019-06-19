@@ -22,6 +22,9 @@ namespace BeerQuest.Controllers
         // GET: Businesses
         public async Task<IActionResult> Index()
         {
+            //Get logged in business
+            //this.User.ID == _context.Businesses.Where(this.User.Id == id)
+            //return View(loggedinbusiness)
             return View(await _context.Businesses.ToListAsync());
         }
 

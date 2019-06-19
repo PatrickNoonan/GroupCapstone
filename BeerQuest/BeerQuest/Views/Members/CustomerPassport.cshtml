@@ -4,4 +4,33 @@
 }
 
 <h2>CustomerPassport</h2>
+@*TODO: Display map of passport with Details of current Business
+    Formbox for Business to enter pin, with a button that triggers BusinessCheckIn(current stop, pin)
 
+*@
+
+@*<script>
+        var map;
+        var centermap = {lat: 43.0065380, lng: -87.9071726}
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: centermap,
+                zoom: 13
+            });
+            @foreach (Stop stop in Model)
+             {
+                    <text>
+                    bar = { lat: @stop.Business.Latitude., lng: @stop.Business.Longitude }
+                    marker = new google.maps.Marker({
+                    position: bar,
+                    map: map
+                    });
+                    </text>
+             }
+        }
+
+</script>*@
+@*@{
+    var myScriptSrc = "https://maps.googleapis.com/maps/api/js?key=" + APIkey.SecretKey + "&callback=initMap async defer";
+}*@
+@*<script src=@myScriptSrc></script>*@

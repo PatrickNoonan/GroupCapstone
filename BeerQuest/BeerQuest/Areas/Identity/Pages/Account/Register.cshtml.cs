@@ -85,7 +85,7 @@ namespace BeerQuest.Areas.Identity.Pages.Account
             [Required]
             [DataType(DataType.Text)]
             [Display(Name = "Role")]
-            public string Role { get; set; }
+            public string UserRole { get; set; }
         }
 
         public void OnGet(string returnUrl = null)
@@ -106,7 +106,7 @@ namespace BeerQuest.Areas.Identity.Pages.Account
                     Email = Input.Email,
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
-                    Role = Input.Role
+                    RoleString = Input.UserRole
 
                 };
 
@@ -126,7 +126,7 @@ namespace BeerQuest.Areas.Identity.Pages.Account
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return LocalRedirect(returnUrl);
+                    return LocalRedirect("/Home/AccountRedirect");
                 }
                 foreach (var error in result.Errors)
                 {
