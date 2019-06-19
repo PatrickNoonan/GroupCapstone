@@ -315,6 +315,14 @@ namespace BeerQuest.Controllers
                 stop.IsFree = true;
             }
         }
+        public List<Message> GetMemberMessages()
+        {
+            List<Message> message = _context.Messages.ToList();
+             message.Reverse();
+
+            return message;
+
+        }
 
     }
 }
