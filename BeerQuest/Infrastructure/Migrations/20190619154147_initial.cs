@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.Migrations
 {
-    public partial class _1 : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -44,14 +44,27 @@ namespace Infrastructure.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    Discriminator = table.Column<string>(nullable: false),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
                     RoleString = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Messages",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CurrentMember = table.Column<string>(nullable: true),
+                    CurrentBar = table.Column<string>(nullable: true),
+                    CurrentDay = table.Column<DateTime>(nullable: false),
+                    WasFree = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Messages", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -166,16 +179,18 @@ namespace Infrastructure.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
                     Address = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: true),
                     State = table.Column<string>(nullable: true),
                     Premium = table.Column<bool>(nullable: false),
-                    IsFree = table.Column<bool>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
                     Pin = table.Column<int>(nullable: false),
+                    lat = table.Column<float>(nullable: false),
+                    lng = table.Column<float>(nullable: false),
                     ApplicationId = table.Column<string>(nullable: true),
                     ApplicationRoleId = table.Column<string>(nullable: true),
-                    UserRole = table.Column<string>(nullable: true)
+                    UserRole = table.Column<string>(nullable: true),
+                    CheckIns = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -203,6 +218,7 @@ namespace Infrastructure.Migrations
                     Title = table.Column<string>(nullable: true),
                     Points = table.Column<double>(nullable: false),
                     Name = table.Column<string>(nullable: true),
+                    ActivePassport = table.Column<bool>(nullable: false),
                     ApplicationId = table.Column<string>(nullable: true),
                     ApplicationRoleId = table.Column<string>(nullable: true),
                     UserRole = table.Column<string>(nullable: true)
@@ -414,6 +430,9 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Messages");
 
             migrationBuilder.DropTable(
                 name: "Passports");
