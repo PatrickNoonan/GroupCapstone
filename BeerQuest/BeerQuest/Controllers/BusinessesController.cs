@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Domain;
 using Infrastructure.Data;
+using System.Security.Claims;
+using BeerQuest.Helper;
 
 namespace BeerQuest.Controllers
 {
@@ -22,10 +24,10 @@ namespace BeerQuest.Controllers
         // GET: Businesses
         public async Task<IActionResult> Index()
         {
-            //Get logged in business
-            //this.User.ID == _context.Businesses.Where(this.User.Id == id)
-            //return View(loggedinbusiness)
-            return View(await _context.Businesses.ToListAsync());
+            var currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var loggedInBusiness = _context.Businesses.Single(b => b.ApplicationId == currentUserId);
+            return View(loggedInBusiness);
+            //return View(await _context.Businesses.ToListAsync());
         }
 
         // GET: Businesses/Details/5
@@ -49,7 +51,8 @@ namespace BeerQuest.Controllers
         // GET: Businesses/Create
         public IActionResult Create()
         {
-            return View();
+            Business business = new Business();
+            return View(business);
         }
 
         // POST: Businesses/Create
@@ -57,10 +60,15 @@ namespace BeerQuest.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Address,Premium,IsFree,Name")] Business business)
+        public async Task<IActionResult> Create([Bind("Id,Name,Address,City,State,Pin")] Business business)
         {
+            var currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var latlng = GoogleGeoCoding.GetLatLong(business);
             if (ModelState.IsValid)
             {
+                business.ApplicationId = currentUserId;
+                business.lat = latlng[0];
+                business.lng = latlng[1];
                 _context.Add(business);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -89,7 +97,7 @@ namespace BeerQuest.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Address,Premium,IsFree,Name")] Business business)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,City,State,Pin")] Business business)
         {
             if (id != business.Id)
             {

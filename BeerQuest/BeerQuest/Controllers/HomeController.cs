@@ -49,15 +49,7 @@ namespace BeerQuest.Controllers
         public async Task<IActionResult> AccountRedirect()
         {
             var currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            //var users = _context.Users;
             var user = _context.Users.Where(u => u.Id == currentUserId).FirstOrDefault();
-            //var user = _context.Users.Where(u => u.Id == currentUserId).FirstOrDefault();
-
-            //var AreYouAMember = _context.Members.Where(s => s.ApplicationId == userId).FirstOrDefault();
-            //var AreYouABusiness = _context.Businesses.Where(s => s.ApplicationId == userId).FirstOrDefault();
-            //.FindFirstValue(ClaimTypes.NameIdentifier);
-
-            //var user = await GetCurrentUserAsync();
             if (user.RoleString == "Business")
             {
                 return RedirectToAction("Create", "Businesses");
@@ -74,5 +66,6 @@ namespace BeerQuest.Controllers
         {
             return View(new Domain.ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        
     }
 }

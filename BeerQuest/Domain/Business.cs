@@ -14,9 +14,10 @@ namespace Domain
         public string City { get; set; }
         public string State { get; set; }
         public bool Premium { get; set; }
-        public bool IsFree { get; set; }
         public int Pin { get; set; }
-        [ForeignKey("ApplicationUser")]
+        public float lat { get; set; }
+        public float lng { get; set; }
+    [ForeignKey("ApplicationUser")]
         public string ApplicationId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
         public ApplicationRole ApplicationRole { get; set; }

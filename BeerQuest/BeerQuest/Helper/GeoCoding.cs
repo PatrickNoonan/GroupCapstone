@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace BeerQuest.Helper
 {
-    public class GoogleGeoCoding
+    public static class GoogleGeoCoding
     {
-        public static float[] GetLatLong(Stop stop)
+        public static float[] GetLatLong(Business business)
         {
             GoogleMap myMap = new GoogleMap();
-            string url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + stop.Business.Address + ",+" +stop.Business.City + ",+" + stop.Business.State + "&key=" + ApiKeys.GoogleMapsApiKeys;
+            string url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + business.Address + ",+" + business.City + ",+" + business.State + "&key=" + APIKey.SecretKey;
             WebRequest requestObject = WebRequest.Create(url);
             requestObject.Method = "GET";
             HttpWebResponse responseObject = null;
