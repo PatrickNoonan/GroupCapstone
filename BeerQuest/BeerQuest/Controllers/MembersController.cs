@@ -165,9 +165,12 @@ namespace BeerQuest.Controllers
         {
             Passport passport;
             passport = CreatePassport();
+            _context.Passports.Add(passport);
+            _context.SaveChanges();
+            int id = passport.Id;
             var loggedInMember = GetLoggedInMember();
             loggedInMember.ActivePassport = true;
-            _context.Passports.Add(passport);
+            loggedInMember.PassportID = id;
             _context.SaveChanges();
             return View(passport);
         }

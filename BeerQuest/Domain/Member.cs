@@ -19,7 +19,7 @@ namespace Domain
         public ApplicationRole ApplicationRole { get; set; }
         public string UserRole { get; set; }
         [ForeignKey("PassPort")]
-        public int PassportID { get; set; }
+        public int? PassportID { get; set; }
         public Passport Passport { get; set; }
 
     }
