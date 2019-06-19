@@ -7,12 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Domain;
 using Infrastructure.Data;
-<<<<<<< HEAD
 using System.Security.Claims;
 using BeerQuest.Helper;
-=======
-using BeerQuest.Helper;
->>>>>>> 62080e8abc088814ccf4ff9afd44c49f25bdec9c
+
 namespace BeerQuest.Controllers
 {
     public class BusinessesController : Controller
