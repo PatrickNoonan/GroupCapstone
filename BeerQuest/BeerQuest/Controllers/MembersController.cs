@@ -10,11 +10,14 @@ using Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 
+
 namespace BeerQuest.Controllers
 {
     //This currently pulls a list of all the members. We want it to only function for a single user.
     public class MembersController : Controller
     {
+        private UserManager<ApplicationUser> _userManager;
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
         private readonly ApplicationDbContext _context;
         //private UserManager<ApplicationUser> _userManager;
         //private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
@@ -28,14 +31,10 @@ namespace BeerQuest.Controllers
         public async Task<IActionResult> Index()
         {
             //TODO: Prompt new Quest or Display details of current
-            //Get the current logged in user
-            //string id = User.Identity.GetUserId();
-            //if (id != null)
-            //{
-            //    Member member = _context.Members.Where(m => m.ApplicationId == id).FirstOrDefault();
-            //    return View(member);
-            //}
-            return View(await _context.Members.ToListAsync());
+            var currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var loggedInMember = _context.Members.Single(b => b.ApplicationId == currentUserId);
+
+            return View(loggedInMember);
         }
 
         // GET: Members/Details/5
@@ -214,10 +213,22 @@ namespace BeerQuest.Controllers
             }
         }
 
-        public bool BusinessCheckIn(Stop stop, int pin)
+        public async Task<bool> BusinessCheckIn(Stop stop, int pin)
         {
+
+            Message message = new Message();
             if(pin == stop.Business.Pin)
             {
+
+                var user = await GetCurrentUserAsync();
+
+                var userId = user?.Id;
+                var member = _context.Members.Where(c => c.ApplicationId == userId).Single();
+                DateTime now = DateTime.Now;
+                message.CurrentBar = stop.Business.Name;
+                message.CurrentDay = now;
+                message.CurrentMember = member.Name;
+                CreateMessage(message);
                 return true;
             }
             else
@@ -230,7 +241,11 @@ namespace BeerQuest.Controllers
             var messageList = _context.Messages.ToList();
             return messageList;
         }
-
+        public void CreateMessage(Message message)
+        {
+            _context.Messages.Add(message);
+            _context.SaveChanges(); 
+        }
         //Some method that generates the fifth stop if the first four are complete.
         
 

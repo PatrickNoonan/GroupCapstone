@@ -4,14 +4,16 @@ using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190619124829_removedisfree")]
+    partial class removedisfree
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -100,10 +102,6 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("UserRole");
 
-                    b.Property<float>("lat");
-
-                    b.Property<float>("lng");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ApplicationId");
@@ -148,13 +146,17 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CurrentBar");
+                    b.Property<int?>("CurrentBarId");
 
                     b.Property<DateTime>("CurrentDay");
 
-                    b.Property<string>("CurrentMember");
+                    b.Property<int?>("CurrentMemberId");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("CurrentBarId");
+
+                    b.HasIndex("CurrentMemberId");
 
                     b.ToTable("Messages");
                 });
@@ -211,10 +213,6 @@ namespace Infrastructure.Migrations
                     b.Property<bool>("IsFree");
 
                     b.Property<int>("MemberID");
-
-                    b.Property<float>("lat");
-
-                    b.Property<float>("lng");
 
                     b.HasKey("Id");
 
@@ -377,6 +375,17 @@ namespace Infrastructure.Migrations
                     b.HasOne("Domain.ApplicationRole", "ApplicationRole")
                         .WithMany()
                         .HasForeignKey("ApplicationRoleId");
+                });
+
+            modelBuilder.Entity("Domain.Message", b =>
+                {
+                    b.HasOne("Domain.Stop", "CurrentBar")
+                        .WithMany()
+                        .HasForeignKey("CurrentBarId");
+
+                    b.HasOne("Domain.Member", "CurrentMember")
+                        .WithMany()
+                        .HasForeignKey("CurrentMemberId");
                 });
 
             modelBuilder.Entity("Domain.Passport", b =>
