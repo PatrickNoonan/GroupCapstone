@@ -12,7 +12,7 @@ namespace BeerQuest.Helper
 {
     public static class GoogleGeoCoding
     {
-        public static float[] GetLatLong(Business business)
+        public static double[] GetLatLong(Business business)
         {
             GoogleMap myMap = new GoogleMap();
             string url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + business.Address + ",+" + business.City + ",+" + business.State + "&key=" + APIKey.SecretKey;
@@ -28,8 +28,8 @@ namespace BeerQuest.Helper
                 sr.Close();
             }
 
-            float lat;
-            float longitutde;
+            double lat;
+            double longitutde;
 
             myMap = JsonConvert.DeserializeObject<GoogleMap>(urlResult);
             try
@@ -41,7 +41,7 @@ namespace BeerQuest.Helper
             {
                 return null;
             }
-            float[] coords = new float[2];
+            double[] coords = new double[2];
             coords[0] = lat;
             coords[1] = longitutde;
             return coords;
@@ -68,8 +68,8 @@ namespace BeerQuest.Helper
 
     public class Location
     {
-        public float lat { get; set; }
-        public float lng { get; set; }
+        public double lat { get; set; }
+        public double lng { get; set; }
     }
 
 }

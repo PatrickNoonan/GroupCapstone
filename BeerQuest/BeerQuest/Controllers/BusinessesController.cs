@@ -164,8 +164,12 @@ namespace BeerQuest.Controllers
         {
             business.Premium = true;
             _context.SaveChanges();
+<<<<<<< HEAD
         }
         
+=======
+        }        
+>>>>>>> 6c9a5c43ab54968c21ac0b6e01ee8b7c5ca272cd
         public void GetMembersVisited(Business business)
         {
             var membersList = _context.Members.ToList();
@@ -199,10 +203,12 @@ namespace BeerQuest.Controllers
                 data.Add(businessData);
 
                 }
-            return data;
-            
+            return data;           
 
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6c9a5c43ab54968c21ac0b6e01ee8b7c5ca272cd
     }
 }

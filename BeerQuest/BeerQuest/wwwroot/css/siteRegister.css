@@ -49,11 +49,17 @@ textarea {
     color: #d5ead6;
 }
 
-#footerDuh {
+#footerD {
     position: absolute;
     bottom: 0;
 }
 
-.registerText {
+.registerText, .control-label, .form-control {
     color: #8298a5;
+}
+
+
+.navbar-inverse {
+    background-color: #ffffff00;
+    border-color: #ffffff00;
 }

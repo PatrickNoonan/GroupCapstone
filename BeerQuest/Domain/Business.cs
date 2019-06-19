@@ -15,8 +15,8 @@ namespace Domain
         public string State { get; set; }
         public bool Premium { get; set; }
         public int Pin { get; set; }
-        public float lat { get; set; }
-        public float lng { get; set; }
+        public double lat { get; set; }
+        public double lng { get; set; }
         [ForeignKey("ApplicationUser")]
         public string ApplicationId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
