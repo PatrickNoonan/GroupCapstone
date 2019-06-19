@@ -154,5 +154,18 @@ namespace BeerQuest.Controllers
             business.Premium = true;
             _context.SaveChanges();
         }
+        
+        public void GetMembersVisited(Business business)
+        {
+            var membersList = _context.Members.ToList();
+            var relevantMembersList = new List<Member>();
+            
+            foreach (Member el in membersList)
+            {
+                //if ( el.passport.completedVisitAt == business.location ){
+                //relevantMembersList.Add(el);
+                //}
+            }
+        }
     }
 }
