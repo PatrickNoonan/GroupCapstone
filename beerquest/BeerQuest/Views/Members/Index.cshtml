@@ -5,14 +5,10 @@
 }
 <head>
     <style>
-
-         /* Always set the map height explicitly to define the size of the div
-        * element that contains the map. */
          #map {
-             height: 1000px;
-             width: 1000px;
+             height: 750px;
+             width: 750px;
          }
-         /* Optional: Makes the sample page fill the window. */
     </style>
     </head>
 
@@ -50,8 +46,8 @@
             <td>
                 <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@Model.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
-                <a asp-action="CustomerPassport">Passport</a>
+                <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a> |
+                <a asp-action="CustomerPassport">Create A Passport</a>
             </td>
         </tr>
 }
@@ -73,8 +69,10 @@
      var myLatLng1 = { lat: @Model.Passport.StopOne.Business.lat, lng: @Model.Passport.StopOne.Business.lng};
      var myLatLng2 = {lat: @Model.Passport.StopTwo.Business.lat, lng: @Model.Passport.StopTwo.Business.lng};
      var myLatLng3 = {lat: @Model.Passport.StopThree.Business.lat, lng: @Model.Passport.StopThree.Business.lng};
-     var myLatLng4 = {lat: @Model.Passport.StopFour.Business.lat, lng: @Model.Passport.StopFour.Business.lng};
+     var myLatLng4 = { lat: @Model.Passport.StopFour.Business.lat, lng: @Model.Passport.StopFour.Business.lng};
+     
      @*var myLatLng5 = {lat: @Model.Passport.StopFive.Business.lat, lng: @Model.Passport.StopFive.Business.lng};*@
+
 
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 15,
@@ -100,12 +98,12 @@
     position: myLatLng4,
     map: map,
            title: 'Bar4'
- });
- //      var marker5 = new google.maps.Marker({
- //   position: myLatLng5,
- //   map: map,
- //          title: 'Bar5'
- //});
+       });
+         //      var marker5 = new google.maps.Marker({
+         //   position: myLatLng5,
+         //   map: map,
+         //          title: 'Bar5'
+         //});
 
 
 }
@@ -116,25 +114,4 @@
             <script src=@srcKey></script>
         }
     }
-
-
-
-
-@*@{
-    if (this.User.ActivePassport == true)
-    {
-        
-        <script>
-            <p>Click here to see your passport</p>
-            //Link to CustomerPassport.cshtml
-        </script>
-        
-    }
-    else
-    {
-       
-        <p>Would you like to start a new passport?</p>
-        <a asp-controller="Members" asp-action="CreatePassport">Add Two Products</a>
-    }
-}*@
 

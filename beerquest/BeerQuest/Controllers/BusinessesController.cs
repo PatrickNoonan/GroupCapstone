@@ -167,6 +167,7 @@ namespace BeerQuest.Controllers
 
 
         }
+
         
 
 
@@ -184,6 +185,7 @@ namespace BeerQuest.Controllers
 
             }
         }
+
         public List<BusinessData> GetData()
         {
             List<BusinessData> data = new List<BusinessData>();
@@ -212,12 +214,25 @@ namespace BeerQuest.Controllers
 
         }
 
+
         public async Task<IActionResult> Premium()
         {
 
 
             return View();
         }
+
+
+
+        public List<Message> GetBusinessMessages(Business business)
+        {
+            List<Message> message = _context.Messages.Where(c => c.CurrentBar == business.Name).ToList();
+            message.Reverse();
+
+            return message;
+
+        }
+
 
     }
 }
