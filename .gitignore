@@ -329,4 +329,4 @@ ASALocalRun/
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
 
-Helper/APIKey.cs
+BeerQuest/Helper/APIKey.cs
