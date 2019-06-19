@@ -176,6 +176,8 @@ namespace BeerQuest.Controllers
                 //if ( el.passport.completedVisitAt == business.location ){
                 //relevantMembersList.Add(el);
                 //}
+                
+
             }
         }
     }
