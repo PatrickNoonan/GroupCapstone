@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190618215531_removeduselessdbset")]
-    partial class removeduselessdbset
+    [Migration("20190619154147_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,10 +35,6 @@ namespace Infrastructure.Migrations
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("LastName");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -90,9 +86,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("ApplicationRoleId");
 
-                    b.Property<string>("City");
+                    b.Property<int>("CheckIns");
 
-                    b.Property<bool>("IsFree");
+                    b.Property<string>("City");
 
                     b.Property<string>("Name");
 
@@ -103,6 +99,10 @@ namespace Infrastructure.Migrations
                     b.Property<string>("State");
 
                     b.Property<string>("UserRole");
+
+                    b.Property<float>("lat");
+
+                    b.Property<float>("lng");
 
                     b.HasKey("Id");
 
@@ -148,17 +148,15 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CurrentBarId");
+                    b.Property<string>("CurrentBar");
 
                     b.Property<DateTime>("CurrentDay");
 
-                    b.Property<int?>("CurrentMemberId");
+                    b.Property<string>("CurrentMember");
+
+                    b.Property<bool>("WasFree");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("CurrentBarId");
-
-                    b.HasIndex("CurrentMemberId");
 
                     b.ToTable("Messages");
                 });
@@ -377,17 +375,6 @@ namespace Infrastructure.Migrations
                     b.HasOne("Domain.ApplicationRole", "ApplicationRole")
                         .WithMany()
                         .HasForeignKey("ApplicationRoleId");
-                });
-
-            modelBuilder.Entity("Domain.Message", b =>
-                {
-                    b.HasOne("Domain.Stop", "CurrentBar")
-                        .WithMany()
-                        .HasForeignKey("CurrentBarId");
-
-                    b.HasOne("Domain.Member", "CurrentMember")
-                        .WithMany()
-                        .HasForeignKey("CurrentMemberId");
                 });
 
             modelBuilder.Entity("Domain.Passport", b =>

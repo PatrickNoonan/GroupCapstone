@@ -34,10 +34,6 @@ namespace Infrastructure.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("LastName");
-
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
@@ -87,6 +83,8 @@ namespace Infrastructure.Migrations
                     b.Property<string>("ApplicationId");
 
                     b.Property<string>("ApplicationRoleId");
+
+                    b.Property<int>("CheckIns");
 
                     b.Property<string>("City");
 
@@ -154,6 +152,8 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("CurrentMember");
 
+                    b.Property<bool>("WasFree");
+
                     b.HasKey("ID");
 
                     b.ToTable("Messages");
@@ -211,10 +211,6 @@ namespace Infrastructure.Migrations
                     b.Property<bool>("IsFree");
 
                     b.Property<int>("MemberID");
-
-                    b.Property<float>("lat");
-
-                    b.Property<float>("lng");
 
                     b.HasKey("Id");
 
