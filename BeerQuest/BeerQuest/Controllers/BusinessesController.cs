@@ -164,7 +164,6 @@ namespace BeerQuest.Controllers
         {
             business.Premium = true;
             _context.SaveChanges();
-
         }
         public List<BusinessData> GetData()
         {
@@ -190,6 +189,7 @@ namespace BeerQuest.Controllers
             return data;           
 
         }
+<<<<<<< HEAD
         public List<Message> GetBusinessMessages(Business business)
         {
             List<Message> message = _context.Messages.Where(c => c.CurrentBar == business.Name).ToList();
@@ -199,5 +199,7 @@ namespace BeerQuest.Controllers
 
         }
 
+=======
+>>>>>>> 6a413cb07f4be6324653db5bfa5211f46019f0db
     }
 }

@@ -18,9 +18,9 @@ namespace Domain
         public ApplicationUser ApplicationUser { get; set; }
         public ApplicationRole ApplicationRole { get; set; }
         public string UserRole { get; set; }
-        [ForeignKey("PassPort")]
-        public int? PassportID { get; set; }
-        public Passport Passport { get; set; }
+        public int? PassportId { get; set; }
+        [ForeignKey("PassportId")]
+        public virtual Passport Passport { get; set; }
 
     }
 }

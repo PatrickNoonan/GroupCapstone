@@ -62,9 +62,7 @@ namespace BeerQuest.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Name")] Member member)
-        
-{
-
+        {
             if (ModelState.IsValid)
             {
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -170,9 +168,9 @@ namespace BeerQuest.Controllers
             int id = passport.Id;
             var loggedInMember = GetLoggedInMember();
             loggedInMember.ActivePassport = true;
-            loggedInMember.PassportID = id;
+            loggedInMember.PassportId = id;
             _context.SaveChanges();
-            return View(passport);
+            return RedirectToAction(nameof(Index));
         }
 
         public Passport CreatePassport()
@@ -302,7 +300,7 @@ namespace BeerQuest.Controllers
         public Member GetLoggedInMember()
         {
             var currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var loggedInMember = _context.Members.Single(b => b.ApplicationId == currentUserId);
+            var loggedInMember = _context.Members.Include(m => m.Passport).ThenInclude(p => p.StopOne).ThenInclude(s => s.Business).Include(m => m.Passport).ThenInclude(p => p.StopTwo).ThenInclude(s => s.Business).Include(m => m.Passport).ThenInclude(p => p.StopThree).ThenInclude(s => s.Business).Include(m => m.Passport).ThenInclude(p => p.StopFour).ThenInclude(s => s.Business).Include(m => m.Passport).ThenInclude(p => p.StopFive).ThenInclude(s => s.Business).Single(b => b.ApplicationId == currentUserId);
             return loggedInMember;
         }
 

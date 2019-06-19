@@ -4,14 +4,16 @@ using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190619193415_fixedpassport")]
+    partial class fixedpassport
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -125,7 +127,7 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int?>("PassportId");
+                    b.Property<int?>("PassportID");
 
                     b.Property<double>("Points");
 
@@ -139,7 +141,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("ApplicationRoleId");
 
-                    b.HasIndex("PassportId");
+                    b.HasIndex("PassportID");
 
                     b.ToTable("Members");
                 });
@@ -376,7 +378,7 @@ namespace Infrastructure.Migrations
 
                     b.HasOne("Domain.Passport", "Passport")
                         .WithMany()
-                        .HasForeignKey("PassportId");
+                        .HasForeignKey("PassportID");
                 });
 
             modelBuilder.Entity("Domain.Passport", b =>
