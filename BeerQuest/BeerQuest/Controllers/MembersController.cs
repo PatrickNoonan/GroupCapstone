@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Domain;
 using Infrastructure.Data;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace BeerQuest.Controllers
 {
@@ -14,6 +16,8 @@ namespace BeerQuest.Controllers
     public class MembersController : Controller
     {
         private readonly ApplicationDbContext _context;
+        //private UserManager<ApplicationUser> _userManager;
+        //private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         public MembersController(ApplicationDbContext context)
         {
@@ -55,7 +59,8 @@ namespace BeerQuest.Controllers
         // GET: Members/Create
         public IActionResult Create()
         {
-            return View();
+            Member member = new Member();
+            return View(member);
         }
 
         // POST: Members/Create
@@ -63,10 +68,13 @@ namespace BeerQuest.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Points,Name")] Member member)
+        public async Task<IActionResult> Create([Bind("Name")] Member member)
         {
+
             if (ModelState.IsValid)
             {
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                member.ApplicationId = userId;
                 _context.Add(member);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

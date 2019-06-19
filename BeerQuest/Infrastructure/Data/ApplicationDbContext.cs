@@ -4,11 +4,12 @@ using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Domain;
+using System.Web.Providers.Entities;
 
 namespace Infrastructure.Data
 {
     //public class ApplicationDbContext : IdentityDbContext<ApplicationUser,ApplicationRole,string>
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Member> Members { get; set; }
         public DbSet<Business> Businesses { get; set; }
