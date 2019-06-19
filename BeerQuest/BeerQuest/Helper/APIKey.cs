@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BeerQuest.Helper
+namespace BeerQuest
 {
     public static class APIKey
     {
