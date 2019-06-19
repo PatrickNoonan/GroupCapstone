@@ -6,11 +6,12 @@ using System.Text;
 namespace Domain
 {
    public class Message
-    { [Key]
-    public int ID { get; set; }
-
+    {
+        [Key]
+        public int ID { get; set; }
         public string CurrentMember { get; set; }
         public string CurrentBar { get; set; }
         public DateTime CurrentDay { get; set; }
+        public bool WasFree { get; set; }
     }
 }

@@ -68,7 +68,8 @@ namespace BeerQuest.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Name")] Member member)
-        {
+        
+{
 
             if (ModelState.IsValid)
             {
@@ -178,18 +179,24 @@ namespace BeerQuest.Controllers
 
         public Passport CreatePassport()
         {
+            double daysInWeek = 7;
             var potentialStops = _context.Businesses.ToList();
             Passport passport = new Passport();
             ChooseStop(potentialStops, passport.StopOne, true);
             ChooseStop(potentialStops, passport.StopTwo, false);
             ChooseStop(potentialStops, passport.StopThree, false);
             ChooseStop(potentialStops, passport.StopFour, true);
+            passport.CurrentStop = 1;
+            passport.StartDate = DateTime.Today;
+            passport.StopDate = DateTime.Today.AddDays(7);
             return passport;
             
         }
 
         public void ChooseStop(List<Business> list, Stop stop, bool premium)
         {
+            var currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var loggedInMember = _context.Members.Single(b => b.ApplicationId == currentUserId);
             int total = list.Count();
             Random r = new Random();
             int offset = r.Next(0, total);
@@ -202,33 +209,38 @@ namespace BeerQuest.Controllers
                 }
                 list.Remove(newStop);
                 stop.BusinessID = newStop.Id;
-                //stop.MemberID = this.User.Identity.GetId();
+                stop.MemberID = loggedInMember.Id;
             }
             else
             {
                 var newStop = list.Skip(offset).FirstOrDefault();
                 list.Remove(newStop);
                 stop.BusinessID = newStop.Id;
-                //stop.MemberID = this.User.Identity.GetId();
+                stop.MemberID = loggedInMember.Id;
             }
         }
 
-        public async Task<bool> BusinessCheckIn(Stop stop, int pin)
+        public void CreateFifthStop(Passport passport)
         {
+            var potentialFifth = _context.Businesses.Where(b => b.CheckIns > 10).ToList();
+            ChooseStop(potentialFifth, passport.StopFive, false);
+            passport.StopFive.IsFree = true;
+        }
 
-            Message message = new Message();
-            if(pin == stop.Business.Pin)
+        public async Task<bool> BusinessCheckIn(Passport passport, Stop stop, int pin)
+        {
+            if(pin == stop.Business.Pin && passport.CurrentStop < 4)
             {
-
-                var user = await GetCurrentUserAsync();
-
-                var userId = user?.Id;
-                var member = _context.Members.Where(c => c.ApplicationId == userId).Single();
-                DateTime now = DateTime.Now;
-                message.CurrentBar = stop.Business.Name;
-                message.CurrentDay = now;
-                message.CurrentMember = member.Name;
-                CreateMessage(message);
+                stop.Complete = true;
+                CreateMessage(stop);
+                passport.CurrentStop++;
+                return true;
+            }
+            else if(pin == stop.Business.Pin && passport.CurrentStop == 4)
+            {
+                CreateFifthStop(passport);
+                CreateMessage(stop);
+                passport.CurrentStop++;
                 return true;
             }
             else
@@ -241,8 +253,15 @@ namespace BeerQuest.Controllers
             var messageList = _context.Messages.ToList();
             return messageList;
         }
-        public void CreateMessage(Message message)
+        public void CreateMessage(Stop stop)
         {
+            Message message = new Message();
+            var member = stop.Member;
+            DateTime now = DateTime.Now;
+            message.CurrentBar = stop.Business.Name;
+            message.CurrentDay = now;
+            message.CurrentMember = member.Name;
+            message.WasFree = stop.IsFree;
             _context.Messages.Add(message);
             _context.SaveChanges(); 
         }
