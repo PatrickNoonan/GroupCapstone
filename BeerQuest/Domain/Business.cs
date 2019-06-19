@@ -14,7 +14,6 @@ namespace Domain
         public string City { get; set; }
         public string State { get; set; }
         public bool Premium { get; set; }
-        public bool IsFree { get; set; }
         public int Pin { get; set; }
         public float lat { get; set; }
         public float lng { get; set; }

@@ -31,14 +31,10 @@ namespace BeerQuest.Controllers
         public async Task<IActionResult> Index()
         {
             //TODO: Prompt new Quest or Display details of current
-            //Get the current logged in user
-            //string id = User.Identity.GetUserId();
-            //if (id != null)
-            //{
-            //    Member member = _context.Members.Where(m => m.ApplicationId == id).FirstOrDefault();
-            //    return View(member);
-            //}
-            return View(await _context.Members.ToListAsync());
+            var currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var loggedInMember = _context.Members.Single(b => b.ApplicationId == currentUserId);
+
+            return View(loggedInMember);
         }
 
         // GET: Members/Details/5
@@ -232,7 +228,7 @@ namespace BeerQuest.Controllers
                 message.CurrentBar = stop.Business.Name;
                 message.CurrentDay = now;
                 message.CurrentMember = member.Name;
-                Create(message);
+                CreateMessage(message);
                 return true;
             }
             else
@@ -245,7 +241,7 @@ namespace BeerQuest.Controllers
             var messageList = _context.Messages.ToList();
             return messageList;
         }
-        public void Create(Message message)
+        public void CreateMessage(Message message)
         {
             _context.Messages.Add(message);
             _context.SaveChanges(); 

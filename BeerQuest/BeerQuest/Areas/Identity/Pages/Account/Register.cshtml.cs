@@ -104,10 +104,7 @@ namespace BeerQuest.Areas.Identity.Pages.Account
                 {
                     UserName = Input.Email,
                     Email = Input.Email,
-                    FirstName = Input.FirstName,
-                    LastName = Input.LastName,
                     RoleString = Input.UserRole
-
                 };
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
