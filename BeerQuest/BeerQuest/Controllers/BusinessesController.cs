@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Domain;
 using Infrastructure.Data;
+using BeerQuest.Helper;
 
 namespace BeerQuest.Controllers
 {
@@ -59,8 +60,11 @@ namespace BeerQuest.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Address,Premium,IsFree,Name")] Business business)
         {
+            var latlng = GoogleGeoCoding.GetLatLong(business);
             if (ModelState.IsValid)
             {
+                business.lat = latlng[0];
+                business.lng = latlng[1];
                 _context.Add(business);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

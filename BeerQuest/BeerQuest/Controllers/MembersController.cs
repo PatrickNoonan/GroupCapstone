@@ -8,10 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Domain;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
-<<<<<<< HEAD
-=======
 using System.Security.Claims;
->>>>>>> 43f00e798483c3a94af90c764ec46f8a28cdd1f2
+
 
 namespace BeerQuest.Controllers
 {
