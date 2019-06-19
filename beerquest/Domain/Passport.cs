@@ -12,16 +12,16 @@ namespace Domain
         [Key]
         public int Id { get; set; }
         [ForeignKey("StopOne")]
-        public int StopOneId { get; set; }
+        public int? StopOneId { get; set; }
         public Stop StopOne { get; set; }
         [ForeignKey("StopTwo")]
-        public int StopTwoId { get; set; }
+        public int? StopTwoId { get; set; }
         public Stop StopTwo { get; set; }
         [ForeignKey("StopThree")]
-        public int StopThreeId { get; set; }
+        public int? StopThreeId { get; set; }
         public Stop StopThree { get; set; }
         [ForeignKey("StopFour")]
-        public int StopFourId { get; set; }
+        public int? StopFourId { get; set; }
         public Stop StopFour { get; set; }
         [ForeignKey("StopFive")]
         public int? StopFiveId { get; set; }

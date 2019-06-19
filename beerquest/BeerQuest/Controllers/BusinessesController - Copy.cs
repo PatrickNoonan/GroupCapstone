@@ -165,8 +165,10 @@ namespace BeerQuest.Controllers
             business.Premium = true;
             _context.SaveChanges();
 
+
         }
         
+
 
         public void GetMembersVisited(Business business)
         {
@@ -205,6 +207,16 @@ namespace BeerQuest.Controllers
                 }
             return data;           
 
+
+
+
+        }
+
+        public async Task<IActionResult> Premium()
+        {
+
+
+            return View();
         }
 
     }

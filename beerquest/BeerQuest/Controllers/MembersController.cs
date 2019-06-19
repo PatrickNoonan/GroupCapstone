@@ -170,7 +170,7 @@ namespace BeerQuest.Controllers
             int id = passport.Id;
             var loggedInMember = GetLoggedInMember();
             loggedInMember.ActivePassport = true;
-            loggedInMember.PassportID = id;
+            loggedInMember.PassportId = id;
             _context.SaveChanges();
             return View(passport);
         }
@@ -206,7 +206,6 @@ namespace BeerQuest.Controllers
                     newStop = list.Skip(offset).FirstOrDefault();
                 }
                 stop.BusinessID = newStop.Id;
-                stop.MemberID = loggedInMember.Id;
                 list.Remove(newStop);
             }
             else
@@ -214,7 +213,6 @@ namespace BeerQuest.Controllers
                 var newStop = list.Skip(offset).FirstOrDefault();
                 list.Remove(newStop);
                 stop.BusinessID = newStop.Id;
-                stop.MemberID = loggedInMember.Id;
             }
             _context.Add(stop);
             _context.SaveChanges();
@@ -264,17 +262,18 @@ namespace BeerQuest.Controllers
 
         public void StopCheck(Passport passport, Stop stop)
         {
+            var member = GetLoggedInMember();
             if(passport.CurrentStop < 4)
             {
                 stop.Complete = true;
-                CreateMessage(stop);
+                CreateMessage(stop, member);
                 passport.CurrentStop++;
             }
             else if (passport.CurrentStop == 4)
             {
                 stop.Complete = true;
                 CreateFifthStop(passport);
-                CreateMessage(stop);
+                CreateMessage(stop, member);
                 passport.CurrentStop++;
             }
             else if (passport.CurrentStop == 5)
@@ -288,10 +287,9 @@ namespace BeerQuest.Controllers
             var messageList = _context.Messages.ToList();
             return messageList;
         }
-        public void CreateMessage(Stop stop)
+        public void CreateMessage(Stop stop, Member member)
         {
             Message message = new Message();
-            var member = stop.Member;
             DateTime now = DateTime.Now;
             message.CurrentBar = stop.Business.Name;
             message.CurrentDay = now;
@@ -304,7 +302,7 @@ namespace BeerQuest.Controllers
         public Member GetLoggedInMember()
         {
             var currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var loggedInMember = _context.Members.Single(b => b.ApplicationId == currentUserId);
+            var loggedInMember = _context.Members.Include(m => m.Passport).ThenInclude(p => p.StopOne).ThenInclude(s => s.Business).Include(m => m.Passport).ThenInclude(p => p.StopTwo).ThenInclude(s => s.Business).Include(m => m.Passport).ThenInclude(p => p.StopThree).ThenInclude(s => s.Business).Include(m => m.Passport).ThenInclude(p => p.StopFour).ThenInclude(s => s.Business).Single(b => b.ApplicationId == currentUserId);
             return loggedInMember;
         }
 
