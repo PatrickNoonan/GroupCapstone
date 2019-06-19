@@ -176,18 +176,20 @@ namespace BeerQuest.Controllers
         {
             var potentialStops = _context.Businesses.ToList();
             Passport passport = new Passport();
-            ChooseStop(potentialStops, passport.StopOne, true);
-            ChooseStop(potentialStops, passport.StopTwo, false);
-            ChooseStop(potentialStops, passport.StopThree, false);
-            ChooseStop(potentialStops, passport.StopFour, true);
+            ChooseStop(potentialStops, passport, 1, true);
+            ChooseStop(potentialStops, passport, 2, false);
+            ChooseStop(potentialStops, passport, 3, false);
+            ChooseStop(potentialStops, passport, 4, true);
             passport.CurrentStop = 1;
             passport.StartDate = DateTime.Today;
             passport.StopDate = DateTime.Today.AddDays(7);
+            _context.SaveChanges();
             return passport;
         }
 
-        public void ChooseStop(List<Business> list, Stop stop, bool premium)
+        public void ChooseStop(List<Business> list, Passport passport, int stopNumber, bool premium)
         {
+            var stop = new Stop();
             var loggedInMember = GetLoggedInMember();
             int total = list.Count();
             Random r = new Random();
@@ -197,11 +199,12 @@ namespace BeerQuest.Controllers
                 var newStop = list.Skip(offset).FirstOrDefault();
                 while(newStop.Premium == false)
                 {
+                    offset = r.Next(0, total);
                     newStop = list.Skip(offset).FirstOrDefault();
                 }
-                list.Remove(newStop);
                 stop.BusinessID = newStop.Id;
                 stop.MemberID = loggedInMember.Id;
+                list.Remove(newStop);
             }
             else
             {
@@ -210,12 +213,34 @@ namespace BeerQuest.Controllers
                 stop.BusinessID = newStop.Id;
                 stop.MemberID = loggedInMember.Id;
             }
+            _context.Add(stop);
+            _context.SaveChanges();
+            int id = stop.Id;
+            switch(stopNumber)
+            {
+                case 1:
+                    passport.StopOneId = id;
+                    break;
+                case 2:
+                    passport.StopTwoId = id;
+                    break;
+                case 3:
+                    passport.StopThreeId = id;
+                    break;
+                case 4:
+                    passport.StopFourId = id;
+                    break;
+                case 5:
+                    passport.StopFiveId = id;
+                    break;
+            }
+            _context.SaveChanges();
         }
 
         public void CreateFifthStop(Passport passport)
         {
             var potentialFifth = _context.Businesses.Where(b => b.CheckIns > 10).ToList();
-            ChooseStop(potentialFifth, passport.StopFive, false);
+            ChooseStop(potentialFifth, passport, 5, false);
             passport.StopFive.IsFree = true;
             _context.SaveChanges();
         }

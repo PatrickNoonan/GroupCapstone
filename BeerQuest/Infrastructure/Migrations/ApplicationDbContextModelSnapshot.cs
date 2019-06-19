@@ -98,9 +98,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("UserRole");
 
-                    b.Property<float>("lat");
+                    b.Property<double>("lat");
 
-                    b.Property<float>("lng");
+                    b.Property<double>("lng");
 
                     b.HasKey("Id");
 
