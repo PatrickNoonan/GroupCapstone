@@ -234,5 +234,16 @@ namespace BeerQuest.Controllers
         //Some method that generates the fifth stop if the first four are complete.
         
 
+
+        public void FreeBeer(Member member,Passport passport,Stop stop)
+        {
+            //var member = _context.Members
+            //    .FirstOrDefaultAsync(m => m.Id == id);
+            if (member.ActivePassport == true && passport.CurrentStop == 5)
+            {
+                stop.IsFree = true;
+            }
+        }
+
     }
 }
