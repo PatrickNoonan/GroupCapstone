@@ -13,7 +13,6 @@ namespace Domain
         public double Points { get; set; }
         public string Name { get; set; }
         public bool ActivePassport { get; set; }
-        //public List<Stop> Stops{ get; set; }
         [ForeignKey("ApplicationUser")]
         public string ApplicationId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
