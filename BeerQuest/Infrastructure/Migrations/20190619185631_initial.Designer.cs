@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190619181617_updateAfterPull")]
-    partial class updateAfterPull
+    [Migration("20190619185631_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -100,9 +100,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("UserRole");
 
-                    b.Property<float>("lat");
+                    b.Property<double>("lat");
 
-                    b.Property<float>("lng");
+                    b.Property<double>("lng");
 
                     b.HasKey("Id");
 
@@ -127,7 +127,7 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("PassportID");
+                    b.Property<int?>("PassportID");
 
                     b.Property<double>("Points");
 
@@ -216,13 +216,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<bool>("IsFree");
 
-                    b.Property<int>("MemberID");
-
                     b.HasKey("Id");
 
                     b.HasIndex("BusinessID");
-
-                    b.HasIndex("MemberID");
 
                     b.ToTable("Stops");
                 });
@@ -382,8 +378,7 @@ namespace Infrastructure.Migrations
 
                     b.HasOne("Domain.Passport", "Passport")
                         .WithMany()
-                        .HasForeignKey("PassportID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("PassportID");
                 });
 
             modelBuilder.Entity("Domain.Passport", b =>
@@ -414,11 +409,6 @@ namespace Infrastructure.Migrations
                     b.HasOne("Domain.Business", "Business")
                         .WithMany()
                         .HasForeignKey("BusinessID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Domain.Member", "Member")
-                        .WithMany()
-                        .HasForeignKey("MemberID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

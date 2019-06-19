@@ -12,9 +12,6 @@ namespace Domain
         public bool Complete { get; set; }
         public bool IsFree { get; set; }
         public DateTime CheckInDate { get; set; }
-        [ForeignKey("Member")]
-        public int MemberID { get; set; }
-        public Member Member { get; set; }
         [ForeignKey("Business")]
         public int BusinessID { get; set; }
         public Business Business { get; set; }

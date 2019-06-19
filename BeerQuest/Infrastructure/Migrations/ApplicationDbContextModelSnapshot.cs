@@ -125,7 +125,7 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("PassportID");
+                    b.Property<int?>("PassportID");
 
                     b.Property<double>("Points");
 
@@ -214,13 +214,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<bool>("IsFree");
 
-                    b.Property<int>("MemberID");
-
                     b.HasKey("Id");
 
                     b.HasIndex("BusinessID");
-
-                    b.HasIndex("MemberID");
 
                     b.ToTable("Stops");
                 });
@@ -380,8 +376,7 @@ namespace Infrastructure.Migrations
 
                     b.HasOne("Domain.Passport", "Passport")
                         .WithMany()
-                        .HasForeignKey("PassportID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("PassportID");
                 });
 
             modelBuilder.Entity("Domain.Passport", b =>
@@ -412,11 +407,6 @@ namespace Infrastructure.Migrations
                     b.HasOne("Domain.Business", "Business")
                         .WithMany()
                         .HasForeignKey("BusinessID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Domain.Member", "Member")
-                        .WithMany()
-                        .HasForeignKey("MemberID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
