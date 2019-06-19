@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.Migrations
 {
-    public partial class initial : Migration
+    public partial class inital : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -185,8 +185,8 @@ namespace Infrastructure.Migrations
                     State = table.Column<string>(nullable: true),
                     Premium = table.Column<bool>(nullable: false),
                     Pin = table.Column<int>(nullable: false),
-                    lat = table.Column<float>(nullable: false),
-                    lng = table.Column<float>(nullable: false),
+                    lat = table.Column<double>(nullable: false),
+                    lng = table.Column<double>(nullable: false),
                     ApplicationId = table.Column<string>(nullable: true),
                     ApplicationRoleId = table.Column<string>(nullable: true),
                     UserRole = table.Column<string>(nullable: true),

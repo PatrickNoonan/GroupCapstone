@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190619154147_initial")]
-    partial class initial
+    [Migration("20190619165412_inital")]
+    partial class inital
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -100,9 +100,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("UserRole");
 
-                    b.Property<float>("lat");
+                    b.Property<double>("lat");
 
-                    b.Property<float>("lng");
+                    b.Property<double>("lng");
 
                     b.HasKey("Id");
 
