@@ -74,5 +74,6 @@ namespace BeerQuest.Controllers
         {
             return View(new Domain.ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        
     }
 }

@@ -7,8 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Domain;
 using Infrastructure.Data;
+<<<<<<< HEAD
 using System.Security.Claims;
-
+using BeerQuest.Helper;
+=======
+using BeerQuest.Helper;
+>>>>>>> 62080e8abc088814ccf4ff9afd44c49f25bdec9c
 namespace BeerQuest.Controllers
 {
     public class BusinessesController : Controller
@@ -62,9 +66,12 @@ namespace BeerQuest.Controllers
         public async Task<IActionResult> Create([Bind("Id,Name,Address,City,State,Pin")] Business business)
         {
             var currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var latlng = GoogleGeoCoding.GetLatLong(business);
             if (ModelState.IsValid)
             {
                 business.ApplicationId = currentUserId;
+                business.lat = latlng[0];
+                business.lng = latlng[1];
                 _context.Add(business);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
