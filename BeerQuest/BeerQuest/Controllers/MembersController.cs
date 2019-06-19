@@ -222,19 +222,9 @@ namespace BeerQuest.Controllers
 
         public async Task<bool> BusinessCheckIn(Passport passport, Stop stop, int pin)
         {
-            if(pin == stop.Business.Pin && passport.CurrentStop < 4)
+            if(pin == stop.Business.Pin)
             {
-                stop.Complete = true;
-                CreateMessage(stop);
-                passport.CurrentStop++;
-                _context.SaveChanges();
-                return true;
-            }
-            else if(pin == stop.Business.Pin && passport.CurrentStop == 4)
-            {
-                CreateFifthStop(passport);
-                CreateMessage(stop);
-                passport.CurrentStop++;
+                StopCheck(passport, stop);
                 _context.SaveChanges();
                 return true;
             }
@@ -242,6 +232,28 @@ namespace BeerQuest.Controllers
             {
                 return false;
             }
+        }
+
+        public void StopCheck(Passport passport, Stop stop)
+        {
+            if(passport.CurrentStop < 4)
+            {
+                stop.Complete = true;
+                CreateMessage(stop);
+                passport.CurrentStop++;
+            }
+            else if (passport.CurrentStop == 4)
+            {
+                stop.Complete = true;
+                CreateFifthStop(passport);
+                CreateMessage(stop);
+                passport.CurrentStop++;
+            }
+            else if (passport.CurrentStop == 5)
+            {
+                //TODO: Free Beer Logic. Passport over, etc.
+            }
+
         }
         public List<Message> GetMesssageList()
         {
