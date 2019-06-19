@@ -13,14 +13,10 @@ using System.Security.Claims;
 
 namespace BeerQuest.Controllers
 {
-    //This currently pulls a list of all the members. We want it to only function for a single user.
     public class MembersController : Controller
     {
         private UserManager<ApplicationUser> _userManager;
-        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
         private readonly ApplicationDbContext _context;
-        //private UserManager<ApplicationUser> _userManager;
-        //private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         public MembersController(ApplicationDbContext context)
         {
@@ -31,9 +27,7 @@ namespace BeerQuest.Controllers
         public async Task<IActionResult> Index()
         {
             //TODO: Prompt new Quest or Display details of current
-            var currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var loggedInMember = _context.Members.Single(b => b.ApplicationId == currentUserId);
-
+            var loggedInMember = GetLoggedInMember();
             return View(loggedInMember);
         }
 
@@ -68,7 +62,8 @@ namespace BeerQuest.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Name")] Member member)
-        {
+        
+{
 
             if (ModelState.IsValid)
             {
@@ -170,8 +165,9 @@ namespace BeerQuest.Controllers
         {
             Passport passport;
             passport = CreatePassport();
+            var loggedInMember = GetLoggedInMember();
+            loggedInMember.ActivePassport = true;
             _context.Passports.Add(passport);
-            //this.User.ActivePassport = true;
             _context.SaveChanges();
             return View(passport);
         }
@@ -184,12 +180,15 @@ namespace BeerQuest.Controllers
             ChooseStop(potentialStops, passport.StopTwo, false);
             ChooseStop(potentialStops, passport.StopThree, false);
             ChooseStop(potentialStops, passport.StopFour, true);
+            passport.CurrentStop = 1;
+            passport.StartDate = DateTime.Today;
+            passport.StopDate = DateTime.Today.AddDays(7);
             return passport;
-            
         }
 
         public void ChooseStop(List<Business> list, Stop stop, bool premium)
         {
+            var loggedInMember = GetLoggedInMember();
             int total = list.Count();
             Random r = new Random();
             int offset = r.Next(0, total);
@@ -202,33 +201,31 @@ namespace BeerQuest.Controllers
                 }
                 list.Remove(newStop);
                 stop.BusinessID = newStop.Id;
-                //stop.MemberID = this.User.Identity.GetId();
+                stop.MemberID = loggedInMember.Id;
             }
             else
             {
                 var newStop = list.Skip(offset).FirstOrDefault();
                 list.Remove(newStop);
                 stop.BusinessID = newStop.Id;
-                //stop.MemberID = this.User.Identity.GetId();
+                stop.MemberID = loggedInMember.Id;
             }
         }
 
-        public async Task<bool> BusinessCheckIn(Stop stop, int pin)
+        public void CreateFifthStop(Passport passport)
         {
+            var potentialFifth = _context.Businesses.Where(b => b.CheckIns > 10).ToList();
+            ChooseStop(potentialFifth, passport.StopFive, false);
+            passport.StopFive.IsFree = true;
+            _context.SaveChanges();
+        }
 
-            Message message = new Message();
+        public async Task<bool> BusinessCheckIn(Passport passport, Stop stop, int pin)
+        {
             if(pin == stop.Business.Pin)
             {
-
-                var user = await GetCurrentUserAsync();
-
-                var userId = user?.Id;
-                var member = _context.Members.Where(c => c.ApplicationId == userId).Single();
-                DateTime now = DateTime.Now;
-                message.CurrentBar = stop.Business.Name;
-                message.CurrentDay = now;
-                message.CurrentMember = member.Name;
-                CreateMessage(message);
+                StopCheck(passport, stop);
+                _context.SaveChanges();
                 return true;
             }
             else
@@ -236,19 +233,52 @@ namespace BeerQuest.Controllers
                 return false;
             }
         }
+
+        public void StopCheck(Passport passport, Stop stop)
+        {
+            if(passport.CurrentStop < 4)
+            {
+                stop.Complete = true;
+                CreateMessage(stop);
+                passport.CurrentStop++;
+            }
+            else if (passport.CurrentStop == 4)
+            {
+                stop.Complete = true;
+                CreateFifthStop(passport);
+                CreateMessage(stop);
+                passport.CurrentStop++;
+            }
+            else if (passport.CurrentStop == 5)
+            {
+                //TODO: Free Beer Logic. Passport over, etc.
+            }
+
+        }
         public List<Message> GetMesssageList()
         {
             var messageList = _context.Messages.ToList();
             return messageList;
         }
-        public void CreateMessage(Message message)
+        public void CreateMessage(Stop stop)
         {
+            Message message = new Message();
+            var member = stop.Member;
+            DateTime now = DateTime.Now;
+            message.CurrentBar = stop.Business.Name;
+            message.CurrentDay = now;
+            message.CurrentMember = member.Name;
+            message.WasFree = stop.IsFree;
             _context.Messages.Add(message);
             _context.SaveChanges(); 
         }
-        //Some method that generates the fifth stop if the first four are complete.
         
-
+        public Member GetLoggedInMember()
+        {
+            var currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var loggedInMember = _context.Members.Single(b => b.ApplicationId == currentUserId);
+            return loggedInMember;
+        }
 
         public void FreeBeer(Member member,Passport passport,Stop stop)
         {

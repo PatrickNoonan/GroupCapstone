@@ -34,10 +34,6 @@ namespace Infrastructure.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("LastName");
-
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
@@ -88,6 +84,8 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("ApplicationRoleId");
 
+                    b.Property<int>("CheckIns");
+
                     b.Property<string>("City");
 
                     b.Property<string>("Name");
@@ -127,6 +125,8 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<int>("PassportID");
+
                     b.Property<double>("Points");
 
                     b.Property<string>("Title");
@@ -138,6 +138,8 @@ namespace Infrastructure.Migrations
                     b.HasIndex("ApplicationId");
 
                     b.HasIndex("ApplicationRoleId");
+
+                    b.HasIndex("PassportID");
 
                     b.ToTable("Members");
                 });
@@ -153,6 +155,8 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("CurrentDay");
 
                     b.Property<string>("CurrentMember");
+
+                    b.Property<bool>("WasFree");
 
                     b.HasKey("ID");
 
@@ -211,10 +215,6 @@ namespace Infrastructure.Migrations
                     b.Property<bool>("IsFree");
 
                     b.Property<int>("MemberID");
-
-                    b.Property<float>("lat");
-
-                    b.Property<float>("lng");
 
                     b.HasKey("Id");
 
@@ -377,6 +377,11 @@ namespace Infrastructure.Migrations
                     b.HasOne("Domain.ApplicationRole", "ApplicationRole")
                         .WithMany()
                         .HasForeignKey("ApplicationRoleId");
+
+                    b.HasOne("Domain.Passport", "Passport")
+                        .WithMany()
+                        .HasForeignKey("PassportID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Domain.Passport", b =>

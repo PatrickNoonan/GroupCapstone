@@ -17,11 +17,12 @@ namespace Domain
         public int Pin { get; set; }
         public float lat { get; set; }
         public float lng { get; set; }
-    [ForeignKey("ApplicationUser")]
+        [ForeignKey("ApplicationUser")]
         public string ApplicationId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
         public ApplicationRole ApplicationRole { get; set; }
         public string UserRole { get; set; }
+        public int CheckIns { get; set; }
 
     }
 }
