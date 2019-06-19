@@ -50,7 +50,8 @@ namespace BeerQuest.Controllers
         // GET: Businesses/Create
         public IActionResult Create()
         {
-            return View();
+            Business business = new Business();
+            return View(business);
         }
 
         // POST: Businesses/Create
