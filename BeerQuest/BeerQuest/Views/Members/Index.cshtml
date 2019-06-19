@@ -47,7 +47,56 @@
 </table>
 
 <p id="#prompt"></p>
-<table id="#map"></table>
+<div id="#map">
+    <script>
+        var map;
+ function initMap() {
+     var myLatLng1 = { lat: @Model.Passport.StopOne.Business.lat, lng: @Model.Passport.StopOne.Business.lng};
+     var myLatLng2 = {lat: @Model.Passport.StopTwo.Business.lat, lng: @Model.Passport.StopTwo.Business.lng};
+     var myLatLng3 = {lat: @Model.Passport.StopThree.Business.lat, lng: @Model.Passport.StopThree.Business.lng};
+     var myLatLng4 = {lat: @Model.Passport.StopFour.Business.lat, lng: @Model.Passport.StopFour.Business.lng};
+     var myLatLng5 = {lat: @Model.Passport.StopFive.Business.lat, lng: @Model.Passport.StopFive.Business.lng};
+
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 15,
+    center: myLatLng
+  });
+
+  var marker = new google.maps.Marker({
+    position: myLatLng1,
+    map: map,
+      title: 'Bar1'
+  });
+       var marker2 = new google.maps.Marker({
+    position: myLatLng2,
+    map: map,
+           title: 'Bar2'
+ });
+       var marker3 = new google.maps.Marker({
+    position: myLatLng3,
+    map: map,
+           title: 'Bar3'
+ });
+       var marker4 = new google.maps.Marker({
+    position: myLatLng4,
+    map: map,
+           title: 'Bar4'
+ });
+       var marker5 = new google.maps.Marker({
+    position: myLatLng5,
+    map: map,
+           title: 'Bar5'
+ });
+
+  
+}
+    </script>
+
+    <script @{ var srcKey = "https://maps.googleapis.com/maps/api/js?key=" + APIKey.SecretKey + "&callback=initMap"; }></script>
+
+    <script src=@srcKey></script>
+
+</div>
 
 @*@{
     if (this.User.ActivePassport == true)

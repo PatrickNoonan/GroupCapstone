@@ -165,7 +165,6 @@ namespace BeerQuest.Controllers
             business.Premium = true;
             _context.SaveChanges();
         }
-<<<<<<< HEAD
         
         public void GetMembersVisited(Business business)
         {
@@ -204,7 +203,6 @@ namespace BeerQuest.Controllers
             
 
         }
-=======
->>>>>>> dfba83c642beb221aa7fdcf9834875cf0bb76fe0
+
     }
 }
