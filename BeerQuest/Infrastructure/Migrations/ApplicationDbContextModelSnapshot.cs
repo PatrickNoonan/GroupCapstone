@@ -125,6 +125,8 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<int>("PassportID");
+
                     b.Property<double>("Points");
 
                     b.Property<string>("Title");
@@ -136,6 +138,8 @@ namespace Infrastructure.Migrations
                     b.HasIndex("ApplicationId");
 
                     b.HasIndex("ApplicationRoleId");
+
+                    b.HasIndex("PassportID");
 
                     b.ToTable("Members");
                 });
@@ -373,6 +377,11 @@ namespace Infrastructure.Migrations
                     b.HasOne("Domain.ApplicationRole", "ApplicationRole")
                         .WithMany()
                         .HasForeignKey("ApplicationRoleId");
+
+                    b.HasOne("Domain.Passport", "Passport")
+                        .WithMany()
+                        .HasForeignKey("PassportID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Domain.Passport", b =>
