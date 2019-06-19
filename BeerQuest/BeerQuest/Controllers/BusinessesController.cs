@@ -97,7 +97,7 @@ namespace BeerQuest.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Address,Premium,IsFree,Name")] Business business)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,City,State,Pin")] Business business)
         {
             if (id != business.Id)
             {

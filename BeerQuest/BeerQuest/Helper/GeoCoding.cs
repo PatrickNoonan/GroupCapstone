@@ -15,7 +15,7 @@ namespace BeerQuest.Helper
         public static float[] GetLatLong(Business business)
         {
             GoogleMap myMap = new GoogleMap();
-            string url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + business.Address + ",+" + business.City + ",+" + business.State + "&key=" + ApiKeys.GoogleMapsApiKeys;
+            string url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + business.Address + ",+" + business.City + ",+" + business.State + "&key=" + APIKey.SecretKey;
             WebRequest requestObject = WebRequest.Create(url);
             requestObject.Method = "GET";
             HttpWebResponse responseObject = null;
