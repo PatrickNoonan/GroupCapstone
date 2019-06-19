@@ -13,14 +13,10 @@ using System.Security.Claims;
 
 namespace BeerQuest.Controllers
 {
-    //This currently pulls a list of all the members. We want it to only function for a single user.
     public class MembersController : Controller
     {
         private UserManager<ApplicationUser> _userManager;
-        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
         private readonly ApplicationDbContext _context;
-        //private UserManager<ApplicationUser> _userManager;
-        //private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         public MembersController(ApplicationDbContext context)
         {
@@ -31,9 +27,7 @@ namespace BeerQuest.Controllers
         public async Task<IActionResult> Index()
         {
             //TODO: Prompt new Quest or Display details of current
-            var currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var loggedInMember = _context.Members.Single(b => b.ApplicationId == currentUserId);
-
+            var loggedInMember = GetLoggedInMember();
             return View(loggedInMember);
         }
 
@@ -171,15 +165,15 @@ namespace BeerQuest.Controllers
         {
             Passport passport;
             passport = CreatePassport();
+            var loggedInMember = GetLoggedInMember();
+            loggedInMember.ActivePassport = true;
             _context.Passports.Add(passport);
-            //this.User.ActivePassport = true;
             _context.SaveChanges();
             return View(passport);
         }
 
         public Passport CreatePassport()
         {
-            double daysInWeek = 7;
             var potentialStops = _context.Businesses.ToList();
             Passport passport = new Passport();
             ChooseStop(potentialStops, passport.StopOne, true);
@@ -190,13 +184,11 @@ namespace BeerQuest.Controllers
             passport.StartDate = DateTime.Today;
             passport.StopDate = DateTime.Today.AddDays(7);
             return passport;
-            
         }
 
         public void ChooseStop(List<Business> list, Stop stop, bool premium)
         {
-            var currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var loggedInMember = _context.Members.Single(b => b.ApplicationId == currentUserId);
+            var loggedInMember = GetLoggedInMember();
             int total = list.Count();
             Random r = new Random();
             int offset = r.Next(0, total);
@@ -225,6 +217,7 @@ namespace BeerQuest.Controllers
             var potentialFifth = _context.Businesses.Where(b => b.CheckIns > 10).ToList();
             ChooseStop(potentialFifth, passport.StopFive, false);
             passport.StopFive.IsFree = true;
+            _context.SaveChanges();
         }
 
         public async Task<bool> BusinessCheckIn(Passport passport, Stop stop, int pin)
@@ -234,6 +227,7 @@ namespace BeerQuest.Controllers
                 stop.Complete = true;
                 CreateMessage(stop);
                 passport.CurrentStop++;
+                _context.SaveChanges();
                 return true;
             }
             else if(pin == stop.Business.Pin && passport.CurrentStop == 4)
@@ -241,6 +235,7 @@ namespace BeerQuest.Controllers
                 CreateFifthStop(passport);
                 CreateMessage(stop);
                 passport.CurrentStop++;
+                _context.SaveChanges();
                 return true;
             }
             else
@@ -265,9 +260,13 @@ namespace BeerQuest.Controllers
             _context.Messages.Add(message);
             _context.SaveChanges(); 
         }
-        //Some method that generates the fifth stop if the first four are complete.
         
-
+        public Member GetLoggedInMember()
+        {
+            var currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var loggedInMember = _context.Members.Single(b => b.ApplicationId == currentUserId);
+            return loggedInMember;
+        }
 
         public void FreeBeer(Member member,Passport passport,Stop stop)
         {
