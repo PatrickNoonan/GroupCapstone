@@ -177,13 +177,13 @@ namespace Infrastructure.Migrations
 
                     b.Property<int?>("StopFiveId");
 
-                    b.Property<int?>("StopFourId");
+                    b.Property<int>("StopFourId");
 
-                    b.Property<int?>("StopOneId");
+                    b.Property<int>("StopOneId");
 
-                    b.Property<int?>("StopThreeId");
+                    b.Property<int>("StopThreeId");
 
-                    b.Property<int?>("StopTwoId");
+                    b.Property<int>("StopTwoId");
 
                     b.HasKey("Id");
 
@@ -392,19 +392,23 @@ namespace Infrastructure.Migrations
 
                     b.HasOne("Domain.Stop", "StopFour")
                         .WithMany()
-                        .HasForeignKey("StopFourId");
+                        .HasForeignKey("StopFourId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Domain.Stop", "StopOne")
                         .WithMany()
-                        .HasForeignKey("StopOneId");
+                        .HasForeignKey("StopOneId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Domain.Stop", "StopThree")
                         .WithMany()
-                        .HasForeignKey("StopThreeId");
+                        .HasForeignKey("StopThreeId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Domain.Stop", "StopTwo")
                         .WithMany()
-                        .HasForeignKey("StopTwoId");
+                        .HasForeignKey("StopTwoId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Domain.Stop", b =>
