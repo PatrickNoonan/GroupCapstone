@@ -95,7 +95,7 @@ namespace BeerQuest.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Points,Name")] Member member)
+        public async Task<IActionResult> Edit(int id, [Bind("Name")] Member member)
         {
             if (id != member.Id)
             {
@@ -343,6 +343,10 @@ namespace BeerQuest.Controllers
 
             return message;
 
+        }
+        public async Task<IActionResult> SeeMemberMessages()
+        {
+            return View(GetMemberMessages());
         }
 
     }

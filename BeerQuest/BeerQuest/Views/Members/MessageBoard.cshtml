@@ -4,14 +4,13 @@
     ViewData["Title"] = "MessageBoard";
 }
 
-<h2>MessageBoard</h2>
+<h2>Message Board</h2>
 
 
 
-<body>
-    @foreach (var item in Model)
-    {
+    <body>
+@foreach (var item in Model) {
         <p> @item.CurrentMember was at @item.CurrentBar on @item.CurrentDay</p>
-    }
-</body>
+}
+    </body>
 

@@ -97,7 +97,7 @@ namespace BeerQuest.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,City,State,Pin")] Business business)
+        public async Task<IActionResult> Edit(int id, [Bind("Name,Address,City,State,Pin")] Business business)
         {
             if (id != business.Id)
             {
@@ -164,28 +164,8 @@ namespace BeerQuest.Controllers
         {
             business.Premium = true;
             _context.SaveChanges();
-
-
-        }
-
-        
-
-
-        public void GetMembersVisited(Business business)
-        {
-            var membersList = _context.Members.ToList();
-            var relevantMembersList = new List<Member>();
-            
-            foreach (Member el in membersList)
-            {
-                //if ( el.passport.completedVisitAt == business.location ){
-                //relevantMembersList.Add(el);
-                //}
-                
-
-            }
-        }
-
+        }        
+       
         public List<BusinessData> GetData()
         {
             List<BusinessData> data = new List<BusinessData>();
@@ -195,35 +175,19 @@ namespace BeerQuest.Controllers
             DateTime now = DateTime.Now;
             for (DateTime date = startDate; date < now; date = date.AddDays(1))
             {
-                allDates.Add(date);
+            allDates.Add(date);
             }
 
             for (int i = 0; i < allDates.Count; i++)
-                {
-                    BusinessData businessData = new BusinessData();
-                List<Message> dateList = _context.Messages.Where(c => c.CurrentDay == allDates[i]).ToList();
-                businessData.date = allDates[i];
-                businessData.count = dateList.Count;
-                data.Add(businessData);
-
-                }
-            return data;           
-
-
-
-
+            {
+            BusinessData businessData = new BusinessData();
+            List<Message> dateList = _context.Messages.Where(c => c.CurrentDay == allDates[i]).ToList();
+            businessData.date = allDates[i];
+            businessData.count = dateList.Count;
+            data.Add(businessData);
+            }
+            return data;          
         }
-
-
-        public async Task<IActionResult> Premium()
-        {
-
-
-            return View();
-        }
-
-
-
         public List<Message> GetBusinessMessages(Business business)
         {
             List<Message> message = _context.Messages.Where(c => c.CurrentBar == business.Name).ToList();
