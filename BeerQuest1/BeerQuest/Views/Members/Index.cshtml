@@ -109,7 +109,7 @@
             }
         </div>
         <div class="col-md-5 whiteText">
-            @if (Model.Passport.CurrentStop == 1)
+            @if (Model.ActivePassport == true && Model.Passport.CurrentStop == 1)
             {
                 <h2>Your current stop is:<br /> @Model.Passport.StopOne.Business.Name</h2>
                 <h3>@Model.Passport.StopOne.Business.Address</h3>
@@ -123,7 +123,7 @@
                     </form>
                 </div>
             }
-            else if (Model.Passport.CurrentStop == 2)
+            else if (Model.ActivePassport == true && Model.Passport.CurrentStop == 2)
             {
                 <h2>Your current stop is:<br /> @Model.Passport.StopTwo.Business.Name</h2>
                 <h3>@Model.Passport.StopTwo.Business.Address</h3>
@@ -137,7 +137,7 @@
                     </form>
                 </div>
             }
-            @if (Model.Passport.CurrentStop == 3)
+            @if (Model.ActivePassport == true && Model.Passport.CurrentStop == 3)
             {
                 <h2>Your current stop is: @Model.Passport.StopThree.Business.Name</h2>
                 <h3>@Model.Passport.StopThree.Business.Address</h3><br /><h3>@Model.Passport.StopThree.Business.City</h3>
@@ -150,7 +150,7 @@
                     </form>
                 </div>
             }
-            @if (Model.Passport.CurrentStop == 4)
+            @if (Model.ActivePassport == true && Model.Passport.CurrentStop == 4)
             {
                 <h2>Your current stop is: @Model.Passport.StopFour.Business.Name</h2>
                 <h3>@Model.Passport.StopFour.Business.Address</h3>
@@ -165,6 +165,10 @@
                 </div>
             }
 
+        </div>
+        <div>
+            <a asp-action="SeeMemberMessages">See Messages</a> |
+            <a asp-action="Index">Back to List</a>
         </div>
         <div class="col-md-1"></div>
     </div>
