@@ -6,15 +6,15 @@
 <head>
     <style>
         #map {
-            height: 750px;
-            width: 750px;
+            height: 500px;
+            width: 100%;
         }
     </style>
 </head>
 
 <h2>Welcome, @Model.Name</h2>
 
-<table class="table">
+@*<table class="table">
     <thead>
         <tr>
             <th>
@@ -39,25 +39,26 @@
                 <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a> |
             </td>
         </tr>
-        }
     </tbody>
-</table>
-    @{ if (Model.ActivePassport == false)
-        {
-<a asp-action="CustomerPassport">Create A Passport</a>
+</table>*@
+<div class="container">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            @{ if (Model.ActivePassport == false)
+                {
+                    <a asp-action="CustomerPassport">Create A Passport</a>
+                }
             }
-        }
-
-<p id="#prompt"></p>
-<div id="map"></div>
-@{
-    if (Model.ActivePassport == false)
-    {
-        <a asp-action="CustomerPassport">Create A Passport</a>
-    }
-    else if (Model.ActivePassport == true)
-    {
-        <script>
+            <div id="map"></div>
+            @{
+                if (Model.ActivePassport == false)
+                {
+                    <a asp-action="CustomerPassport">Create A Passport</a>
+                }
+                else if (Model.ActivePassport == true)
+                {
+                    <script>
         var map;
  function initMap() {
      var myLatLng1 = { lat: @Model.Passport.StopOne.Business.lat, lng: @Model.Passport.StopOne.Business.lng};
@@ -98,14 +99,74 @@
          //   map: map,
          //          title: 'Bar5'
          //});
-
-
 }
-        </script>
+                    </script>
 
-        var srcKey = "https://maps.googleapis.com/maps/api/js?key=" + APIKey.SecretKey + "&callback=initMap async defer";
+                    var srcKey = "https://maps.googleapis.com/maps/api/js?key=" + APIKey.SecretKey + "&callback=initMap async defer";
 
-        <script src=@srcKey></script>
-    }
-}
+                    <script src=@srcKey></script>
+                }
+            }
+        </div>
+        <div class="col-md-5 whiteText">
+            @if (Model.Passport.CurrentStop == 1)
+            {
+                <h2>Your current stop is:<br /> @Model.Passport.StopOne.Business.Name</h2>
+                <h3>@Model.Passport.StopOne.Business.Address</h3>
+                <h3>@Model.Passport.StopOne.Business.City</h3>
+                <h3>@Model.Passport.StopOne.Business.State</h3>
+                <br />
+                <div>
+                    <form method="post" asp-action="pincheck" asp-route-stop="1">
+                        <button style="color: black">Enter Business Pin</button>
+                        <input type="text" name="pin" />
+                    </form>
+                </div>
+            }
+            else if (Model.Passport.CurrentStop == 2)
+            {
+                <h2>Your current stop is:<br /> @Model.Passport.StopTwo.Business.Name</h2>
+                <h3>@Model.Passport.StopTwo.Business.Address</h3>
+                <h3>@Model.Passport.StopTwo.Business.City</h3>
+                <h3>@Model.Passport.StopTwo.Business.State</h3>
+                <br />
+                <div>
+                    <form method="post" asp-action="pincheck" asp-route-stop="2">
+                        <button style="color: black">Enter Business Pin</button>
+                        <input type="text" name="pin" />
+                    </form>
+                </div>
+            }
+            @if (Model.Passport.CurrentStop == 3)
+            {
+                <h2>Your current stop is: @Model.Passport.StopThree.Business.Name</h2>
+                <h3>@Model.Passport.StopThree.Business.Address</h3><br /><h3>@Model.Passport.StopThree.Business.City</h3>
+                <h3>@Model.Passport.StopThree.Business.State</h3>
+                <br />
+                <div>
+                    <form method="post" asp-action="pincheck" asp-route-stop="3">
+                        <button style="color: black">Enter Business Pin</button>
+                        <input type="text" name="pin" />
+                    </form>
+                </div>
+            }
+            @if (Model.Passport.CurrentStop == 4)
+            {
+                <h2>Your current stop is: @Model.Passport.StopFour.Business.Name</h2>
+                <h3>@Model.Passport.StopFour.Business.Address</h3>
+                <h3>@Model.Passport.StopFour.Business.City</h3>
+                <h3>@Model.Passport.StopFour.Business.State</h3>
+                <br />
+                <div>
+                    <form method="post" asp-action="pincheck" asp-route-stop="4">
+                        <button style="color: black">Enter Business Pin</button>
+                        <input type="text" name="pin" />
+                    </form>
+                </div>
+            }
+
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
 

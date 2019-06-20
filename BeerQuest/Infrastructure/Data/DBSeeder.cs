@@ -56,4 +56,11 @@ namespace Infrastructure.Data
             context.SaveChanges();
         }
     }
-}
+    //public static void SeedDbMessage(ApplicationDbContext context)
+    //{
+    //    context.Database.EnsureCreated();
+    //    context.Businesses.Add(
+    //       new Business { Name = "Milwaukee Ale House", Pin = 1111, Address = "233 N Water St", City = "Milwaukee", State = "WI", lat = 43.0334116, lng = -87.909373, CheckIns = 10, Premium = true });
+    //    context.SaveChanges();
+    //}
+    }
