@@ -244,11 +244,34 @@ namespace BeerQuest.Controllers
             _context.SaveChanges();
         }
 
-        public async Task<bool> BusinessCheckIn(Passport passport, Stop stop, int pin)
+        public bool pincheck(int stop, int pin)
         {
-            if(pin == stop.Business.Pin)
+            Stop currentStop;
+            var loggedInMember = GetLoggedInMember();
+            switch (stop)
+            { 
+                case 1:
+                    currentStop = loggedInMember.Passport.StopOne;
+                    break;
+                case 2:
+                    currentStop = loggedInMember.Passport.StopTwo;
+                    break;
+                case 3:
+                    currentStop = loggedInMember.Passport.StopThree;
+                    break;
+                case 4:
+                    currentStop = loggedInMember.Passport.StopFour;
+                    break;
+                case 5:
+                    currentStop = loggedInMember.Passport.StopFive;
+                    break;
+                default:
+                    currentStop = loggedInMember.Passport.StopOne;
+                    break;
+            }
+            if (pin == currentStop.Business.Pin)
             {
-                StopCheck(passport, stop);
+                StopCheck(loggedInMember.Passport, currentStop);
                 _context.SaveChanges();
                 return true;
             }
