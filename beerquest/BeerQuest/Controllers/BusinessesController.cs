@@ -164,8 +164,13 @@ namespace BeerQuest.Controllers
         {
             business.Premium = true;
             _context.SaveChanges();
+
+
         }
+
         
+
+
         public void GetMembersVisited(Business business)
         {
             var membersList = _context.Members.ToList();
@@ -176,8 +181,11 @@ namespace BeerQuest.Controllers
                 //if ( el.passport.completedVisitAt == business.location ){
                 //relevantMembersList.Add(el);
                 //}
+                
+
             }
         }
+
         public List<BusinessData> GetData()
         {
             List<BusinessData> data = new List<BusinessData>();
@@ -201,6 +209,30 @@ namespace BeerQuest.Controllers
                 }
             return data;           
 
+
+
+
         }
+
+
+        public async Task<IActionResult> Premium()
+        {
+
+
+            return View();
+        }
+
+
+
+        public List<Message> GetBusinessMessages(Business business)
+        {
+            List<Message> message = _context.Messages.Where(c => c.CurrentBar == business.Name).ToList();
+            message.Reverse();
+
+            return message;
+
+        }
+
+
     }
 }

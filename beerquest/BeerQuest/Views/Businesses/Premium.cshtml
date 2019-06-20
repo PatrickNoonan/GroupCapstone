@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+@{
+    ViewData["Title"] = "Premium";
+}
+
+<h2>Premium</h2>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+</head>
+
+<body>
+    <script src="https://www.paypal.com/sdk/js?client-id=ATJg44gKxTM3q7WKwffM1MYBM0RwrkYzfuGLAgOdxYDHgafE0Ltlui0lw1L0yuKnKa_nZVMcSk3ryb2-">
+    </script>
+
+    <div id="paypal-button-container">
+        <script>
+            paypal.Buttons({
+                createOrder: function (data, actions) {
+                    // Set up the transaction
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                value: '20.00'
+                            }
+                        }]
+                    });
+                }
+            }).render('#paypal-button-container');
+        </script>
+    </div>
+
+</body>
