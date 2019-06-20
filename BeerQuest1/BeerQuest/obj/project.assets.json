@@ -7928,6 +7928,7 @@
       "path": "runtime.native.system.net.http/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.0/_._",
@@ -7954,6 +7955,7 @@
       "path": "runtime.native.system.security.cryptography.openssl/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.0/_._",
@@ -10350,6 +10352,7 @@
       "path": "system.reflection.emit.lightweight/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -12659,27 +12662,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\rsmid\\.nuget\\packages\\": {},
-    "C:\\ProgramData\\Xamarin\\NuGet\\": {},
+    "C:\\Users\\hlhuynh14\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\rsmid\\Desktop\\dev\\c#\\GroupCapstone\\GroupCapstone\\BeerQuest\\BeerQuest\\BeerQuest.csproj",
+      "projectUniqueName": "C:\\Users\\hlhuynh14\\Desktop\\devCodeCamp Projects\\GroupCapstone\\BeerQuest\\BeerQuest\\BeerQuest.csproj",
       "projectName": "BeerQuest",
-      "projectPath": "C:\\Users\\rsmid\\Desktop\\dev\\c#\\GroupCapstone\\GroupCapstone\\BeerQuest\\BeerQuest\\BeerQuest.csproj",
-      "packagesPath": "C:\\Users\\rsmid\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\rsmid\\Desktop\\dev\\c#\\GroupCapstone\\GroupCapstone\\BeerQuest\\BeerQuest\\obj\\",
+      "projectPath": "C:\\Users\\hlhuynh14\\Desktop\\devCodeCamp Projects\\GroupCapstone\\BeerQuest\\BeerQuest\\BeerQuest.csproj",
+      "packagesPath": "C:\\Users\\hlhuynh14\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\hlhuynh14\\Desktop\\devCodeCamp Projects\\GroupCapstone\\BeerQuest\\BeerQuest\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\ProgramData\\Xamarin\\NuGet\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\rsmid\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\hlhuynh14\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.1"
@@ -12691,8 +12691,8 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "C:\\Users\\rsmid\\Desktop\\dev\\c#\\GroupCapstone\\GroupCapstone\\BeerQuest\\Application\\Application.csproj": {
-              "projectPath": "C:\\Users\\rsmid\\Desktop\\dev\\c#\\GroupCapstone\\GroupCapstone\\BeerQuest\\Application\\Application.csproj"
+            "C:\\Users\\hlhuynh14\\Desktop\\devCodeCamp Projects\\GroupCapstone\\BeerQuest\\Application\\Application.csproj": {
+              "projectPath": "C:\\Users\\hlhuynh14\\Desktop\\devCodeCamp Projects\\GroupCapstone\\BeerQuest\\Application\\Application.csproj"
             }
           }
         }

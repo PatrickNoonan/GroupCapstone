@@ -1,26 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\rsmid\\Desktop\\dev\\c#\\GroupCapstone\\GroupCapstone\\BeerQuest\\Application\\Application.csproj": {}
+    "C:\\Users\\hlhuynh14\\Desktop\\devCodeCamp Projects\\GroupCapstone\\BeerQuest\\Application\\Application.csproj": {}
   },
   "projects": {
-    "C:\\Users\\rsmid\\Desktop\\dev\\c#\\GroupCapstone\\GroupCapstone\\BeerQuest\\Application\\Application.csproj": {
+    "C:\\Users\\hlhuynh14\\Desktop\\devCodeCamp Projects\\GroupCapstone\\BeerQuest\\Application\\Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rsmid\\Desktop\\dev\\c#\\GroupCapstone\\GroupCapstone\\BeerQuest\\Application\\Application.csproj",
+        "projectUniqueName": "C:\\Users\\hlhuynh14\\Desktop\\devCodeCamp Projects\\GroupCapstone\\BeerQuest\\Application\\Application.csproj",
         "projectName": "Application",
-        "projectPath": "C:\\Users\\rsmid\\Desktop\\dev\\c#\\GroupCapstone\\GroupCapstone\\BeerQuest\\Application\\Application.csproj",
-        "packagesPath": "C:\\Users\\rsmid\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rsmid\\Desktop\\dev\\c#\\GroupCapstone\\GroupCapstone\\BeerQuest\\Application\\obj\\",
+        "projectPath": "C:\\Users\\hlhuynh14\\Desktop\\devCodeCamp Projects\\GroupCapstone\\BeerQuest\\Application\\Application.csproj",
+        "packagesPath": "C:\\Users\\hlhuynh14\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\hlhuynh14\\Desktop\\devCodeCamp Projects\\GroupCapstone\\BeerQuest\\Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\ProgramData\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\rsmid\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\hlhuynh14\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp2.1"
@@ -32,8 +30,8 @@
         "frameworks": {
           "netcoreapp2.1": {
             "projectReferences": {
-              "C:\\Users\\rsmid\\Desktop\\dev\\c#\\GroupCapstone\\GroupCapstone\\BeerQuest\\Infrastructure\\Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\rsmid\\Desktop\\dev\\c#\\GroupCapstone\\GroupCapstone\\BeerQuest\\Infrastructure\\Infrastructure.csproj"
+              "C:\\Users\\hlhuynh14\\Desktop\\devCodeCamp Projects\\GroupCapstone\\BeerQuest\\Infrastructure\\Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\hlhuynh14\\Desktop\\devCodeCamp Projects\\GroupCapstone\\BeerQuest\\Infrastructure\\Infrastructure.csproj"
               }
             }
           }
@@ -62,23 +60,21 @@
         }
       }
     },
-    "C:\\Users\\rsmid\\Desktop\\dev\\c#\\GroupCapstone\\GroupCapstone\\BeerQuest\\Domain\\Domain.csproj": {
+    "C:\\Users\\hlhuynh14\\Desktop\\devCodeCamp Projects\\GroupCapstone\\BeerQuest\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rsmid\\Desktop\\dev\\c#\\GroupCapstone\\GroupCapstone\\BeerQuest\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\hlhuynh14\\Desktop\\devCodeCamp Projects\\GroupCapstone\\BeerQuest\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\rsmid\\Desktop\\dev\\c#\\GroupCapstone\\GroupCapstone\\BeerQuest\\Domain\\Domain.csproj",
-        "packagesPath": "C:\\Users\\rsmid\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rsmid\\Desktop\\dev\\c#\\GroupCapstone\\GroupCapstone\\BeerQuest\\Domain\\obj\\",
+        "projectPath": "C:\\Users\\hlhuynh14\\Desktop\\devCodeCamp Projects\\GroupCapstone\\BeerQuest\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\hlhuynh14\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\hlhuynh14\\Desktop\\devCodeCamp Projects\\GroupCapstone\\BeerQuest\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\ProgramData\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\rsmid\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\hlhuynh14\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp2.1"
@@ -124,23 +120,21 @@
         }
       }
     },
-    "C:\\Users\\rsmid\\Desktop\\dev\\c#\\GroupCapstone\\GroupCapstone\\BeerQuest\\Infrastructure\\Infrastructure.csproj": {
+    "C:\\Users\\hlhuynh14\\Desktop\\devCodeCamp Projects\\GroupCapstone\\BeerQuest\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rsmid\\Desktop\\dev\\c#\\GroupCapstone\\GroupCapstone\\BeerQuest\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\hlhuynh14\\Desktop\\devCodeCamp Projects\\GroupCapstone\\BeerQuest\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "C:\\Users\\rsmid\\Desktop\\dev\\c#\\GroupCapstone\\GroupCapstone\\BeerQuest\\Infrastructure\\Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\rsmid\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rsmid\\Desktop\\dev\\c#\\GroupCapstone\\GroupCapstone\\BeerQuest\\Infrastructure\\obj\\",
+        "projectPath": "C:\\Users\\hlhuynh14\\Desktop\\devCodeCamp Projects\\GroupCapstone\\BeerQuest\\Infrastructure\\Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\hlhuynh14\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\hlhuynh14\\Desktop\\devCodeCamp Projects\\GroupCapstone\\BeerQuest\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\ProgramData\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\rsmid\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\hlhuynh14\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp2.1"
@@ -152,8 +146,8 @@
         "frameworks": {
           "netcoreapp2.1": {
             "projectReferences": {
-              "C:\\Users\\rsmid\\Desktop\\dev\\c#\\GroupCapstone\\GroupCapstone\\BeerQuest\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\rsmid\\Desktop\\dev\\c#\\GroupCapstone\\GroupCapstone\\BeerQuest\\Domain\\Domain.csproj"
+              "C:\\Users\\hlhuynh14\\Desktop\\devCodeCamp Projects\\GroupCapstone\\BeerQuest\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\hlhuynh14\\Desktop\\devCodeCamp Projects\\GroupCapstone\\BeerQuest\\Domain\\Domain.csproj"
               }
             }
           }

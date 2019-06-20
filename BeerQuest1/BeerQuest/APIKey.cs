@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace BeerQuest
 {
-    public class APIKey
+    public static class APIKey
     {
-        private static string secretKey = "AIzaSyAud5xYFvsXHMlKE7mco_D8K6kxInw5jMM";
+        private static string secretKey = "AIzaSyClhVTQPpKXAHx279h_9RKTBhwDqktwhzs";
         public static string SecretKey { get { return secretKey; } }
     }
 }
