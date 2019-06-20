@@ -7,7 +7,7 @@ namespace BeerQuest
 {
     public static class APIKey
     {
-        private static string secretKey = "AIzaSyClhVTQPpKXAHx279h_9RKTBhwDqktwhzs";
+        private static string secretKey = "AIzaSyCmorY9HKCSet2PYD96jDU118cTbrsDNCM";
         public static string SecretKey { get { return secretKey; } }
     }
 }
