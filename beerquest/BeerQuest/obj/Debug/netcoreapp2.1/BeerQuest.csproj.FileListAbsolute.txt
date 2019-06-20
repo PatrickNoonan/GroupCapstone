@@ -92,3 +92,5 @@ C:\Users\hlhuynh14\Desktop\devCodeCamp Projects\GroupCapstone\BeerQuest\BeerQues
 C:\Users\hlhuynh14\Desktop\devCodeCamp Projects\GroupCapstone\BeerQuest\BeerQuest\obj\Debug\netcoreapp2.1\Razor\Views\Members\_ViewStart.g.cshtml.cs
 C:\Users\hlhuynh14\Desktop\devCodeCamp Projects\GroupCapstone\BeerQuest\BeerQuest\obj\Debug\netcoreapp2.1\Razor\Views\Shared\LayoutMember.g.cshtml.cs
 C:\Users\hlhuynh14\Desktop\devCodeCamp Projects\GroupCapstone\BeerQuest\BeerQuest\obj\Debug\netcoreapp2.1\Razor\Views\Members\MessageBoard.g.cshtml.cs
+C:\Users\hlhuynh14\Desktop\devCodeCamp Projects\GroupCapstone\BeerQuest\BeerQuest\obj\Debug\netcoreapp2.1\Razor\Views\Businesses\BusinessMessageBoard.g.cshtml.cs
+C:\Users\hlhuynh14\Desktop\devCodeCamp Projects\GroupCapstone\BeerQuest\BeerQuest\obj\Debug\netcoreapp2.1\Razor\Views\Businesses\Premium.g.cshtml.cs

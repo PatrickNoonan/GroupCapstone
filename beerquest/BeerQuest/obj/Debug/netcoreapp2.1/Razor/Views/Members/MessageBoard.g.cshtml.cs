@@ -62,7 +62,7 @@ using Domain;
             WriteLiteral("\r\n<h2>MessageBoard</h2>\r\n\r\n\r\n\r\n    ");
             EndContext();
             BeginContext(121, 135, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "05a1cb6ecfb34d139333d914129618f5", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0d05247aab6c4dc18c56c2eb23a3ec87", async() => {
                 BeginContext(127, 2, true);
                 WriteLiteral("\r\n");
                 EndContext();
