@@ -70,7 +70,7 @@ namespace BeerQuest
 
             app.UseAuthentication();
 
-            //DBSeeder.SeedDb(context);
+            DBSeeder.SeedDb(context);
 
             app.UseMvc(routes =>
             {

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190619165218_initialMigration")]
-    partial class initialMigration
+    [Migration("20190619184741_makenullable")]
+    partial class makenullable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -100,9 +100,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("UserRole");
 
-                    b.Property<float>("lat");
+                    b.Property<double>("lat");
 
-                    b.Property<float>("lng");
+                    b.Property<double>("lng");
 
                     b.HasKey("Id");
 
@@ -127,6 +127,8 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<int>("PassportID");
+
                     b.Property<double>("Points");
 
                     b.Property<string>("Title");
@@ -138,6 +140,8 @@ namespace Infrastructure.Migrations
                     b.HasIndex("ApplicationId");
 
                     b.HasIndex("ApplicationRoleId");
+
+                    b.HasIndex("PassportID");
 
                     b.ToTable("Members");
                 });
@@ -375,6 +379,11 @@ namespace Infrastructure.Migrations
                     b.HasOne("Domain.ApplicationRole", "ApplicationRole")
                         .WithMany()
                         .HasForeignKey("ApplicationRoleId");
+
+                    b.HasOne("Domain.Passport", "Passport")
+                        .WithMany()
+                        .HasForeignKey("PassportID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Domain.Passport", b =>

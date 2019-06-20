@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.Migrations
 {
-    public partial class inital : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -210,37 +210,6 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Members",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Title = table.Column<string>(nullable: true),
-                    Points = table.Column<double>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    ActivePassport = table.Column<bool>(nullable: false),
-                    ApplicationId = table.Column<string>(nullable: true),
-                    ApplicationRoleId = table.Column<string>(nullable: true),
-                    UserRole = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Members", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Members_AspNetUsers_ApplicationId",
-                        column: x => x.ApplicationId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Members_AspNetRoles_ApplicationRoleId",
-                        column: x => x.ApplicationRoleId,
-                        principalTable: "AspNetRoles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Stops",
                 columns: table => new
                 {
@@ -249,7 +218,6 @@ namespace Infrastructure.Migrations
                     Complete = table.Column<bool>(nullable: false),
                     IsFree = table.Column<bool>(nullable: false),
                     CheckInDate = table.Column<DateTime>(nullable: false),
-                    MemberID = table.Column<int>(nullable: false),
                     BusinessID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -259,12 +227,6 @@ namespace Infrastructure.Migrations
                         name: "FK_Stops_Businesses_BusinessID",
                         column: x => x.BusinessID,
                         principalTable: "Businesses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Stops_Members_MemberID",
-                        column: x => x.MemberID,
-                        principalTable: "Members",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -315,6 +277,44 @@ namespace Infrastructure.Migrations
                         name: "FK_Passports_Stops_StopTwoId",
                         column: x => x.StopTwoId,
                         principalTable: "Stops",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Members",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Title = table.Column<string>(nullable: true),
+                    Points = table.Column<double>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    ActivePassport = table.Column<bool>(nullable: false),
+                    ApplicationId = table.Column<string>(nullable: true),
+                    ApplicationRoleId = table.Column<string>(nullable: true),
+                    UserRole = table.Column<string>(nullable: true),
+                    PassportID = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Members", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Members_AspNetUsers_ApplicationId",
+                        column: x => x.ApplicationId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Members_AspNetRoles_ApplicationRoleId",
+                        column: x => x.ApplicationRoleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Members_Passports_PassportID",
+                        column: x => x.PassportID,
+                        principalTable: "Passports",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -379,6 +379,11 @@ namespace Infrastructure.Migrations
                 column: "ApplicationRoleId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Members_PassportID",
+                table: "Members",
+                column: "PassportID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Passports_StopFiveId",
                 table: "Passports",
                 column: "StopFiveId");
@@ -407,11 +412,6 @@ namespace Infrastructure.Migrations
                 name: "IX_Stops_BusinessID",
                 table: "Stops",
                 column: "BusinessID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Stops_MemberID",
-                table: "Stops",
-                column: "MemberID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -432,6 +432,9 @@ namespace Infrastructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Members");
+
+            migrationBuilder.DropTable(
                 name: "Messages");
 
             migrationBuilder.DropTable(
@@ -442,9 +445,6 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Businesses");
-
-            migrationBuilder.DropTable(
-                name: "Members");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

@@ -165,6 +165,7 @@ namespace BeerQuest.Controllers
             business.Premium = true;
             _context.SaveChanges();
         }        
+       
         public List<BusinessData> GetData()
         {
             List<BusinessData> data = new List<BusinessData>();
@@ -187,5 +188,6 @@ namespace BeerQuest.Controllers
             }
             return data;          
         }
+
     }
 }

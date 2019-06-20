@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190619181617_updateAfterPull")]
-    partial class updateAfterPull
+    [Migration("20190619184229_addtable")]
+    partial class addtable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -100,9 +100,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("UserRole");
 
-                    b.Property<float>("lat");
+                    b.Property<double>("lat");
 
-                    b.Property<float>("lng");
+                    b.Property<double>("lng");
 
                     b.HasKey("Id");
 
@@ -179,13 +179,13 @@ namespace Infrastructure.Migrations
 
                     b.Property<int?>("StopFiveId");
 
-                    b.Property<int?>("StopFourId");
+                    b.Property<int>("StopFourId");
 
-                    b.Property<int?>("StopOneId");
+                    b.Property<int>("StopOneId");
 
-                    b.Property<int?>("StopThreeId");
+                    b.Property<int>("StopThreeId");
 
-                    b.Property<int?>("StopTwoId");
+                    b.Property<int>("StopTwoId");
 
                     b.HasKey("Id");
 
@@ -394,19 +394,23 @@ namespace Infrastructure.Migrations
 
                     b.HasOne("Domain.Stop", "StopFour")
                         .WithMany()
-                        .HasForeignKey("StopFourId");
+                        .HasForeignKey("StopFourId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Domain.Stop", "StopOne")
                         .WithMany()
-                        .HasForeignKey("StopOneId");
+                        .HasForeignKey("StopOneId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Domain.Stop", "StopThree")
                         .WithMany()
-                        .HasForeignKey("StopThreeId");
+                        .HasForeignKey("StopThreeId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Domain.Stop", "StopTwo")
                         .WithMany()
-                        .HasForeignKey("StopTwoId");
+                        .HasForeignKey("StopTwoId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Domain.Stop", b =>
