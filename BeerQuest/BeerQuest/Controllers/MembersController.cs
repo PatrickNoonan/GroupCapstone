@@ -277,6 +277,7 @@ namespace BeerQuest.Controllers
             else if (passport.CurrentStop == 5)
             {
                 //TODO: Free Beer Logic. Passport over, etc.
+                FreeBeer(member, passport, stop);
             }
 
         }
