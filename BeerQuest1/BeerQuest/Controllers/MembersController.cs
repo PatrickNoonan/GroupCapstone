@@ -95,7 +95,7 @@ namespace BeerQuest.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Points,Name")] Member member)
+        public async Task<IActionResult> Edit(int id, [Bind("Name")] Member member)
         {
             if (id != member.Id)
             {
@@ -244,17 +244,40 @@ namespace BeerQuest.Controllers
             _context.SaveChanges();
         }
 
-        public async Task<bool> BusinessCheckIn(Passport passport, Stop stop, int pin)
+        public ActionResult pincheck(int stop, int pin)
         {
-            if(pin == stop.Business.Pin)
+            Stop currentStop;
+            var loggedInMember = GetLoggedInMember();
+            switch (stop)
+            { 
+                case 1:
+                    currentStop = loggedInMember.Passport.StopOne;
+                    break;
+                case 2:
+                    currentStop = loggedInMember.Passport.StopTwo;
+                    break;
+                case 3:
+                    currentStop = loggedInMember.Passport.StopThree;
+                    break;
+                case 4:
+                    currentStop = loggedInMember.Passport.StopFour;
+                    break;
+                case 5:
+                    currentStop = loggedInMember.Passport.StopFive;
+                    break;
+                default:
+                    currentStop = loggedInMember.Passport.StopOne;
+                    break;
+            }
+            if (pin == currentStop.Business.Pin)
             {
-                StopCheck(passport, stop);
+                StopCheck(loggedInMember.Passport, currentStop);
                 _context.SaveChanges();
-                return true;
+                return RedirectToAction(nameof(Index));
             }
             else
             {
-                return false;
+                return RedirectToAction(nameof(Index));
             }
         }
 
@@ -277,6 +300,7 @@ namespace BeerQuest.Controllers
             else if (passport.CurrentStop == 5)
             {
                 //TODO: Free Beer Logic. Passport over, etc.
+                FreeBeer(member, passport, stop);
             }
 
         }
@@ -320,6 +344,10 @@ namespace BeerQuest.Controllers
 
             return message;
 
+        }
+        public async Task<IActionResult> SeeMemberMessages()
+        {
+            return View(GetMemberMessages());
         }
 
     }
