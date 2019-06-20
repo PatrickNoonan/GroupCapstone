@@ -244,7 +244,7 @@ namespace BeerQuest.Controllers
             _context.SaveChanges();
         }
 
-        public bool pincheck(int stop, int pin)
+        public ActionResult pincheck(int stop, int pin)
         {
             Stop currentStop;
             var loggedInMember = GetLoggedInMember();
@@ -273,11 +273,11 @@ namespace BeerQuest.Controllers
             {
                 StopCheck(loggedInMember.Passport, currentStop);
                 _context.SaveChanges();
-                return true;
+                return RedirectToAction(nameof(Index));
             }
             else
             {
-                return false;
+                return RedirectToAction(nameof(Index));
             }
         }
 
