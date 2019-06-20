@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Domain.Message>
+
+@{
+    ViewData["Title"] = "MessageBoard";
+}
+
+<h2>MessageBoard</h2>
+
+
+
+    <body>
+@foreach (var item in Model) {
+        <p> @item.CurrentMember was at @item.CurrentBar on @item.CurrentDay</p>
+}
+    </body>
+

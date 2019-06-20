@@ -188,6 +188,15 @@ namespace BeerQuest.Controllers
             }
             return data;          
         }
+        public List<Message> GetBusinessMessages(Business business)
+        {
+            List<Message> message = _context.Messages.Where(c => c.CurrentBar == business.Name).ToList();
+            message.Reverse();
+
+            return message;
+
+        }
+
 
     }
 }

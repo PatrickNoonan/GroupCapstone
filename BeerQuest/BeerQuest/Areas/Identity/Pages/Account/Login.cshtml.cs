@@ -9,19 +9,27 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Domain;
+using System.Security.Claims;
+using Infrastructure.Data;
 
 namespace BeerQuest.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly ApplicationDbContext _context;
+        
+        //private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger)
+        //public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger, ApplicationDbContext context)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _context = context;
         }
 
         [BindProperty]
@@ -77,7 +85,18 @@ namespace BeerQuest.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+                    var currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                    var user = _context.Users.Where(u => u.Id == currentUserId).FirstOrDefault();
+                    if (user.RoleString == "Business")
+                    {
+                        return RedirectToAction("Index", "Businesses");
+                    }
+                    if (user.RoleString == "Member")
+                    {
+                        return RedirectToAction("Index", "Members");
+                    }
+
+                    return LocalRedirect(returnUrl);//make change
                 }
                 if (result.RequiresTwoFactor)
                 {
