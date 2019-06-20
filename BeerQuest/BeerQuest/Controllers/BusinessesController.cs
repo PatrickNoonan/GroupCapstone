@@ -164,7 +164,8 @@ namespace BeerQuest.Controllers
         {
             business.Premium = true;
             _context.SaveChanges();
-        }
+        }        
+       
         public List<BusinessData> GetData()
         {
             List<BusinessData> data = new List<BusinessData>();
@@ -174,20 +175,18 @@ namespace BeerQuest.Controllers
             DateTime now = DateTime.Now;
             for (DateTime date = startDate; date < now; date = date.AddDays(1))
             {
-                allDates.Add(date);
+            allDates.Add(date);
             }
 
             for (int i = 0; i < allDates.Count; i++)
-                {
-                    BusinessData businessData = new BusinessData();
-                List<Message> dateList = _context.Messages.Where(c => c.CurrentDay == allDates[i]).ToList();
-                businessData.date = allDates[i];
-                businessData.count = dateList.Count;
-                data.Add(businessData);
-
-                }
-            return data;           
-
+            {
+            BusinessData businessData = new BusinessData();
+            List<Message> dateList = _context.Messages.Where(c => c.CurrentDay == allDates[i]).ToList();
+            businessData.date = allDates[i];
+            businessData.count = dateList.Count;
+            data.Add(businessData);
+            }
+            return data;          
         }
         public List<Message> GetBusinessMessages(Business business)
         {
