@@ -196,7 +196,14 @@ namespace BeerQuest.Controllers
             return message;
 
         }
+        public async Task<IActionResult> Premium()
+        {
+            var currentBusiness = this.User.Identity.Name;
+            Business business = _context.Businesses.Where(b => b.Name == currentBusiness).FirstOrDefault();
+            GetPremium(business);
 
+            return View();
+        }
 
     }
 }
