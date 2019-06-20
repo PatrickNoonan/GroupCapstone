@@ -20,11 +20,6 @@
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-5">
-            @{ if (Model.ActivePassport == false)
-                {
-                    <a asp-action="CustomerPassport">Create A Passport</a>
-                }
-            }
             <div id="map"></div>
             @{
                 if (Model.ActivePassport == false)
@@ -85,6 +80,7 @@
                 }
             }
         </div>
+        <div class="col-md-1"></div>
         <div class="col-md-5 whiteText">
             @if (Model.ActivePassport == true && Model.Passport.CurrentStop == 1)
             {
@@ -95,8 +91,8 @@
                 <br />
                 <div>
                     <form method="post" asp-action="pincheck" asp-route-stop="1">
+                        <input type="password" style="color: black" name="pin" /><br /><br />
                         <button style="color: black">Enter Business Pin</button>
-                        <input type="text" name="pin" />
                     </form>
                 </div>
             }
@@ -109,8 +105,8 @@
                 <br />
                 <div>
                     <form method="post" asp-action="pincheck" asp-route-stop="2">
+                        <input type="password" style="color: black" name="pin" /><br /><br />
                         <button style="color: black">Enter Business Pin</button>
-                        <input type="text" name="pin" />
                     </form>
                 </div>
             }
@@ -122,8 +118,8 @@
                 <br />
                 <div>
                     <form method="post" asp-action="pincheck" asp-route-stop="3">
+                        <input type="password" style="color: black" name="pin" /><br /><br />
                         <button style="color: black">Enter Business Pin</button>
-                        <input type="text" name="pin" />
                     </form>
                 </div>
             }
@@ -136,13 +132,12 @@
                 <br />
                 <div>
                     <form method="post" asp-action="pincheck" asp-route-stop="4">
+                        <input type="password" style="color: black" name="pin" /><br /><br />
                         <button style="color: black">Enter Business Pin</button>
-                        <input type="text" name="pin" />
                     </form>
                 </div>
             }
 
         </div>
-        <div class="col-md-1"></div>
     </div>
 </div>
