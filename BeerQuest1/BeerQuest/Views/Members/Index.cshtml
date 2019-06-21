@@ -20,13 +20,18 @@
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-5">
-            <div id="map"></div>
-            @{
-                if (Model.ActivePassport == false)
+            <div>
+                @if (Model.ActivePassport == false)
                 {
-                    <a asp-action="CustomerPassport">Create A Passport</a>
+                //<a asp-action="CustomerPassport">Create A Passport</a>
+                <h2 class="whiteText text-center">Thirsty?</h2>
+                <h3 class="whiteText">BeerQuest gives you a unique passport to bring to local businesses. After purchasing a beer at each of your first 4 locations, you earn a free beer at a mystery 5th location.</h3>
+                <br />
+                <input type="button" value="Create A Passport" onclick="location.href='@Url.Action("CustomerPassport", "Members")'" />
                 }
-                else if (Model.ActivePassport == true)
+            </div>
+            <div id="map"></div>
+            @if (Model.ActivePassport == true)
                 {
                     <h3 class="whiteText">Your current Passport expires on @Model.Passport.StopDate.Date</h3>
                     <br />
@@ -163,9 +168,6 @@
                 <h3><a asp-action="SeeMemberMessages" class="whiteText">View Local Check-Ins</a></h3>
             </div>
         </div>
-
-
         <div class="col-md-1"></div>
-
     </div>
 </div>
