@@ -1,27 +1,27 @@
-﻿@Model Domain.Member
+﻿@model Domain.Member
 @{
     ViewData["Title"] = "FreeBeerMap";
 }
-    <head>
-        <style>
-            #map {
-                height: 500px;
-                width: 100%;
-            }
-        </style>
-    </head>
+<head>
+    <style>
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+    </style>
+</head>
 
-    <h2 class="whiteText text-center">Welcome, @Model.Name</h2>
+<h2 class="whiteText text-center">Welcome, @Model.Name</h2>
 <br />
 <div class="container">
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-5">
             <div id="map"></div>
-            @{ 
-            <h3 class="whiteText">Redeem Your Free Beer By: @Model.Passport.StopDate.ToShortDateString()</h3>
-            <br />
-            <script>
+            @{
+                <h3 class="whiteText">Redeem Your Free Beer By: @Model.Passport.StopDate.ToShortDateString()</h3>
+                <br />
+                <script>
         var map;
  function initMap() {
 
@@ -47,11 +47,11 @@
                    animation: google.maps.Animation.BOUNCE
          });
 }
-            </script>
+                </script>
 
-            var srcKey = "https://maps.googleapis.com/maps/api/js?key=" + APIKey.SecretKey + "&callback=initMap async defer";
+                var srcKey = "https://maps.googleapis.com/maps/api/js?key=" + APIKey.SecretKey + "&callback=initMap async defer";
 
-            <script src=@srcKey></script>
+                <script src=@srcKey></script>
             }
 
         </div>
@@ -73,5 +73,5 @@
                 </div>
             }
         </div>
-</div>
+    </div>
 </div>

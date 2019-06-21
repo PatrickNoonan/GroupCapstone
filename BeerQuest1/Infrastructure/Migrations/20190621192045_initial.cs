@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.Migrations
 {
-    public partial class initialMigration : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -57,6 +57,7 @@ namespace Infrastructure.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CurrentRank = table.Column<string>(nullable: true),
                     CurrentMember = table.Column<string>(nullable: true),
                     CurrentBar = table.Column<string>(nullable: true),
                     CurrentDay = table.Column<DateTime>(nullable: false),
@@ -65,6 +66,19 @@ namespace Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Messages", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Ranks",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ranks", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -294,7 +308,8 @@ namespace Infrastructure.Migrations
                     ApplicationId = table.Column<string>(nullable: true),
                     ApplicationRoleId = table.Column<string>(nullable: true),
                     UserRole = table.Column<string>(nullable: true),
-                    PassportId = table.Column<int>(nullable: true)
+                    PassportId = table.Column<int>(nullable: true),
+                    RankId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -315,6 +330,12 @@ namespace Infrastructure.Migrations
                         name: "FK_Members_Passports_PassportId",
                         column: x => x.PassportId,
                         principalTable: "Passports",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Members_Ranks_RankId",
+                        column: x => x.RankId,
+                        principalTable: "Ranks",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -384,6 +405,11 @@ namespace Infrastructure.Migrations
                 column: "PassportId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Members_RankId",
+                table: "Members",
+                column: "RankId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Passports_StopFiveId",
                 table: "Passports",
                 column: "StopFiveId");
@@ -439,6 +465,9 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Passports");
+
+            migrationBuilder.DropTable(
+                name: "Ranks");
 
             migrationBuilder.DropTable(
                 name: "Stops");
