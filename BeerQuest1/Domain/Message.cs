@@ -9,6 +9,7 @@ namespace Domain
     {
         [Key]
         public int ID { get; set; }
+        public string CurrentRank { get; set; }
         public string CurrentMember { get; set; }
         public string CurrentBar { get; set; }
         public DateTime CurrentDay { get; set; }
