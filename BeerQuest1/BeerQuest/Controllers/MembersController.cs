@@ -310,7 +310,6 @@ namespace BeerQuest.Controllers
             {
                 FreeBeer(member, passport, stop);
                 passport.CurrentStop++;
-                _context.Remove(passport);
                 member.ActivePassport = false;
                 _context.SaveChanges();
             }
@@ -358,7 +357,6 @@ namespace BeerQuest.Controllers
         {
             List<Message> message = _context.Messages.ToList();
              message.Reverse();
-
             return message;
 
         }
@@ -369,3 +367,6 @@ namespace BeerQuest.Controllers
 
     }
 }
+
+//TODO: Incorrect Pin Message
+// 5th stop
