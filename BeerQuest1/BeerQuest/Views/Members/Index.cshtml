@@ -38,43 +38,46 @@
      var myLatLng3 = {lat: @Model.Passport.StopThree.Business.lat, lng: @Model.Passport.StopThree.Business.lng};
      var myLatLng4 = { lat: @Model.Passport.StopFour.Business.lat, lng: @Model.Passport.StopFour.Business.lng};
 
-     @*var myLatLng5 = {lat: @Model.Passport.StopFive.Business.lat, lng: @Model.Passport.StopFive.Business.lng};*@
-
-
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 15,
     center: myLatLng1
   });
 
+     var imgMarker = {
+        url: '../images/beerMapMarker.png',
+        size: new google.maps.Size(32, 56),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(0, 13)};
+
   var marker = new google.maps.Marker({
     position: myLatLng1,
-    map: map,
-      title: 'Bar1',
+      map: map,
+      title: '@Model.Passport.StopOne.Business.Name',
+      icon: imgMarker,
       //animation: google.maps.Animation.BOUNCE
   });
        var marker2 = new google.maps.Marker({
     position: myLatLng2,
     map: map,
-           title: 'Bar2',
+           title: '@Model.Passport.StopTwo.Business.Name',
+                icon: imgMarker,
       //animation: google.maps.Animation.DROP
  });
        var marker3 = new google.maps.Marker({
     position: myLatLng3,
     map: map,
-           title: 'Bar3',
+           title: '@Model.Passport.StopThree.Business.Name',
+                icon: imgMarker,
                 //animation: google.maps.Animation.BOUNCE
  });
        var marker4 = new google.maps.Marker({
     position: myLatLng4,
     map: map,
-           title: 'Bar4',
+           title: '@Model.Passport.StopFour.Business.Name',
+                icon: imgMarker,
                 //animation: google.maps.Animation.BOUNCE
        });
-         //      var marker5 = new google.maps.Marker({
-         //   position: myLatLng5,
-         //   map: map,
-         //          title: 'Bar5'
-         //});
+
 }
                     </script>
 

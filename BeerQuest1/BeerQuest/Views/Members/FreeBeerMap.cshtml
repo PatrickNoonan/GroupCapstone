@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewData["Title"] = "FreeBeerMap";
+}
+    <head>
+        <style>
+            #map {
+                height: 500px;
+                width: 100%;
+            }
+        </style>
+    </head>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            <div id="map"></div>
+            @{ 
+            <h3 class="whiteText">Redeem Your Free Beer By: @Model.Passport.StopDate.Date</h3>
+            <br />
+            <script>
+        var map;
+ function initMap() {
+
+     var myLatLng5 = {lat: @Model.Passport.StopFive.Business.lat, lng: @Model.Passport.StopFive.Business.lng};
+
+
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 15,
+    center: myLatLng5
+  });
+
+ var imgMarker = {
+        url: '../images/beerMapMarker.png',
+        size: new google.maps.Size(32, 56),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(0, 13)};
+
+               var marker5 = new google.maps.Marker({
+                   position: myLatLng5,
+                   icon: imgMarker,
+            map: map,
+                   title: 'Bar5'
+         });
+}
+            </script>
+
+            var srcKey = "https://maps.googleapis.com/maps/api/js?key=" + APIKey.SecretKey + "&callback=initMap async defer";
+
+            <script src=@srcKey></script>
+            }
+
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-5 whiteText">
+            @if (Model.ActivePassport == true)
+            {
+                <h1>Congratulations on Completing Your Passport!</h1>
+                <h2>Collect your Free Beer at:<br /> @Model.Passport.StopFive.Business.Name</h2>
+                <h3>@Model.Passport.StopFive.Business.Address</h3>
+                <h3>@Model.Passport.StopFive.Business.City</h3>
+                <h3>@Model.Passport.StopFive.Business.State</h3>
+                <br />
+                <div>
+                    <form method="post" asp-action="pincheck" asp-route-stop="1">
+                        <input type="password" style="color: black" name="pin" /><br /><br />
+                        <button style="color: black">Redeem Free Beer</button>
+                    </form>
+                </div>
+            }
+        </div>
+</div>
+</div>
