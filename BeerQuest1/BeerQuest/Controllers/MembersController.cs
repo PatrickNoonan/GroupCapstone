@@ -272,6 +272,8 @@ namespace BeerQuest.Controllers
             if (pin == currentStop.Business.Pin)
             {
                 StopCheck(loggedInMember.Passport, currentStop);
+                currentStop.Business.CheckIns ++;
+                currentStop.Complete = true;
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
@@ -286,13 +288,11 @@ namespace BeerQuest.Controllers
             var member = GetLoggedInMember();
             if(passport.CurrentStop < 4)
             {
-                stop.Complete = true;
                 CreateMessage(stop, member);
                 passport.CurrentStop++;
             }
             else if (passport.CurrentStop == 4)
             {
-                stop.Complete = true;
                 CreateFifthStop(passport);
                 CreateMessage(stop, member);
                 passport.CurrentStop++;
