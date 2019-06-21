@@ -10,42 +10,6 @@
 <h2 class="indexTitle">Verified Visitors</h2>
 
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Premium)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-                @Html.DisplayFor(model => model.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.Premium)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@Model.Id">Update Profile</a> |
-                <a asp-action="Premium" asp-route-id=>Go Premium</a>
-                <a asp-action="SeeMemberMessages">See Messages</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-=======
 <div class="row">
     <div class="col-xs-8">
         <div id="bar-chart">
@@ -77,19 +41,10 @@
             contentType: "application/json; chartset=utf-8",
         })
             .done(function (data) {
-                let datat = [
-                    { date: "6/12/2019", visitors: 30 },
-                    { date: "6/13/2019", visitors: 40 },
-                    { date: "6/14/2019", visitors: 50 },
-                    { date: "6/15/2019", visitors: 60 },
-                    { date: "6/16/2019", visitors: 70 },
-                    { date: "6/17/2019", visitors: 80 },
-                    { date: "6/18/2019", visitors: 90 },
-                ];
                 let chartData = [];
                 let chartDates = [];
                 for (let i = 0; i < data.length; i++) {
-                    chartData.push(data[i].visitors);
+                    chartData.push(data[i].count);
                 }
                 for (let i = 0; i < data.length; i++) {
                     chartDates.push(data[i].date);
@@ -202,4 +157,5 @@
             });
     //});
 </script>
+
 
