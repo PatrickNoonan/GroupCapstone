@@ -36,7 +36,8 @@ namespace Infrastructure.Data
 
             context.SaveChanges();
         }
-            public static void SeedMessage(ApplicationDbContext context){
+            public static void SeedMessage(ApplicationDbContext context)
+        {
             context.Messages.Add(
                 new Message { CurrentMember = "Spooderman", CurrentBar = "My Office", CurrentDay = DateTime.ParseExact("09/06/2019 13:45:00", "dd/MM/yyyy HH:mm:ss", null), WasFree = false });
             context.Messages.Add(
@@ -166,6 +167,30 @@ namespace Infrastructure.Data
             context.Messages.Add(
                 new Message { CurrentMember = "Shawn", CurrentBar = "My Office", CurrentDay = DateTime.ParseExact("15/06/2019 13:45:00", "dd/MM/yyyy HH:mm:ss", null), WasFree = false });
      
+            context.SaveChanges();
+        }
+        public static void RankSeeder(ApplicationDbContext context)
+        {
+            context.Ranks.Add(
+    new Rank { Name = "Noob Drinker" });
+            context.Ranks.Add(
+    new Rank { Name = "Barely Buzzed" });
+            context.Ranks.Add(
+    new Rank { Name = "1 Shot Wonder" });
+            context.Ranks.Add(
+    new Rank { Name = "Adept Drunk" });
+            context.Ranks.Add(
+    new Rank { Name = "Bar Hopper" });
+            context.Ranks.Add(
+    new Rank { Name = "No Chasers" });
+            context.Ranks.Add(
+    new Rank { Name = "Beer Bong Pro" });
+            context.Ranks.Add(
+    new Rank { Name = "BlackOut Fiend" });
+            context.Ranks.Add(
+    new Rank { Name = "Alcoholic" });
+            context.Ranks.Add(
+    new Rank { Name = "Drunken Master" });
             context.SaveChanges();
         }
     }

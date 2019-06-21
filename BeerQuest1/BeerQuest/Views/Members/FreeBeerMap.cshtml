@@ -1,4 +1,4 @@
-﻿
+﻿@Model Domain.Member
 @{
     ViewData["Title"] = "FreeBeerMap";
 }
@@ -19,7 +19,7 @@
         <div class="col-md-5">
             <div id="map"></div>
             @{ 
-            <h3 class="whiteText">Redeem Your Free Beer By: @Model.Passport.StopDate.Date</h3>
+            <h3 class="whiteText">Redeem Your Free Beer By: @Model.Passport.StopDate.ToShortDateString()</h3>
             <br />
             <script>
         var map;
@@ -37,13 +37,14 @@
         url: '../images/beerMapMarker.png',
         size: new google.maps.Size(32, 56),
         origin: new google.maps.Point(0, 0),
-        anchor: new google.maps.Point(0, 13)};
+        anchor: new google.maps.Point(11, 56)};
 
                var marker5 = new google.maps.Marker({
                    position: myLatLng5,
                    icon: imgMarker,
-            map: map,
-                   title: 'Bar5'
+                    map: map,
+                   title: '@Model.Passport.StopFive.Business.Name',
+                   animation: google.maps.Animation.BOUNCE
          });
 }
             </script>
