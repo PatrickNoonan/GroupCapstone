@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190619184720_initAfterNuke")]
-    partial class initAfterNuke
+    [Migration("20190620184225_reMigratingAfterPull")]
+    partial class reMigratingAfterPull
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -127,7 +127,7 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("PassportID");
+                    b.Property<int?>("PassportId");
 
                     b.Property<double>("Points");
 
@@ -141,7 +141,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("ApplicationRoleId");
 
-                    b.HasIndex("PassportID");
+                    b.HasIndex("PassportId");
 
                     b.ToTable("Members");
                 });
@@ -179,13 +179,13 @@ namespace Infrastructure.Migrations
 
                     b.Property<int?>("StopFiveId");
 
-                    b.Property<int>("StopFourId");
+                    b.Property<int?>("StopFourId");
 
-                    b.Property<int>("StopOneId");
+                    b.Property<int?>("StopOneId");
 
-                    b.Property<int>("StopThreeId");
+                    b.Property<int?>("StopThreeId");
 
-                    b.Property<int>("StopTwoId");
+                    b.Property<int?>("StopTwoId");
 
                     b.HasKey("Id");
 
@@ -216,13 +216,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<bool>("IsFree");
 
-                    b.Property<int>("MemberID");
-
                     b.HasKey("Id");
 
                     b.HasIndex("BusinessID");
-
-                    b.HasIndex("MemberID");
 
                     b.ToTable("Stops");
                 });
@@ -382,8 +378,7 @@ namespace Infrastructure.Migrations
 
                     b.HasOne("Domain.Passport", "Passport")
                         .WithMany()
-                        .HasForeignKey("PassportID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("PassportId");
                 });
 
             modelBuilder.Entity("Domain.Passport", b =>
@@ -394,23 +389,19 @@ namespace Infrastructure.Migrations
 
                     b.HasOne("Domain.Stop", "StopFour")
                         .WithMany()
-                        .HasForeignKey("StopFourId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("StopFourId");
 
                     b.HasOne("Domain.Stop", "StopOne")
                         .WithMany()
-                        .HasForeignKey("StopOneId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("StopOneId");
 
                     b.HasOne("Domain.Stop", "StopThree")
                         .WithMany()
-                        .HasForeignKey("StopThreeId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("StopThreeId");
 
                     b.HasOne("Domain.Stop", "StopTwo")
                         .WithMany()
-                        .HasForeignKey("StopTwoId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("StopTwoId");
                 });
 
             modelBuilder.Entity("Domain.Stop", b =>
@@ -418,11 +409,6 @@ namespace Infrastructure.Migrations
                     b.HasOne("Domain.Business", "Business")
                         .WithMany()
                         .HasForeignKey("BusinessID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Domain.Member", "Member")
-                        .WithMany()
-                        .HasForeignKey("MemberID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
