@@ -10,13 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-<<<<<<< HEAD:BeerQuest1/Infrastructure/Migrations/20190621192045_initial.Designer.cs
-    [Migration("20190621192045_initial")]
-    partial class initial
-=======
-    [Migration("20190621185539_1337")]
-    partial class _1337
->>>>>>> 93067e1af46b79b2daaf806f97b2bff8a6183b68:BeerQuest1/Infrastructure/Migrations/20190621185539_1337.Designer.cs
+    [Migration("20190621190847_migratingAfterPull")]
+    partial class migratingAfterPull
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
