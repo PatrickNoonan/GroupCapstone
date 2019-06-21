@@ -27,6 +27,7 @@ namespace BeerQuest.Controllers
         public async Task<IActionResult> Index()
         {
             var loggedInMember = GetLoggedInMember();
+            loggedInMember = GetRank(loggedInMember);
             return View(loggedInMember);
         }
 
@@ -375,7 +376,71 @@ namespace BeerQuest.Controllers
         {
             return View(GetMemberMessages());
         }
-
+        public Member GetRank(Member member)
+        {
+            
+            if (member.Points > 1200)
+            {
+                member.RankId = 10;
+                member.Title = member.Rank.Name;
+                return member;
+            }
+            if (member.Points > 900)
+            {
+                member.RankId = 9;
+                member.Title = member.Rank.Name;
+                return member;
+            }
+            if (member.Points > 600)
+            {
+                member.RankId = 8;
+                member.Title = member.Rank.Name;
+                return member;
+            }
+            if (member.Points > 500)
+            {
+                member.RankId = 7;
+                member.Title = member.Rank.Name;
+                return member;
+            }
+            if (member.Points > 400)
+            {
+                member.RankId = 6;
+                member.Title = member.Rank.Name;
+                return member;
+            }
+            if (member.Points > 300)
+            {
+                member.RankId = 5;
+                member.Title = member.Rank.Name;
+                return member;
+            }
+            if (member.Points > 100)
+            {
+                member.RankId = 4;
+                member.Title = member.Rank.Name;
+                return member;
+            }
+            if (member.Points > 60)
+            {
+                member.RankId = 3;
+                member.Title = member.Rank.Name;
+                return member;
+            }
+            if (member.Points > 30)
+            {
+                member.RankId = 2;
+                member.Title = member.Rank.Name;
+                return member;
+            }
+            if (member.Points >= 0)
+            {
+                member.RankId = 1;
+                member.Title = member.Rank.Name;
+                return member;
+            }
+            return member;
+        }
     }
 }
 
