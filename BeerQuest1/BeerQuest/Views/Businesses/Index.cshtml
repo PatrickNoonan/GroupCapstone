@@ -51,15 +51,16 @@
                 for (let i = 0; i < 7; i++) {
                     let d = new Date();
                     d.setDate(d.getDate() - i);
-                    pastSevenDays.unshift(d)
+                    let dString = (d.getMonth() + "-" + d.getDate());
+                    pastSevenDays.unshift(dString)
                 }
 
                 for (let i = 0; i < data.length; i++) {
                     chartDates.push(data[i].date);
                 }
-                let filteredArray = chartDates.filter(function(item, pos){
-                  return chartDates.indexOf(item)== pos; 
-                });
+                //let filteredArray = chartDates.filter(function(item, pos){
+                //  return chartDates.indexOf(item)== pos; 
+                //});
 
                 let margin = {
                     top: 30,
