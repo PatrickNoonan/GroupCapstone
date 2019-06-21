@@ -221,9 +221,16 @@ namespace BeerQuest.Controllers
         }
         public async Task<IActionResult> Premium()
         {
-            var currentBusiness = this.User.Identity.Name;
-            Business business = _context.Businesses.Where(b => b.Name == currentBusiness).FirstOrDefault();
-            GetPremium(business);
+
+            var currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = _context.Users.Where(u => u.Id == currentUserId).FirstOrDefault();
+
+            //var currentBusiness = this.User.Identity.Name;
+            //= _context.Businesses.Where(b => b.Name == currentBusiness).FirstOrDefault();
+            
+            Business business = _context.Businesses.Where(b => b.ApplicationId == user.Id).FirstOrDefault();
+            business.Premium = true;
+            _context.SaveChanges();
 
             return View();
         }
