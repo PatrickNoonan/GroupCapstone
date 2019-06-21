@@ -26,7 +26,6 @@ namespace BeerQuest.Controllers
         // GET: Members
         public async Task<IActionResult> Index()
         {
-            //TODO: Prompt new Quest or Display details of current
             var loggedInMember = GetLoggedInMember();
             return View(loggedInMember);
         }
@@ -271,14 +270,22 @@ namespace BeerQuest.Controllers
             }
             if (pin == currentStop.Business.Pin)
             {
-                StopCheck(loggedInMember.Passport, currentStop);
-                currentStop.Business.CheckIns ++;
                 currentStop.Complete = true;
+                currentStop.Business.CheckIns++;
                 _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                StopCheck(loggedInMember.Passport, currentStop);
+                if(loggedInMember.Passport.CurrentStop == 5)
+                {
+                    return RedirectToAction(nameof(FreeBeerMap));
+                }
+                else
+                {
+                    return RedirectToAction(nameof(Index));
+                }
             }
             else
             {
+                //System.Windows.Forms.MessageBox.Show("Incorrect PIN");
                 return RedirectToAction(nameof(Index));
             }
         }
@@ -286,23 +293,26 @@ namespace BeerQuest.Controllers
         public void StopCheck(Passport passport, Stop stop)
         {
             var member = GetLoggedInMember();
-            if(passport.CurrentStop < 4)
+            CreateMessage(stop, member);
+            if (passport.CurrentStop < 4)
             {
-                CreateMessage(stop, member);
                 passport.CurrentStop++;
+                _context.SaveChanges();
             }
             else if (passport.CurrentStop == 4)
             {
                 CreateFifthStop(passport);
-                CreateMessage(stop, member);
                 passport.CurrentStop++;
+                _context.SaveChanges();
+
             }
             else if (passport.CurrentStop == 5)
             {
-                //TODO: Free Beer Logic. Passport over, etc.
                 FreeBeer(member, passport, stop);
+                passport.CurrentStop++;
+                member.ActivePassport = false;
+                _context.SaveChanges();
             }
-
         }
         public List<Message> GetMesssageList()
         {
@@ -337,11 +347,16 @@ namespace BeerQuest.Controllers
                 stop.IsFree = true;
             }
         }
+        public async Task<IActionResult> FreeBeerMap()
+        {
+            var loggedInMember = GetLoggedInMember();
+            return View(loggedInMember);
+        }
+
         public List<Message> GetMemberMessages()
         {
             List<Message> message = _context.Messages.ToList();
              message.Reverse();
-
             return message;
 
         }
@@ -352,3 +367,6 @@ namespace BeerQuest.Controllers
 
     }
 }
+
+//TODO: Incorrect Pin Message
+// 5th stop
