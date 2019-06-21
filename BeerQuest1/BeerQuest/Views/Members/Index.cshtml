@@ -58,28 +58,28 @@
   var marker = new google.maps.Marker({
     position: myLatLng1,
       map: map,
-      title: '@Model.Passport.StopOne.Business.Name',
+      title: 'Stop One: @Model.Passport.StopOne.Business.Name',
       icon: imgMarker,
       //animation: google.maps.Animation.BOUNCE
   });
        var marker2 = new google.maps.Marker({
     position: myLatLng2,
     map: map,
-           title: '@Model.Passport.StopTwo.Business.Name',
+           title: 'Stop Two: @Model.Passport.StopTwo.Business.Name',
                 icon: imgMarker,
       //animation: google.maps.Animation.DROP
  });
        var marker3 = new google.maps.Marker({
     position: myLatLng3,
     map: map,
-           title: '@Model.Passport.StopThree.Business.Name',
+           title: 'Stop Three: @Model.Passport.StopThree.Business.Name',
                 icon: imgMarker,
                 //animation: google.maps.Animation.BOUNCE
  });
        var marker4 = new google.maps.Marker({
     position: myLatLng4,
     map: map,
-           title: '@Model.Passport.StopFour.Business.Name',
+           title: 'Stop Four: @Model.Passport.StopFour.Business.Name',
                 icon: imgMarker,
                 //animation: google.maps.Animation.BOUNCE
        });
@@ -105,18 +105,14 @@
                 <h3>@Model.Passport.StopOne.Business.City</h3>
                 <h3>@Model.Passport.StopOne.Business.State</h3>
                 <br />
+                <p>After purchase, hand app to employee to enter secret pin.</p>
                 <div>
                     <form method="post" asp-action="pincheck" asp-route-stop="1">
                         <input type="password" style="color: black" name="pin" /><br /><br />
                         <button style="color: black">Enter Business Pin</button>
                     </form>
                 </div>
-                <text>
-                <script>
-                    
-    marker.setAnimation(google.maps.Animation.BOUNCE);
-                </script>
-            </text>
+
             }
             @if (Model.ActivePassport == true && Model.Passport.CurrentStop == 2)
             {
@@ -125,18 +121,13 @@
                 <h3>@Model.Passport.StopTwo.Business.City</h3>
                 <h3>@Model.Passport.StopTwo.Business.State</h3>
                 <br />
+                <p>After purchase, hand app to employee to enter secret pin.</p>
                 <div>
                     <form method="post" asp-action="pincheck" asp-route-stop="2">
                         <input type="password" style="color: black" name="pin" /><br /><br />
                         <button style="color: black">Enter Business Pin</button>
                     </form>
                 </div>
-                <text>
-                <script>
-                        marker.setAnimation(null);
-                        marker2.setAnimation(google.maps.Animation.BOUNCE);
-                </script>
-            </text>
             }
             @if (Model.ActivePassport == true && Model.Passport.CurrentStop == 3)
             {
@@ -145,6 +136,7 @@
                 <h3>@Model.Passport.StopThree.Business.City</h3>
                 <h3>@Model.Passport.StopThree.Business.State</h3>
                 <br />
+                <p>After purchase, hand app to employee to enter secret pin.</p>
                 <div>
                     <form method="post" asp-action="pincheck" asp-route-stop="3">
                         <input type="password" style="color: black" name="pin" /><br /><br />
@@ -159,6 +151,7 @@
                 <h3>@Model.Passport.StopFour.Business.City</h3>
                 <h3>@Model.Passport.StopFour.Business.State</h3>
                 <br />
+                <p>After purchase, hand app to employee to enter secret pin.</p>
                 <div>
                     <form method="post" asp-action="pincheck" asp-route-stop="4">
                         <input type="password" style="color: black" name="pin" /><br /><br />
