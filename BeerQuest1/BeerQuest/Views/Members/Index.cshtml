@@ -12,27 +12,31 @@
     </style>
 </head>
 
-<h2 class="whiteText">Welcome, @Model.Name</h2>
+<h2 class="whiteText text-center">Welcome, @Model.Name</h2>
 <br />
-
 
 <div class="container">
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-5">
-            <div id="map"></div>
-            @{
-                if (Model.ActivePassport == false)
+            <div>
+                @if (Model.ActivePassport == false)
                 {
-                    <a asp-action="CustomerPassport">Create A Passport</a>
+                <h2 class="whiteText text-center">Thirsty?</h2>
+                <h3 class="whiteText">BeerQuest gives you a unique passport to bring to local businesses. After purchasing a beer at each of your first 4 locations, you earn a free beer at a mystery 5th location.</h3>
+                <br />
+                <input type="button" value="Create A Passport" onclick="location.href='@Url.Action("CustomerPassport", "Members")'" />
                 }
-                else if (Model.ActivePassport == true)
+            </div>
+            <div id="map"></div>
+            @if (Model.ActivePassport == true)
                 {
-                    <h3 class="whiteText">Your current Passport expires on @Model.Passport.StopDate.Date</h3>
+                    <h3 class="whiteText">Your current Passport expires on @Model.Passport.StopDate.ToShortDateString()</h3>
                     <br />
                     <script>
         var map;
- function initMap() {
+    function initMap() {
+
      var myLatLng1 = { lat: @Model.Passport.StopOne.Business.lat, lng: @Model.Passport.StopOne.Business.lng};
      var myLatLng2 = {lat: @Model.Passport.StopTwo.Business.lat, lng: @Model.Passport.StopTwo.Business.lng};
      var myLatLng3 = {lat: @Model.Passport.StopThree.Business.lat, lng: @Model.Passport.StopThree.Business.lng};
@@ -43,48 +47,53 @@
     center: myLatLng1
   });
 
+        var bounds = new google.maps.LatLngBounds();
+
      var imgMarker = {
         url: '../images/beerMapMarker.png',
         size: new google.maps.Size(32, 56),
         origin: new google.maps.Point(0, 0),
-        anchor: new google.maps.Point(0, 13)};
+        anchor: new google.maps.Point(11, 56)};
 
   var marker = new google.maps.Marker({
     position: myLatLng1,
       map: map,
-      title: '@Model.Passport.StopOne.Business.Name',
+      title: 'Stop One: @Model.Passport.StopOne.Business.Name',
       icon: imgMarker,
       //animation: google.maps.Animation.BOUNCE
   });
        var marker2 = new google.maps.Marker({
     position: myLatLng2,
     map: map,
-           title: '@Model.Passport.StopTwo.Business.Name',
+           title: 'Stop Two: @Model.Passport.StopTwo.Business.Name',
                 icon: imgMarker,
       //animation: google.maps.Animation.DROP
  });
        var marker3 = new google.maps.Marker({
     position: myLatLng3,
     map: map,
-           title: '@Model.Passport.StopThree.Business.Name',
+           title: 'Stop Three: @Model.Passport.StopThree.Business.Name',
                 icon: imgMarker,
                 //animation: google.maps.Animation.BOUNCE
  });
        var marker4 = new google.maps.Marker({
     position: myLatLng4,
     map: map,
-           title: '@Model.Passport.StopFour.Business.Name',
+           title: 'Stop Four: @Model.Passport.StopFour.Business.Name',
                 icon: imgMarker,
                 //animation: google.maps.Animation.BOUNCE
        });
-
+        bounds.extend(marker.position);
+        bounds.extend(marker2.position);
+        bounds.extend(marker3.position);
+        bounds.extend(marker4.position);
+        map.fitBounds(bounds);
 }
                     </script>
 
                     var srcKey = "https://maps.googleapis.com/maps/api/js?key=" + APIKey.SecretKey + "&callback=initMap async defer";
 
                     <script src=@srcKey></script>
-                }
             }
         </div>
         <div class="col-md-1"></div>
@@ -96,15 +105,13 @@
                 <h3>@Model.Passport.StopOne.Business.City</h3>
                 <h3>@Model.Passport.StopOne.Business.State</h3>
                 <br />
+                <p>After purchase, hand app to employee to enter secret pin.</p>
                 <div>
                     <form method="post" asp-action="pincheck" asp-route-stop="1">
                         <input type="password" style="color: black" name="pin" /><br /><br />
                         <button style="color: black">Enter Business Pin</button>
                     </form>
                 </div>
-                <script>
-                    marker.setAnimation(google.maps.Animation.BOUNCE);
-                </script>
 
             }
             @if (Model.ActivePassport == true && Model.Passport.CurrentStop == 2)
@@ -114,43 +121,37 @@
                 <h3>@Model.Passport.StopTwo.Business.City</h3>
                 <h3>@Model.Passport.StopTwo.Business.State</h3>
                 <br />
+                <p>After purchase, hand app to employee to enter secret pin.</p>
                 <div>
                     <form method="post" asp-action="pincheck" asp-route-stop="2">
                         <input type="password" style="color: black" name="pin" /><br /><br />
                         <button style="color: black">Enter Business Pin</button>
                     </form>
                 </div>
-                <script>
-                    marker.setAnimation(null);
-                    marker2.setAnimation(google.maps.Animation.BOUNCE);
-                </script>
             }
             @if (Model.ActivePassport == true && Model.Passport.CurrentStop == 3)
             {
-                <h2>Your current stop is: @Model.Passport.StopThree.Business.Name</h2>
-                <h3>@Model.Passport.StopThree.Business.Address</h3><br /><h3>@Model.Passport.StopThree.Business.City</h3>
+                <h2>Your current stop is:<br /> @Model.Passport.StopThree.Business.Name</h2>
+                <h3>@Model.Passport.StopThree.Business.Address</h3>
+                <h3>@Model.Passport.StopThree.Business.City</h3>
                 <h3>@Model.Passport.StopThree.Business.State</h3>
                 <br />
+                <p>After purchase, hand app to employee to enter secret pin.</p>
                 <div>
                     <form method="post" asp-action="pincheck" asp-route-stop="3">
                         <input type="password" style="color: black" name="pin" /><br /><br />
                         <button style="color: black">Enter Business Pin</button>
                     </form>
                 </div>
-                <text>
-                <script>
-                    marker2.setAnimation(null);
-                    marker3.setAnimation(google.maps.Animation.BOUNCE);
-                </script>
-            </text>
             }
             @if (Model.ActivePassport == true && Model.Passport.CurrentStop == 4)
             {
-                <h2>Your current stop is: @Model.Passport.StopFour.Business.Name</h2>
+                <h2>Your current stop is:<br /> @Model.Passport.StopFour.Business.Name</h2>
                 <h3>@Model.Passport.StopFour.Business.Address</h3>
                 <h3>@Model.Passport.StopFour.Business.City</h3>
                 <h3>@Model.Passport.StopFour.Business.State</h3>
                 <br />
+                <p>After purchase, hand app to employee to enter secret pin.</p>
                 <div>
                     <form method="post" asp-action="pincheck" asp-route-stop="4">
                         <input type="password" style="color: black" name="pin" /><br /><br />
@@ -158,13 +159,11 @@
                     </form>
                 </div>
             }
-
-        </div>
-
-        <div>
-            <a asp-action="SeeMemberMessages">See Messages</a> 
+            <br />
+            <div>
+                <h3><a asp-action="SeeMemberMessages" class="whiteText">View Local Check-Ins</a></h3>
+            </div>
         </div>
         <div class="col-md-1"></div>
-
     </div>
 </div>

@@ -85,16 +85,18 @@ namespace BeerQuest.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    var currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-                    var user = _context.Users.Where(u => u.Id == currentUserId).FirstOrDefault();
-                    if (user.RoleString == "Business")
-                    {
-                        return RedirectToAction("Index", "Businesses");
-                    }
-                    if (user.RoleString == "Member")
-                    {
-                        return RedirectToAction("Index", "Members");
-                    }
+                    //var currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                    //var currentUser = this.User.Identity.Name;
+                    ////var user = _context.Users.Where(u => u.Id == currentUserId).FirstOrDefault();
+                    //var user = _context.Users.Where(u => u.Id == currentUserId).FirstOrDefault();
+                    //if (user.RoleString == "Business")
+                    //{
+                    //    return RedirectToAction("Index", "Businesses");
+                    //}
+                    //if (user.RoleString == "Member")
+                    //{
+                    //    return RedirectToAction("Index", "Members");
+                    //}
 
                     return LocalRedirect(returnUrl);//make change
                 }

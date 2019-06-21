@@ -24,6 +24,23 @@ namespace BeerQuest.Controllers
         }
         public IActionResult Index()
         {
+            //why is user null????????
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //var currentUser = this.User.Identity.Name;
+            //var user = _context.Users.Where(u => u.Id == currentUserId).FirstOrDefault();
+            var user = _context.Users.Where(u => u.Id == currentUserId).FirstOrDefault();
+            if(user == null)
+            {
+                return View();
+            }
+            if (user.RoleString == "Business")
+            {
+                return RedirectToAction("Index", "Businesses");
+            }
+            if (user.RoleString == "Member")
+            {
+                return RedirectToAction("Index", "Members");
+            }
             return View();
         }
 
