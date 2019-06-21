@@ -49,22 +49,26 @@
   var marker = new google.maps.Marker({
     position: myLatLng1,
     map: map,
-      title: 'Bar1'
+      title: 'Bar1',
+      //animation: google.maps.Animation.BOUNCE
   });
        var marker2 = new google.maps.Marker({
     position: myLatLng2,
     map: map,
-           title: 'Bar2'
+           title: 'Bar2',
+      //animation: google.maps.Animation.DROP
  });
        var marker3 = new google.maps.Marker({
     position: myLatLng3,
     map: map,
-           title: 'Bar3'
+           title: 'Bar3',
+                //animation: google.maps.Animation.BOUNCE
  });
        var marker4 = new google.maps.Marker({
     position: myLatLng4,
     map: map,
-           title: 'Bar4'
+           title: 'Bar4',
+                //animation: google.maps.Animation.BOUNCE
        });
          //      var marker5 = new google.maps.Marker({
          //   position: myLatLng5,
@@ -95,6 +99,10 @@
                         <button style="color: black">Enter Business Pin</button>
                     </form>
                 </div>
+                <script>
+                    marker.setAnimation(google.maps.Animation.BOUNCE);
+                </script>
+
             }
             @if (Model.ActivePassport == true && Model.Passport.CurrentStop == 2)
             {
@@ -109,6 +117,10 @@
                         <button style="color: black">Enter Business Pin</button>
                     </form>
                 </div>
+                <script>
+                    marker.setAnimation(null);
+                    marker2.setAnimation(google.maps.Animation.BOUNCE);
+                </script>
             }
             @if (Model.ActivePassport == true && Model.Passport.CurrentStop == 3)
             {
@@ -122,6 +134,12 @@
                         <button style="color: black">Enter Business Pin</button>
                     </form>
                 </div>
+                <text>
+                <script>
+                    marker2.setAnimation(null);
+                    marker3.setAnimation(google.maps.Animation.BOUNCE);
+                </script>
+            </text>
             }
             @if (Model.ActivePassport == true && Model.Passport.CurrentStop == 4)
             {
