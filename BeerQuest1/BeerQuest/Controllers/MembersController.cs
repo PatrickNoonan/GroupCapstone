@@ -15,7 +15,7 @@ namespace BeerQuest.Controllers
 {
     public class MembersController : Controller
     {
-        private UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _context;
 
         public MembersController(ApplicationDbContext context)
@@ -27,6 +27,7 @@ namespace BeerQuest.Controllers
         public async Task<IActionResult> Index()
         {
             var loggedInMember = GetLoggedInMember();
+            loggedInMember = GetRank(loggedInMember);
             return View(loggedInMember);
         }
 
@@ -190,7 +191,6 @@ namespace BeerQuest.Controllers
         public void ChooseStop(List<Business> list, Passport passport, int stopNumber, bool premium)
         {
             var stop = new Stop();
-            var loggedInMember = GetLoggedInMember();
             int total = list.Count();
             Random r = new Random();
             int offset = r.Next(0, total);
@@ -285,7 +285,7 @@ namespace BeerQuest.Controllers
             }
             else
             {
-                //System.Windows.Forms.MessageBox.Show("Incorrect PIN");
+                ViewBag.WrongPin = String.Format("Incorrect Pin, try again.");
                 return RedirectToAction(nameof(Index));
             }
         }
@@ -376,10 +376,98 @@ namespace BeerQuest.Controllers
             return View(GetMemberMessages());
         }
 
+
         public async Task<IActionResult> Rank()
         {
             var rank = _context.Ranks.ToList();
             return View(rank);
+        }
+
+
+        public Member GetRank(Member member)
+        {
+            string currentTitle;
+            if (member.Points > 1200)
+            {
+                Rank rank = _context.Ranks.Where(c => c.Id == 10).Single();
+                currentTitle = rank.Name;
+                member.Title = currentTitle;
+                _context.SaveChanges();
+                return member;
+            }
+            if (member.Points > 900)
+            {
+                Rank rank = _context.Ranks.Where(c => c.Id == 9).Single();
+                currentTitle = rank.Name;
+                member.Title = currentTitle;
+                _context.SaveChanges();
+                return member;
+            }
+            if (member.Points > 600)
+            {
+                Rank rank = _context.Ranks.Where(c => c.Id == 8).Single();
+                currentTitle = rank.Name;
+                member.Title = currentTitle;
+                _context.SaveChanges();
+                return member;
+            }
+            if (member.Points > 500)
+            {
+                Rank rank = _context.Ranks.Where(c => c.Id == 7).Single();
+                currentTitle = rank.Name;
+                member.Title = currentTitle;
+                _context.SaveChanges();
+                return member;
+            }
+            if (member.Points > 400)
+            {
+                Rank rank = _context.Ranks.Where(c => c.Id == 6).Single();
+                currentTitle = rank.Name;
+                member.Title = currentTitle;
+                _context.SaveChanges();
+                return member;
+            }
+            if (member.Points > 300)
+            {
+                Rank rank = _context.Ranks.Where(c => c.Id == 5).Single();
+                currentTitle = rank.Name;
+                member.Title = currentTitle;
+                _context.SaveChanges();
+                return member;
+            }
+            if (member.Points > 100)
+            {
+                Rank rank = _context.Ranks.Where(c => c.Id == 4).Single();
+                currentTitle = rank.Name;
+                member.Title = currentTitle;
+                _context.SaveChanges();
+                return member;
+            }
+            if (member.Points > 60)
+            {
+                Rank rank = _context.Ranks.Where(c => c.Id == 3).Single();
+                currentTitle = rank.Name;
+                member.Title = currentTitle;
+                _context.SaveChanges();
+                return member;
+            }
+            if (member.Points > 30)
+            {
+                Rank rank = _context.Ranks.Where(c => c.Id == 2).Single();
+                currentTitle = rank.Name;
+                member.Title = currentTitle;
+                _context.SaveChanges();
+                return member;
+            }
+            if (member.Points >= 0)
+            {
+                Rank rank = _context.Ranks.Where(c => c.Id == 1).Single();
+                currentTitle = rank.Name;
+                member.Title = currentTitle;
+                _context.SaveChanges();
+                return member;
+            }
+            return member;
         }
 
     }

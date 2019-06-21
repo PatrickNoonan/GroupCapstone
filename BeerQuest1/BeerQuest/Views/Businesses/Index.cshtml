@@ -51,15 +51,13 @@
                 for (let i = 0; i < 7; i++) {
                     let d = new Date();
                     d.setDate(d.getDate() - i);
-                    pastSevenDays.unshift(d)
+                    let dString = (d.getMonth() + "-" + d.getDate());
+                    pastSevenDays.unshift(dString)
                 }
 
                 for (let i = 0; i < data.length; i++) {
                     chartDates.push(data[i].date);
                 }
-                let filteredArray = chartDates.filter(function(item, pos){
-                  return chartDates.indexOf(item)== pos; 
-                });
 
                 let margin = {
                     top: 30,
@@ -73,26 +71,15 @@
 
                 let barWidth = 40;
                 let barOffset = 20;
-                let parseTime = d3.timeParse("%Y/%m/%d");
-                let max = d3.max(data, function (d) { return parseTime(d.date) })
-                let min = d3.min(data, function (d) { return parseTime(d.date) })
                 let dynamicColor;
 
                 let yScale = d3.scaleLinear()
                     .domain([0, d3.max(chartData)])
                     .range([0, height])
 
-                // let yScale = d3.scaleLinear()
-                // .domain(d3.extent(data, function (d) { return +d.visitors; }))
-                // .rangeRound([0, height])
-
                 let xScale = d3.scaleBand()
                     .domain(d3.range(0, 7))
                     .range([0, width])
-
-                //let xScale = d3.scaleBand()
-                //    .domain(chartDates.map(function (d) { return d; }))
-                //    .range([0, width])
 
                 let colors = d3.scaleLinear()
                     .domain([0, chartData.length * .33, chartData.length * .66, chartData.length])
@@ -117,7 +104,6 @@
                     .attr('width', xScale.bandwidth())
                     .attr('x', function (data, i) {
                         return xScale(i);
-                        //return chartDates[i];
                     })
 
                     .attr('height', 0)
@@ -172,7 +158,6 @@
                     .range([width, 0])
 
                 let hAxis = d3.axisBottom(xScale)
-                    //.ticks()
                     .tickFormat(function (d, i) {
                         return pastSevenDays[i];
                     })

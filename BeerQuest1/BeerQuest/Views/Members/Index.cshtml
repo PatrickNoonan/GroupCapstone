@@ -22,18 +22,18 @@
             <div>
                 @if (Model.ActivePassport == false)
                 {
-                <h2 class="whiteText text-center">Thirsty?</h2>
-                <h3 class="whiteText">BeerQuest gives you a unique passport to bring to local businesses. After purchasing a beer at each of your first 4 locations, you earn a free beer at a mystery 5th location.</h3>
-                <br />
-                <input type="button" value="Create A Passport" onclick="location.href='@Url.Action("CustomerPassport", "Members")'" />
+                    <h2 class="whiteText text-center">Thirsty?</h2>
+                    <h3 class="whiteText">BeerQuest gives you a unique passport to bring to local businesses. After purchasing a beer at each of your first 4 locations, you earn a free beer at a mystery 5th location.</h3>
+                    <br />
+                    <input type="button" value="Create A Passport" onclick="location.href='@Url.Action("CustomerPassport", "Members")'" />
                 }
             </div>
             <div id="map"></div>
             @if (Model.ActivePassport == true)
-                {
-                    <h3 class="whiteText">Your current Passport expires on @Model.Passport.StopDate.ToShortDateString()</h3>
-                    <br />
-                    <script>
+            {
+                <h3 class="whiteText">Your current Passport expires on @Model.Passport.StopDate.ToShortDateString()</h3>
+                <br />
+                <script>
         var map;
     function initMap() {
 
@@ -89,11 +89,11 @@
         bounds.extend(marker4.position);
         map.fitBounds(bounds);
 }
-                    </script>
+                </script>
 
-                    var srcKey = "https://maps.googleapis.com/maps/api/js?key=" + APIKey.SecretKey + "&callback=initMap async defer";
+                var srcKey = "https://maps.googleapis.com/maps/api/js?key=" + APIKey.SecretKey + "&callback=initMap async defer";
 
-                    <script src=@srcKey></script>
+                <script src=@srcKey></script>
             }
         </div>
         <div class="col-md-1"></div>
@@ -167,3 +167,12 @@
         <div class="col-md-1"></div>
     </div>
 </div>
+@if (ViewBag.WrongPin != null)
+{
+    <script type="text/javascript">
+
+            window.onload = function () {
+                alert("@ViewBag.WrongPin");
+            };
+    </script>
+}  
