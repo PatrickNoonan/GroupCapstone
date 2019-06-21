@@ -326,6 +326,7 @@ namespace BeerQuest.Controllers
         {
             Message message = new Message();
             DateTime now = DateTime.Now;
+            message.CurrentRank = member.Title;
             message.CurrentBar = stop.Business.Name;
             message.CurrentDay = now;
             message.CurrentMember = member.Name;
