@@ -189,6 +189,7 @@ namespace BeerQuest.Controllers
         //    }
         //    return data;
         //}
+        [HttpPost]
         public ActionResult GetData()
         {
             List<BusinessData> data = new List<BusinessData>();
