@@ -5,12 +5,13 @@
 }
 
 <h2>Message Board</h2>
-
+<div> <a asp-action="Index">Home</a></div>
 
 
     <body>
 @foreach (var item in Model) {
         <p> @item.CurrentMember was at @item.CurrentBar on @item.CurrentDay</p>
 }
+        
     </body>
 
