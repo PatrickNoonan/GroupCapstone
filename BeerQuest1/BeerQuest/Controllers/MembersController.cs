@@ -376,6 +376,12 @@ namespace BeerQuest.Controllers
             return View(GetMemberMessages());
         }
 
+        public async Task<IActionResult> Rank()
+        {
+            var rank = _context.Ranks.ToList();
+            return View(rank);
+        }
+
     }
 }
 
