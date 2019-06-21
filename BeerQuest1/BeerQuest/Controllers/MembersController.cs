@@ -15,7 +15,7 @@ namespace BeerQuest.Controllers
 {
     public class MembersController : Controller
     {
-        private UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _context;
 
         public MembersController(ApplicationDbContext context)
@@ -191,7 +191,6 @@ namespace BeerQuest.Controllers
         public void ChooseStop(List<Business> list, Passport passport, int stopNumber, bool premium)
         {
             var stop = new Stop();
-            var loggedInMember = GetLoggedInMember();
             int total = list.Count();
             Random r = new Random();
             int offset = r.Next(0, total);
@@ -286,7 +285,7 @@ namespace BeerQuest.Controllers
             }
             else
             {
-                //System.Windows.Forms.MessageBox.Show("Incorrect PIN");
+                ViewBag.WrongPin = String.Format("Incorrect Pin, try again.");
                 return RedirectToAction(nameof(Index));
             }
         }
