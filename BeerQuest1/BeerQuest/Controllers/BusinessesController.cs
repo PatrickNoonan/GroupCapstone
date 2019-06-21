@@ -164,9 +164,33 @@ namespace BeerQuest.Controllers
         {
             business.Premium = true;
             _context.SaveChanges();
-        }        
-       
-        public List<BusinessData> GetData()
+        }
+
+
+        //public List<BusinessData> GetData()
+        //{
+        //    List<BusinessData> data = new List<BusinessData>();
+        //    List<DateTime> allDates = new List<DateTime>();
+        //    var messageList = _context.Messages.ToList();
+        //    var startDate = messageList[0].CurrentDay;
+        //    DateTime now = DateTime.Now;
+        //    for (DateTime date = startDate; date < now; date = date.AddDays(1))
+        //    {
+        //    allDates.Add(date);
+        //    }
+
+        //    for (int i = 0; i < allDates.Count; i++)
+        //    {
+        //    BusinessData businessData = new BusinessData();
+        //    List<Message> dateList = _context.Messages.Where(c => c.CurrentDay == allDates[i]).ToList();
+        //    businessData.date = allDates[i];
+        //    businessData.count = dateList.Count;
+        //    data.Add(businessData);
+        //    }
+        //    return data;
+        //}
+        [HttpPost]
+        public ActionResult GetData()
         {
             List<BusinessData> data = new List<BusinessData>();
             List<DateTime> allDates = new List<DateTime>();
@@ -175,18 +199,18 @@ namespace BeerQuest.Controllers
             DateTime now = DateTime.Now;
             for (DateTime date = startDate; date < now; date = date.AddDays(1))
             {
-            allDates.Add(date);
+                allDates.Add(date);
             }
 
             for (int i = 0; i < allDates.Count; i++)
             {
-            BusinessData businessData = new BusinessData();
-            List<Message> dateList = _context.Messages.Where(c => c.CurrentDay == allDates[i]).ToList();
-            businessData.date = allDates[i];
-            businessData.count = dateList.Count;
-            data.Add(businessData);
+                BusinessData businessData = new BusinessData();
+                List<Message> dateList = _context.Messages.Where(c => c.CurrentDay == allDates[i]).ToList();
+                businessData.date = allDates[i];
+                businessData.count = dateList.Count;
+                data.Add(businessData);
             }
-            return data;          
+            return Json(data);
         }
         public List<Message> GetBusinessMessages(Business business)
         {
@@ -196,7 +220,14 @@ namespace BeerQuest.Controllers
             return message;
 
         }
+        public async Task<IActionResult> Premium()
+        {
+            var currentBusiness = this.User.Identity.Name;
+            Business business = _context.Businesses.Where(b => b.Name == currentBusiness).FirstOrDefault();
+            GetPremium(business);
 
+            return View();
+        }
 
     }
 }
