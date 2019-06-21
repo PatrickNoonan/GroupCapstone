@@ -175,6 +175,7 @@ namespace BeerQuest.Controllers
             var startDate = messageList[0].CurrentDay;
             DateTime now = DateTime.Now;
             for (DateTime date = startDate; date < now; date = date.AddDays(1))
+                //counts dates from the start date until date.now 
             {
                 allDates.Add(date);
             }
