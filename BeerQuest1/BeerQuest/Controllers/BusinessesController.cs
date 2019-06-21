@@ -194,7 +194,8 @@ namespace BeerQuest.Controllers
         {
             List<BusinessData> data = new List<BusinessData>();
             List<DateTime> allDates = new List<DateTime>();
-            var messageList = _context.Messages.ToList();
+            Business currentBusiness = GetLoggedInBusiness();
+            var messageList = _context.Messages.Where(c => c.CurrentBar == currentBusiness.Name).ToList();
             var startDate = messageList[0].CurrentDay;
             DateTime now = DateTime.Now;
             for (DateTime date = startDate; date < now; date = date.AddDays(1))
@@ -216,6 +217,13 @@ namespace BeerQuest.Controllers
         {
             List<Message> message = _context.Messages.Where(c => c.CurrentBar == business.Name).ToList();
             message.Reverse();
+            if (message.Count > 40)
+            {
+                for (int i = (message.Count - 1); i >= 19; i--)
+                {
+                    message.Remove(message[i]);
+                }
+            }
 
             return message;
 
@@ -228,6 +236,12 @@ namespace BeerQuest.Controllers
 
             return View();
         }
+        public Business GetLoggedInBusiness()
+        {
+            var currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var loggedInBusiness = _context.Businesses.Where(c => c.ApplicationId == currentUserId).Single();
+            return loggedInBusiness;
 
+        }
     }
 }

@@ -341,6 +341,10 @@ namespace BeerQuest.Controllers
         {
             List<Message> message = _context.Messages.ToList();
              message.Reverse();
+            for (int i = (message.Count - 1); i >= 19; i--)
+            {
+                message.Remove(message[i]);
+            }
 
             return message;
 
