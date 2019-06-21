@@ -17,6 +17,7 @@ namespace Infrastructure.Data
         public DbSet<Stop> Stops { get; set; }
         public DbSet<ApplicationRole> Role { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Rank> Ranks { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
