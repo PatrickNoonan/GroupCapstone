@@ -72,6 +72,32 @@ textarea {
     height: 500px;
     width: 100%;
 }
+
+.bigBox {
+    display: inline-block;
+    vertical-align: middle;
+    overflow: auto;
+    padding: 5px 15px 10px;
+}
+
+.littleBox {
+    display: inline-block;
+    vertical-align: middle;
+    overflow: auto;
+    padding: 5px;
+}
+
+
+.greenBack {
+    background-color: rgba(34, 139, 34, .75);
+    border-style: groove;
+}
+
+.goldBack {
+    background-color: rgba(184, 134, 11, .75);
+    border-style: groove;
+}
+
 h2,p,h3 {
     font-size: 20px;
     line-height: 1.4;
@@ -79,6 +105,7 @@ h2,p,h3 {
     text-align:left;
 
 }
+
 h2 {
     text-decoration: underline
 }
