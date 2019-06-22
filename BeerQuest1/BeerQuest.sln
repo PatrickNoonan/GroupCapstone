@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.28917.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeerQuest", "BeerQuest\BeerQuest.csproj", "{DEE4BBF0-8508-4FD2-95C1-54C7CC4A81B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{EF574E6D-0827-459D-8F2A-AD5CBDE01898}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{EF574E6D-0827-459D-8F2A-AD5CBDE01898}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{078F92CC-0AFE-452B-855C-6ED55F02677F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{078F92CC-0AFE-452B-855C-6ED55F02677F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{18FFE189-58BF-43A3-AFD8-3DDEF12AF375}"
 EndProject
