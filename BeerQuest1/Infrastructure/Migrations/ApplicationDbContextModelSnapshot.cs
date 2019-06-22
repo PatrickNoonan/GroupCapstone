@@ -88,6 +88,8 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("City");
 
+                    b.Property<bool>("FreeEligibility");
+
                     b.Property<string>("Name");
 
                     b.Property<int>("Pin");
@@ -213,6 +215,8 @@ namespace Infrastructure.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name");
+
+                    b.Property<int>("Points");
 
                     b.HasKey("Id");
 
