@@ -9,12 +9,22 @@
 <h2>Rank: @Model.Members.Rank | Points: @Model.Members.Points</h2>
 
 <center>
+<<<<<<< HEAD
     <h2>Rank</h2>
     @{
         foreach (Rank rank in Model.Ranks)
         {
 
             <p>Rank: @rank.Id | Title: @rank.Name | Points Needed To Obtain Rank: @rank.Points</p>
+=======
+    <h2 class="whiteText">Rank</h2>
+
+        @{
+            foreach (var name in this.Model)
+            {
+                
+                <p class="whiteText">Rank: @name.Id  Title: @name.Name</p>
+>>>>>>> 30009d4782b294fdaf428de29210c5ce116dd36e
 
         }
     }
