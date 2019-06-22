@@ -1,18 +1,29 @@
-﻿@model IEnumerable<Rank>
+﻿@model ViewModel
+
+
 @{
     ViewData["Rank"] = "rank";
+
+
 }
+<h2>Rank: @Model.Members.Title | Points: @Model.Members.Points</h2>
 
 
-<center>
-    <h2>Rank</h2>
+<h2>How To Earn Points:</h2>
+<h3>To easiest way to earn points, is to complete stops!<br>
+    Each stop you complete, you will be given 5 points, <br>
+    and each full passport you complete, you 10 points!</h3>
 
-        @{
-            foreach (var name in this.Model)
-            {
-                
-                <p>Rank: @name.Id  Title: @name.Name</p>
 
-            }
+
+    <h2>Rank Table</h2>
+    @{
+        foreach (Rank rank in Model.Ranks)
+        {
+
+            <p>Rank: @rank.Id | Title: @rank.Name | Points Needed To Obtain Rank: @rank.Points</p>
+
+
         }
-    </center>
+    }
+

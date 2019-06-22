@@ -302,14 +302,14 @@ namespace BeerQuest.Controllers
             if (passport.CurrentStop < 4)
             {
                 passport.CurrentStop++;
-                member.Points = +5;
+                member.Points = (member.Points + 5);
                 _context.SaveChanges();
             }
             else if (passport.CurrentStop == 4)
             {
                 CreateFifthStop(passport);
                 passport.CurrentStop++;
-                member.Points = +5;
+                member.Points = (member.Points + 5);
                 _context.SaveChanges();
 
             }
@@ -317,7 +317,7 @@ namespace BeerQuest.Controllers
             {
                 FreeBeer(member, passport, stop);
                 passport.CurrentStop++;
-                member.Points = +10;
+                member.Points = (member.Points+10);
                 member.ActivePassport = false;
                 _context.SaveChanges();
             }
@@ -333,11 +333,32 @@ namespace BeerQuest.Controllers
             DateTime now = DateTime.Now;
             message.CurrentRank = member.Title;
             message.CurrentBar = stop.Business.Name;
+            var business = _context.Businesses.First(m => m.Name == stop.Business.Name);
+            CheckFreeEligibility(business);
             message.CurrentDay = now;
             message.CurrentMember = member.Name;
             message.WasFree = stop.IsFree;
             _context.Messages.Add(message);
             _context.SaveChanges();
+        }
+        public void CheckFreeEligibility(Business business)
+        {
+            int past7DayTotal = 0;
+            var messageList = _context.Messages.Where(c => c.CurrentBar == business.Name).ToList();
+            foreach(Message el in messageList)
+            {
+                if ( el.CurrentDay < DateTime.Now && el.CurrentDay > DateTime.Now.AddDays(-7));
+                past7DayTotal++;
+            }
+
+            if (past7DayTotal > 10)
+            {
+                business.FreeEligibility = true; 
+            }
+            else
+            {
+                business.FreeEligibility = false;
+            }
         }
 
         public Member GetLoggedInMember()
@@ -384,8 +405,13 @@ namespace BeerQuest.Controllers
 
         public async Task<IActionResult> Rank()
         {
-            var rank = _context.Ranks.ToList();
-            return View(rank);
+            ViewModel myModel = new ViewModel();
+            Member member = new Member();
+            var currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            member = _context.Members.Where(m => m.ApplicationId == currentUserId).FirstOrDefault();
+            myModel.Ranks = _context.Ranks.ToList();
+            myModel.Members = member;
+            return View(myModel);
         }
 
 
