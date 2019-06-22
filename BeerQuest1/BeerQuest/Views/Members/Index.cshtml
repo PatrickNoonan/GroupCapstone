@@ -3,35 +3,44 @@
 @{
     ViewData["Title"] = "Index";
 }
-    <head>
-        <style>
-            #map {
-                height: 500px;
-                width: 100%;
-            }
-        </style>
-    </head>
-<h2 class="whiteText text-center">Welcome, @Model.Name</h2>
-<h4 class="whiteText text-center"> You have @Model.Points points, granting you the Rank of @Model.Title</h4>
+<head>
+    <style>
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+    </style>
+</head>
+<div class="container">
+    <div class="row text-center">
+        <div class="bigBox greenBack text-center well whiteText">
+            <h2>Welcome, @Model.Name</h2>
+            <h4> You have @Model.Points points, granting you the Rank of @Model.Title</h4>
+        </div>
+    </div>
+</div>
 <br />
 
 <div class="container">
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-5">
-            <div>
-                @if (Model.ActivePassport == false)
-                {
+
+            @if (Model.ActivePassport == false)
+            {
+                <div class="bigBox goldBack well">
                     <h2 class="whiteText text-center">Thirsty?</h2>
-                    <h3 class="whiteText">BeerQuest gives you a unique passport to bring to local businesses. After purchasing a beer at each of your first 4 locations, you earn a free beer at a mystery 5th location.</h3>
+                    <h3 class="whiteText text-justify">BeerQuest gives you a unique passport to bring to local businesses. After purchasing a beer at each of your first 4 locations, you earn a free beer at a mystery 5th location.</h3>
                     <br />
-                    <input type="button" value="Create A Passport" onclick="location.href='@Url.Action("CustomerPassport", "Members")'" />
-                }
-            </div>
-            <div id="map"></div>
+                    <div class="text-center">
+                        <input type="button" value="Create A Passport" onclick="location.href='@Url.Action("CustomerPassport", "Members")'" />
+                    </div>
+                </div>
+            }
             @if (Model.ActivePassport == true)
             {
-                <h3 class="whiteText">Your Passport expires on @Model.Passport.StopDate.ToShortDateString().</h3>
+                <div id="map" class="well"></div>
+                <h4 class="littleBox greenBack well whiteText">Your Passport expires on @Model.Passport.StopDate.ToShortDateString().</h4>
                 <br />
                 <script>
         var map;
@@ -49,35 +58,56 @@
 
         var bounds = new google.maps.LatLngBounds();
 
-     var imgMarker = {
-        url: '../images/beerMapMarker.png',
+     var imgMarker1 = {
+        url: '../images/beerMapMarker1.png',
+        size: new google.maps.Size(32, 56),
+        origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(11, 56)
+        };
+
+             var imgMarker2 = {
+        url: '../images/beerMapMarker2.png',
+        size: new google.maps.Size(32, 56),
+        origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(11, 56)
+        };
+             var imgMarker3 = {
+        url: '../images/beerMapMarker3.png',
+        size: new google.maps.Size(32, 56),
+        origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(11, 56)
+        };
+
+             var imgMarker4 = {
+        url: '../images/beerMapMarker4.png',
         size: new google.maps.Size(32, 56),
         origin: new google.maps.Point(0, 0),
         anchor: new google.maps.Point(11, 56)};
+
 
   var marker = new google.maps.Marker({
     position: myLatLng1,
       map: map,
       title: 'Stop One: @Model.Passport.StopOne.Business.Name',
-      icon: imgMarker,
+      icon: imgMarker1,
   });
        var marker2 = new google.maps.Marker({
     position: myLatLng2,
     map: map,
            title: 'Stop Two: @Model.Passport.StopTwo.Business.Name',
-                icon: imgMarker,
+                icon: imgMarker2,
  });
        var marker3 = new google.maps.Marker({
     position: myLatLng3,
     map: map,
            title: 'Stop Three: @Model.Passport.StopThree.Business.Name',
-                icon: imgMarker,
+                icon: imgMarker3,
  });
        var marker4 = new google.maps.Marker({
     position: myLatLng4,
     map: map,
            title: 'Stop Four: @Model.Passport.StopFour.Business.Name',
-                icon: imgMarker,
+                icon: imgMarker4,
        });
         bounds.extend(marker.position);
         bounds.extend(marker2.position);
@@ -93,72 +123,76 @@
             }
         </div>
         <div class="col-md-1"></div>
-        <div class="col-md-5 whiteText">
+        <div class="col-md-5">
             @if (Model.ActivePassport == true && Model.Passport.CurrentStop == 1)
             {
-                <h2>Your current stop is:<br /> @Model.Passport.StopOne.Business.Name</h2>
-                <h3>@Model.Passport.StopOne.Business.Address</h3>
-                <h3>@Model.Passport.StopOne.Business.City</h3>
-                <h3>@Model.Passport.StopOne.Business.State</h3>
-                <br />
-                <p>After purchase, hand app to employee to enter secret pin.</p>
-                <div>
-                    <form method="post" asp-action="pincheck" asp-route-stop="1">
-                        <input type="password" style="color: black" name="pin" /><br /><br />
-                        <button style="color: black">Enter Business Pin</button>
-                    </form>
+                <div class="whiteText bigBox goldBack well">
+                    <h2>Your first stop is:<br /> @Model.Passport.StopOne.Business.Name</h2>
+                    <h3>@Model.Passport.StopOne.Business.Address</h3>
+                    <h3>@Model.Passport.StopOne.Business.City</h3>
+                    <h3>@Model.Passport.StopOne.Business.State</h3>
+                    <br />
+                    <p>After purchase, hand app to employee to enter secret pin.</p>
+                    <div>
+                        <form method="post" asp-action="pincheck" asp-route-stop="1">
+                            <input type="password" style="color: black" name="pin" /><br /><br />
+                            <button style="color: black">Enter Business Pin</button>
+                        </form>
+                    </div>
                 </div>
-
             }
             @if (Model.ActivePassport == true && Model.Passport.CurrentStop == 2)
             {
-                <h2>Your current stop is:<br /> @Model.Passport.StopTwo.Business.Name</h2>
-                <h3>@Model.Passport.StopTwo.Business.Address</h3>
-                <h3>@Model.Passport.StopTwo.Business.City</h3>
-                <h3>@Model.Passport.StopTwo.Business.State</h3>
-                <br />
-                <p>After purchase, hand app to employee to enter secret pin.</p>
-                <div>
-                    <form method="post" asp-action="pincheck" asp-route-stop="2">
-                        <input type="password" style="color: black" name="pin" /><br /><br />
-                        <button style="color: black">Enter Business Pin</button>
-                    </form>
+                <div class="whiteText bigBox goldBack well">
+                    <h2>Your second stop is:<br /> @Model.Passport.StopTwo.Business.Name</h2>
+                    <h3>@Model.Passport.StopTwo.Business.Address</h3>
+                    <h3>@Model.Passport.StopTwo.Business.City</h3>
+                    <h3>@Model.Passport.StopTwo.Business.State</h3>
+                    <br />
+                    <p>After purchase, hand app to employee to enter secret pin.</p>
+                    <div>
+                        <form method="post" asp-action="pincheck" asp-route-stop="2">
+                            <input type="password" style="color: black" name="pin" /><br /><br />
+                            <button style="color: black">Enter Business Pin</button>
+                        </form>
+                    </div>
                 </div>
             }
             @if (Model.ActivePassport == true && Model.Passport.CurrentStop == 3)
             {
-                <h2>Your current stop is:<br /> @Model.Passport.StopThree.Business.Name</h2>
-                <h3>@Model.Passport.StopThree.Business.Address</h3>
-                <h3>@Model.Passport.StopThree.Business.City</h3>
-                <h3>@Model.Passport.StopThree.Business.State</h3>
-                <br />
-                <p>After purchase, hand app to employee to enter secret pin.</p>
-                <div>
-                    <form method="post" asp-action="pincheck" asp-route-stop="3">
-                        <input type="password" style="color: black" name="pin" /><br /><br />
-                        <button style="color: black">Enter Business Pin</button>
-                    </form>
+                <div class="whiteText bigBox goldBack well">
+                    <h2>Your third stop is:<br /> @Model.Passport.StopThree.Business.Name</h2>
+                    <h3>@Model.Passport.StopThree.Business.Address</h3>
+                    <h3>@Model.Passport.StopThree.Business.City</h3>
+                    <h3>@Model.Passport.StopThree.Business.State</h3>
+                    <br />
+                    <p>After purchase, hand app to employee to enter secret pin.</p>
+                    <div>
+                        <form method="post" asp-action="pincheck" asp-route-stop="3">
+                            <input type="password" style="color: black" name="pin" /><br /><br />
+                            <button style="color: black">Enter Business Pin</button>
+                        </form>
+                    </div>
                 </div>
             }
             @if (Model.ActivePassport == true && Model.Passport.CurrentStop == 4)
             {
-                <h2>Your current stop is:<br /> @Model.Passport.StopFour.Business.Name</h2>
-                <h3>@Model.Passport.StopFour.Business.Address</h3>
-                <h3>@Model.Passport.StopFour.Business.City</h3>
-                <h3>@Model.Passport.StopFour.Business.State</h3>
-                <br />
-                <p>After purchase, hand app to employee to enter secret pin.</p>
-                <div>
-                    <form method="post" asp-action="pincheck" asp-route-stop="4">
-                        <input type="password" style="color: black" name="pin" /><br /><br />
-                        <button style="color: black">Enter Business Pin</button>
-                    </form>
+                <div class="whiteText bigBox goldBack well">
+                    <h2>Your fourth stop is:<br /> @Model.Passport.StopFour.Business.Name</h2>
+                    <h3>@Model.Passport.StopFour.Business.Address</h3>
+                    <h3>@Model.Passport.StopFour.Business.City</h3>
+                    <h3>@Model.Passport.StopFour.Business.State</h3>
+                    <br />
+                    <p>After purchase, hand app to employee to enter secret pin.</p>
+                    <div>
+                        <form method="post" asp-action="pincheck" asp-route-stop="4">
+                            <input type="password" style="color: black" name="pin" /><br /><br />
+                            <button style="color: black">Enter Business Pin</button>
+                        </form>
+                    </div>
                 </div>
             }
             <br />
-            <div>
-                <h3><a asp-action="SeeMemberMessages" class="whiteText">View Local Check-Ins</a></h3>
-            </div>
         </div>
         <div class="col-md-1"></div>
     </div>

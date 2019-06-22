@@ -63,9 +63,39 @@ textarea {
     background-color: #ffffff00;
     border-color: #ffffff00;
 }
+
+.whiteText {
+    color: floralwhite;
+}
+
+.bigBox {
+    display: inline-block;
+    vertical-align: middle;
+    overflow: auto;
+    padding: 5px 15px 10px;
+}
+
+.littleBox {
+    display: inline-block;
+    vertical-align: middle;
+    overflow: auto;
+    padding: 5px;
+}
+
+.greenBack {
+    background-color: rgba(34, 139, 34, .75);
+    border-style: groove;
+}
+
+.goldBack {
+    background-color: rgba(184, 134, 11, .75);
+    border-style: groove;
+}
+
 h4, p, h2 {
     color: floralwhite;
 }
+
 .form-group {
     color: floralwhite;
 }

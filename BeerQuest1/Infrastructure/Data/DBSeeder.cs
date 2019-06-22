@@ -137,6 +137,36 @@ namespace Infrastructure.Data
             context.Messages.Add(
                 new Message { CurrentMember = "Brett", CurrentBar = "My Office", CurrentDay = DateTime.ParseExact("18/06/2019 13:45:00", "dd/MM/yyyy HH:mm:ss", null), WasFree = false, CurrentRank = "Noob Drinker" });
             context.Messages.Add(
+                new Message { CurrentMember = "Riddick", CurrentBar = "My Office", CurrentDay = DateTime.ParseExact("15/06/2019 13:45:00", "dd/MM/yyyy HH:mm:ss", null), WasFree = false, CurrentRank = "Noob Drinker" });
+            context.Messages.Add(
+                new Message { CurrentMember = "Hank", CurrentBar = "My Office", CurrentDay = DateTime.ParseExact("15/06/2019 13:45:00", "dd/MM/yyyy HH:mm:ss", null), WasFree = false, CurrentRank = "Noob Drinker" });
+            context.Messages.Add(
+                new Message { CurrentMember = "Richard", CurrentBar = "My Office", CurrentDay = DateTime.ParseExact("15/06/2019 13:45:00", "dd/MM/yyyy HH:mm:ss", null), WasFree = false, CurrentRank = "Noob Drinker" });
+            context.Messages.Add(
+                new Message { CurrentMember = "Patrick", CurrentBar = "My Office", CurrentDay = DateTime.ParseExact("15/06/2019 13:45:00", "dd/MM/yyyy HH:mm:ss", null), WasFree = false, CurrentRank = "Noob Drinker" });
+            context.Messages.Add(
+                new Message { CurrentMember = "Brett", CurrentBar = "My Office", CurrentDay = DateTime.ParseExact("15/06/2019 13:45:00", "dd/MM/yyyy HH:mm:ss", null), WasFree = false, CurrentRank = "Noob Drinker" });
+            context.Messages.Add(
+                new Message { CurrentMember = "Henry", CurrentBar = "My Office", CurrentDay = DateTime.ParseExact("15/06/2019 13:45:00", "dd/MM/yyyy HH:mm:ss", null), WasFree = false, CurrentRank = "Noob Drinker" });
+            context.Messages.Add(
+                new Message { CurrentMember = "Shawn", CurrentBar = "My Office", CurrentDay = DateTime.ParseExact("15/06/2019 13:45:00", "dd/MM/yyyy HH:mm:ss", null), WasFree = false, CurrentRank = "Noob Drinker" });
+            context.Messages.Add(
+             new Message { CurrentMember = "Spooderman", CurrentBar = "My Office", CurrentDay = DateTime.ParseExact("16/06/2019 13:45:00", "dd/MM/yyyy HH:mm:ss", null), WasFree = false, CurrentRank = "Noob Drinker" });
+            context.Messages.Add(
+                new Message { CurrentMember = "Riddick", CurrentBar = "My Office", CurrentDay = DateTime.ParseExact("16/06/2019 13:45:00", "dd/MM/yyyy HH:mm:ss", null), WasFree = false, CurrentRank = "Noob Drinker" });
+            context.Messages.Add(
+                new Message { CurrentMember = "Hank", CurrentBar = "My Office", CurrentDay = DateTime.ParseExact("16/06/2019 13:45:00", "dd/MM/yyyy HH:mm:ss", null), WasFree = false, CurrentRank = "Noob Drinker" });
+            context.Messages.Add(
+                new Message { CurrentMember = "Richard", CurrentBar = "My Office", CurrentDay = DateTime.ParseExact("16/06/2019 13:45:00", "dd/MM/yyyy HH:mm:ss", null), WasFree = false, CurrentRank = "Noob Drinker" });
+            context.Messages.Add(
+                new Message { CurrentMember = "Patrick", CurrentBar = "My Office", CurrentDay = DateTime.ParseExact("16/06/2019 13:45:00", "dd/MM/yyyy HH:mm:ss", null), WasFree = false, CurrentRank = "Noob Drinker" });
+            context.Messages.Add(
+                new Message { CurrentMember = "Brett", CurrentBar = "My Office", CurrentDay = DateTime.ParseExact("16/06/2019 13:45:00", "dd/MM/yyyy HH:mm:ss", null), WasFree = false, CurrentRank = "Noob Drinker" });
+            context.Messages.Add(
+                new Message { CurrentMember = "Henry", CurrentBar = "My Office", CurrentDay = DateTime.ParseExact("16/06/2019 13:45:00", "dd/MM/yyyy HH:mm:ss", null), WasFree = false, CurrentRank = "Noob Drinker" });
+            context.Messages.Add(
+                new Message { CurrentMember = "Shawn", CurrentBar = "My Office", CurrentDay = DateTime.ParseExact("16/06/2019 13:45:00", "dd/MM/yyyy HH:mm:ss", null), WasFree = false, CurrentRank = "Noob Drinker" });
+            context.Messages.Add(
                 new Message { CurrentMember = "Henry", CurrentBar = "My Office", CurrentDay = DateTime.ParseExact("18/06/2019 13:45:00", "dd/MM/yyyy HH:mm:ss", null), WasFree = false, CurrentRank = "Noob Drinker" });
             context.Messages.Add(
                 new Message { CurrentMember = "Shawn", CurrentBar = "My Office", CurrentDay = DateTime.ParseExact("18/06/2019 13:45:00", "dd/MM/yyyy HH:mm:ss", null), WasFree = false, CurrentRank = "Noob Drinker" });
@@ -290,6 +320,7 @@ namespace Infrastructure.Data
                 new Message { CurrentMember = "Henry", CurrentBar = "My Office", CurrentDay = DateTime.ParseExact("22/06/2019 13:45:00", "dd/MM/yyyy HH:mm:ss", null), WasFree = false, CurrentRank = "Noob Drinker" });
             context.Messages.Add(
                 new Message { CurrentMember = "Shawn", CurrentBar = "My Office", CurrentDay = DateTime.ParseExact("22/06/2019 13:45:00", "dd/MM/yyyy HH:mm:ss", null), WasFree = false, CurrentRank = "Noob Drinker" });
+
 
             context.SaveChanges();
         }
