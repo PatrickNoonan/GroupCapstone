@@ -3,15 +3,14 @@
 @{
     ViewData["Title"] = "Index";
 }
-<head>
-    <style>
-        #map {
-            height: 500px;
-            width: 100%;
-        }
-    </style>
-</head>
-
+    <head>
+        <style>
+            #map {
+                height: 500px;
+                width: 100%;
+            }
+        </style>
+    </head>
 <h2 class="whiteText text-center">Welcome, @Model.Name</h2>
 <br />
 
@@ -31,7 +30,7 @@
             <div id="map"></div>
             @if (Model.ActivePassport == true)
             {
-                <h3 class="whiteText">Your current Passport expires on @Model.Passport.StopDate.ToShortDateString()</h3>
+                <h3 class="whiteText">Your Passport expires on @Model.Passport.StopDate.ToShortDateString().</h3>
                 <br />
                 <script>
         var map;
@@ -60,28 +59,24 @@
       map: map,
       title: 'Stop One: @Model.Passport.StopOne.Business.Name',
       icon: imgMarker,
-      //animation: google.maps.Animation.BOUNCE
   });
        var marker2 = new google.maps.Marker({
     position: myLatLng2,
     map: map,
            title: 'Stop Two: @Model.Passport.StopTwo.Business.Name',
                 icon: imgMarker,
-      //animation: google.maps.Animation.DROP
  });
        var marker3 = new google.maps.Marker({
     position: myLatLng3,
     map: map,
            title: 'Stop Three: @Model.Passport.StopThree.Business.Name',
                 icon: imgMarker,
-                //animation: google.maps.Animation.BOUNCE
  });
        var marker4 = new google.maps.Marker({
     position: myLatLng4,
     map: map,
            title: 'Stop Four: @Model.Passport.StopFour.Business.Name',
                 icon: imgMarker,
-                //animation: google.maps.Animation.BOUNCE
        });
         bounds.extend(marker.position);
         bounds.extend(marker2.position);
@@ -170,9 +165,8 @@
 @if (ViewBag.WrongPin != null)
 {
     <script type="text/javascript">
-
             window.onload = function () {
                 alert("@ViewBag.WrongPin");
             };
     </script>
-}  
+}

@@ -26,6 +26,10 @@ namespace BeerQuest.Controllers
         // GET: Members
         public async Task<IActionResult> Index()
         {
+            if (TempData["wrongPin"] != null)
+            {
+                ViewBag.WrongPin = TempData["wrongPin"].ToString();
+            }
             var loggedInMember = GetLoggedInMember();
             loggedInMember = GetRank(loggedInMember);
             return View(loggedInMember);
@@ -197,7 +201,7 @@ namespace BeerQuest.Controllers
             if (premium == true)
             {
                 var newStop = list.Skip(offset).FirstOrDefault();
-                while(newStop.Premium == false)
+                while (newStop.Premium == false)
                 {
                     offset = r.Next(0, total);
                     newStop = list.Skip(offset).FirstOrDefault();
@@ -214,7 +218,7 @@ namespace BeerQuest.Controllers
             _context.Add(stop);
             _context.SaveChanges();
             int id = stop.Id;
-            switch(stopNumber)
+            switch (stopNumber)
             {
                 case 1:
                     passport.StopOneId = id;
@@ -248,7 +252,7 @@ namespace BeerQuest.Controllers
             Stop currentStop;
             var loggedInMember = GetLoggedInMember();
             switch (stop)
-            { 
+            {
                 case 1:
                     currentStop = loggedInMember.Passport.StopOne;
                     break;
@@ -270,11 +274,12 @@ namespace BeerQuest.Controllers
             }
             if (pin == currentStop.Business.Pin)
             {
+                TempData["wrongPin"] = null;
                 currentStop.Complete = true;
                 currentStop.Business.CheckIns++;
                 _context.SaveChanges();
                 StopCheck(loggedInMember.Passport, currentStop);
-                if(loggedInMember.Passport.CurrentStop == 5)
+                if (loggedInMember.Passport.CurrentStop == 5)
                 {
                     return RedirectToAction(nameof(FreeBeerMap));
                 }
@@ -285,7 +290,7 @@ namespace BeerQuest.Controllers
             }
             else
             {
-                ViewBag.WrongPin = String.Format("Incorrect Pin, try again.");
+                TempData["wrongPin"] = "Incorrect Pin, try again.";
                 return RedirectToAction(nameof(Index));
             }
         }
@@ -332,9 +337,9 @@ namespace BeerQuest.Controllers
             message.CurrentMember = member.Name;
             message.WasFree = stop.IsFree;
             _context.Messages.Add(message);
-            _context.SaveChanges(); 
+            _context.SaveChanges();
         }
-        
+
         public Member GetLoggedInMember()
         {
             var currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -342,7 +347,7 @@ namespace BeerQuest.Controllers
             return loggedInMember;
         }
 
-        public void FreeBeer(Member member,Passport passport,Stop stop)
+        public void FreeBeer(Member member, Passport passport, Stop stop)
         {
             //var member = _context.Members
             //    .FirstOrDefaultAsync(m => m.Id == id);
@@ -360,7 +365,7 @@ namespace BeerQuest.Controllers
         public List<Message> GetMemberMessages()
         {
             List<Message> message = _context.Messages.ToList();
-             message.Reverse();
+            message.Reverse();
 
             for (int i = (message.Count - 1); i >= 19; i--)
             {
@@ -375,6 +380,15 @@ namespace BeerQuest.Controllers
         {
             return View(GetMemberMessages());
         }
+
+
+        public async Task<IActionResult> Rank()
+        {
+            var rank = _context.Ranks.ToList();
+            return View(rank);
+        }
+
+
         public Member GetRank(Member member)
         {
             string currentTitle;
@@ -460,6 +474,7 @@ namespace BeerQuest.Controllers
             }
             return member;
         }
+
     }
 }
 
