@@ -98,3 +98,14 @@ textarea {
     border-style: groove;
 }
 
+h2,p,h3 {
+    font-size: 20px;
+    line-height: 1.4;
+    color: floralwhite;
+    text-align:left;
+
+}
+
+h2 {
+    text-decoration: underline
+}

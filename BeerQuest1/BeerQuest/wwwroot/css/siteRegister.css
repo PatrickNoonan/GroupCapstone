@@ -56,7 +56,7 @@ textarea {
 }
 
 .registerText, .control-label, .form-control {
-    color: #8298a5;
+    color: floralwhite;
 }
 
 .navbar-inverse {
@@ -82,7 +82,6 @@ textarea {
     padding: 5px;
 }
 
-
 .greenBack {
     background-color: rgba(34, 139, 34, .75);
     border-style: groove;
@@ -91,4 +90,12 @@ textarea {
 .goldBack {
     background-color: rgba(184, 134, 11, .75);
     border-style: groove;
+}
+
+h4, p, h2 {
+    color: floralwhite;
+}
+
+.form-group {
+    color: floralwhite;
 }

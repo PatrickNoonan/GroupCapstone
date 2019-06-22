@@ -23,6 +23,7 @@ namespace Domain
         public ApplicationRole ApplicationRole { get; set; }
         public string UserRole { get; set; }
         public int CheckIns { get; set; }
+        public bool FreeEligibility { get; set; }
 
     }
 }

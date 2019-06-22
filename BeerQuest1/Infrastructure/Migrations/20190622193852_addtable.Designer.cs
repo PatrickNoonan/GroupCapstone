@@ -4,14 +4,16 @@ using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190622193852_addtable")]
+    partial class addtable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,11 +90,6 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("City");
 
-<<<<<<< HEAD
-=======
-                    b.Property<bool>("FreeEligibility");
-
->>>>>>> c8b4c04a17eebc9986793d6e5e15d765e74bbc5d
                     b.Property<string>("Name");
 
                     b.Property<int>("Pin");
