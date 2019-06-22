@@ -343,15 +343,21 @@ namespace BeerQuest.Controllers
         }
         public void CheckFreeEligibility(Business business)
         {
-            business.CheckIns++;
-            //check thatbusinesses eligibility
-            if (business.CheckIns > 10)
+            int past7DayTotal = 0;
+            var messageList = _context.Messages.Where(c => c.CurrentBar == business.Name).ToList();
+            foreach(Message el in messageList)
             {
-                //business.FreeBeerEligibilitybool = true; //display eligibility in view
+                if ( el.CurrentDay < DateTime.Now && el.CurrentDay > DateTime.Now.AddDays(-7));
+                past7DayTotal++;
+            }
+
+            if (past7DayTotal > 10)
+            {
+                business.FreeEligibility = true; 
             }
             else
             {
-                //business.FreeBeerEligibility = false;
+                business.FreeEligibility = false;
             }
         }
 
