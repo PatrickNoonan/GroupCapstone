@@ -6,12 +6,20 @@
 
 <h2 class= "whiteText">Message Board</h2>
 
+<br />
 
+<body>
+    @foreach (var item in Model)
+    {
+        if (item.WasFree == false)
+        {
+            <p class="whiteText"> @item.CurrentRank  @item.CurrentMember was at @item.CurrentBar on @item.CurrentDay</p>
+        }
+        else
+        {
+            <p class="whiteText"> @item.CurrentRank  @item.CurrentMember got a FREE BEER at @item.CurrentBar on @item.CurrentDay</p>
+        }
+    }
 
-    <body>
-@foreach (var item in Model) {
-        <p class="whiteText"> @item.CurrentMember was at @item.CurrentBar on @item.CurrentDay</p>
-}
-        
-    </body>
+</body>
 

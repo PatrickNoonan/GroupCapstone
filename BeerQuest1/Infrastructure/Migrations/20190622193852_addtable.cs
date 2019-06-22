@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.Migrations
 {
-    public partial class _1337 : Migration
+    public partial class addtable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -74,7 +74,8 @@ namespace Infrastructure.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: true),
+                    Points = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

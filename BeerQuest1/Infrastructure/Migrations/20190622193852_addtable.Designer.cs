@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190621190847_migratingAfterPull")]
-    partial class migratingAfterPull
+    [Migration("20190622193852_addtable")]
+    partial class addtable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -215,6 +215,8 @@ namespace Infrastructure.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name");
+
+                    b.Property<int>("Points");
 
                     b.HasKey("Id");
 
