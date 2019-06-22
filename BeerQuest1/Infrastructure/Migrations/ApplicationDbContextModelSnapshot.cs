@@ -214,6 +214,8 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<int>("Points");
+
                     b.HasKey("Id");
 
                     b.ToTable("Ranks");

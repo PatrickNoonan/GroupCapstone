@@ -1,18 +1,21 @@
-﻿@model IEnumerable<Rank>
+﻿@model ViewModel
+
+
 @{
     ViewData["Rank"] = "rank";
-}
 
+
+}
+<h2>Rank: @Model.Members.Rank | Points: @Model.Members.Points</h2>
 
 <center>
     <h2>Rank</h2>
+    @{
+        foreach (Rank rank in Model.Ranks)
+        {
 
-        @{
-            foreach (var name in this.Model)
-            {
-                
-                <p>Rank: @name.Id  Title: @name.Name</p>
+            <p>Rank: @rank.Id | Title: @rank.Name | Points Needed To Obtain Rank: @rank.Points</p>
 
-            }
         }
-    </center>
+    }
+</center>

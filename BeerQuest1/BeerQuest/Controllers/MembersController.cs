@@ -384,8 +384,13 @@ namespace BeerQuest.Controllers
 
         public async Task<IActionResult> Rank()
         {
-            var rank = _context.Ranks.ToList();
-            return View(rank);
+            ViewModel myModel = new ViewModel();
+            Member member = new Member();
+            var currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            member = _context.Members.Where(m => m.ApplicationId == currentUserId).FirstOrDefault();
+            myModel.Ranks = _context.Ranks.ToList();
+            myModel.Members = member;
+            return View(myModel);
         }
 
 
