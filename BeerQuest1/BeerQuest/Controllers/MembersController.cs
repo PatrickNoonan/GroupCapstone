@@ -31,8 +31,15 @@ namespace BeerQuest.Controllers
                 ViewBag.WrongPin = TempData["wrongPin"].ToString();
             }
             var loggedInMember = GetLoggedInMember();
-            loggedInMember = GetRank(loggedInMember);
-            return View(loggedInMember);
+            if (loggedInMember == null)
+            {
+                return RedirectToAction(nameof(Create));
+            }
+            else
+            {
+                loggedInMember = GetRank(loggedInMember);
+                return View(loggedInMember);
+            }
         }
 
         // GET: Members/Details/5
@@ -358,7 +365,7 @@ namespace BeerQuest.Controllers
         public Member GetLoggedInMember()
         {
             var currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var loggedInMember = _context.Members.Include(m => m.Passport).ThenInclude(p => p.StopOne).ThenInclude(s => s.Business).Include(m => m.Passport).ThenInclude(p => p.StopTwo).ThenInclude(s => s.Business).Include(m => m.Passport).ThenInclude(p => p.StopThree).ThenInclude(s => s.Business).Include(m => m.Passport).ThenInclude(p => p.StopFour).ThenInclude(s => s.Business).Include(m => m.Passport).ThenInclude(p => p.StopFive).ThenInclude(s => s.Business).Single(b => b.ApplicationId == currentUserId);
+            var loggedInMember = _context.Members.Include(m => m.Passport).ThenInclude(p => p.StopOne).ThenInclude(s => s.Business).Include(m => m.Passport).ThenInclude(p => p.StopTwo).ThenInclude(s => s.Business).Include(m => m.Passport).ThenInclude(p => p.StopThree).ThenInclude(s => s.Business).Include(m => m.Passport).ThenInclude(p => p.StopFour).ThenInclude(s => s.Business).Include(m => m.Passport).ThenInclude(p => p.StopFive).ThenInclude(s => s.Business).SingleOrDefault(b => b.ApplicationId == currentUserId);
             return loggedInMember;
         }
 

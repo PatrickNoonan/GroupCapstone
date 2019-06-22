@@ -11,7 +11,14 @@
     </style>
 </head>
 
-<h2 class="whiteText text-center">Welcome, @Model.Name</h2>
+<div class="container">
+    <div class="row text-center">
+        <div class="bigBox greenBack text-center well whiteText">
+            <h2>Welcome, @Model.Name</h2>
+            <h4> You have @Model.Points points, granting you the Rank of @Model.Title</h4>
+        </div>
+    </div>
+</div>
 <br />
 <div class="container">
     <div class="row">
@@ -66,7 +73,7 @@
                 <h3>@Model.Passport.StopFive.Business.State</h3>
                 <br />
                 <div>
-                    <form method="post" asp-action="pincheck" asp-route-stop="1">
+                    <form method="post" asp-action="pincheck" asp-route-stop="5">
                         <input type="password" style="color: black" name="pin" /><br /><br />
                         <button style="color: black">Redeem Free Beer</button>
                     </form>
