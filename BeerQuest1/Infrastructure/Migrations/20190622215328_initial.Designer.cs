@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190622193852_addtable")]
-    partial class addtable
+    [Migration("20190622215328_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -89,6 +89,8 @@ namespace Infrastructure.Migrations
                     b.Property<int>("CheckIns");
 
                     b.Property<string>("City");
+
+                    b.Property<bool>("FreeEligibility");
 
                     b.Property<string>("Name");
 

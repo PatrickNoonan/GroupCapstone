@@ -88,11 +88,8 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("City");
 
-<<<<<<< HEAD
-=======
                     b.Property<bool>("FreeEligibility");
 
->>>>>>> c8b4c04a17eebc9986793d6e5e15d765e74bbc5d
                     b.Property<string>("Name");
 
                     b.Property<int>("Pin");

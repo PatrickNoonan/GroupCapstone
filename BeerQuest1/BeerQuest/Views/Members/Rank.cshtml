@@ -3,27 +3,30 @@
 
 @{
     ViewData["Rank"] = "rank";
-
-
 }
-<h2>Rank: @Model.Members.Title | Points: @Model.Members.Points</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-7">
+            <h3 class="whiteText greenBack littleBox well">Rank: @Model.Members.Title | Points: @Model.Members.Points</h3>
 
-
-<h2>How To Earn Points:</h2>
-<h3>To easiest way to earn points, is to complete stops!<br>
-    Each stop you complete, you will be given 5 points, <br>
-    and each full passport you complete, you 10 points!</h3>
-
-
-
-    <h2>Rank Table</h2>
-    @{
-        foreach (Rank rank in Model.Ranks)
-        {
-
-            <p>Rank: @rank.Id | Title: @rank.Name | Points Needed To Obtain Rank: @rank.Points</p>
-
-
-        }
-    }
-
+            <div class="bigBox greenBack well">
+                <h3 class="under whiteText">How To Earn Points:</h3>
+                <h3 class="whiteText">
+                    The easiest way to earn points is to complete stops!
+                    Each stop you complete, you will be given 5 points,
+                    and each full passport you complete, you get 10 points!
+                </h3>
+            </div>
+            <div class="bigBox goldBack well">
+                <h2 class="under whiteText">Rank Table</h2>
+                @{
+                    foreach (Rank rank in Model.Ranks)
+                    {
+                        <h4 class="whiteText">Rank: @rank.Id | Title: @rank.Name | Points Needed To Obtain Rank: @rank.Points</h4>
+                    }
+                }
+            </div>
+        </div>
+        <div class="col-md-5"></div>
+    </div>
+</div>

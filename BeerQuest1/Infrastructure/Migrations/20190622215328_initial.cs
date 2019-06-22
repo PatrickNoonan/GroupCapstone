@@ -205,7 +205,8 @@ namespace Infrastructure.Migrations
                     ApplicationId = table.Column<string>(nullable: true),
                     ApplicationRoleId = table.Column<string>(nullable: true),
                     UserRole = table.Column<string>(nullable: true),
-                    CheckIns = table.Column<int>(nullable: false)
+                    CheckIns = table.Column<int>(nullable: false),
+                    FreeEligibility = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

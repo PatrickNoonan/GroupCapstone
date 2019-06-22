@@ -98,7 +98,7 @@ textarea {
     border-style: groove;
 }
 
-h2,p,h3 {
+.rankText {
     font-size: 20px;
     line-height: 1.4;
     color: floralwhite;
@@ -106,6 +106,6 @@ h2,p,h3 {
 
 }
 
-h2 {
+.under {
     text-decoration: underline
 }
