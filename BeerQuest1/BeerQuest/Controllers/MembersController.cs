@@ -302,14 +302,14 @@ namespace BeerQuest.Controllers
             if (passport.CurrentStop < 4)
             {
                 passport.CurrentStop++;
-                member.Points = +5;
+                member.Points = (member.Points + 5);
                 _context.SaveChanges();
             }
             else if (passport.CurrentStop == 4)
             {
                 CreateFifthStop(passport);
                 passport.CurrentStop++;
-                member.Points = +5;
+                member.Points = (member.Points + 5);
                 _context.SaveChanges();
 
             }
@@ -317,7 +317,7 @@ namespace BeerQuest.Controllers
             {
                 FreeBeer(member, passport, stop);
                 passport.CurrentStop++;
-                member.Points = +10;
+                member.Points = (member.Points+10);
                 member.ActivePassport = false;
                 _context.SaveChanges();
             }

@@ -56,10 +56,16 @@ textarea {
 }
 
 .registerText, .control-label, .form-control {
-    color: #8298a5;
+    color: floralwhite;
 }
 
 .navbar-inverse {
     background-color: #ffffff00;
     border-color: #ffffff00;
+}
+h4, p, h2 {
+    color: floralwhite;
+}
+.form-group {
+    color: floralwhite;
 }
