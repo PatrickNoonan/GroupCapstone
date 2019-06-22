@@ -378,7 +378,7 @@ namespace BeerQuest.Controllers
         public Member GetRank(Member member)
         {
             string currentTitle;
-            if (member.Points > 1200)
+            if (member.Points > 1599)
             {
                 Rank rank = _context.Ranks.Where(c => c.Id == 10).Single();
                 currentTitle = rank.Name;
@@ -386,7 +386,7 @@ namespace BeerQuest.Controllers
                 _context.SaveChanges();
                 return member;
             }
-            if (member.Points > 900)
+            if (member.Points > 1199)
             {
                 Rank rank = _context.Ranks.Where(c => c.Id == 9).Single();
                 currentTitle = rank.Name;
@@ -394,7 +394,7 @@ namespace BeerQuest.Controllers
                 _context.SaveChanges();
                 return member;
             }
-            if (member.Points > 600)
+            if (member.Points > 899)
             {
                 Rank rank = _context.Ranks.Where(c => c.Id == 8).Single();
                 currentTitle = rank.Name;
@@ -402,7 +402,7 @@ namespace BeerQuest.Controllers
                 _context.SaveChanges();
                 return member;
             }
-            if (member.Points > 500)
+            if (member.Points > 649)
             {
                 Rank rank = _context.Ranks.Where(c => c.Id == 7).Single();
                 currentTitle = rank.Name;
@@ -410,7 +410,7 @@ namespace BeerQuest.Controllers
                 _context.SaveChanges();
                 return member;
             }
-            if (member.Points > 400)
+            if (member.Points > 449)
             {
                 Rank rank = _context.Ranks.Where(c => c.Id == 6).Single();
                 currentTitle = rank.Name;
@@ -418,7 +418,7 @@ namespace BeerQuest.Controllers
                 _context.SaveChanges();
                 return member;
             }
-            if (member.Points > 300)
+            if (member.Points > 299)
             {
                 Rank rank = _context.Ranks.Where(c => c.Id == 5).Single();
                 currentTitle = rank.Name;
@@ -426,7 +426,7 @@ namespace BeerQuest.Controllers
                 _context.SaveChanges();
                 return member;
             }
-            if (member.Points > 100)
+            if (member.Points > 174)
             {
                 Rank rank = _context.Ranks.Where(c => c.Id == 4).Single();
                 currentTitle = rank.Name;
@@ -434,7 +434,7 @@ namespace BeerQuest.Controllers
                 _context.SaveChanges();
                 return member;
             }
-            if (member.Points > 60)
+            if (member.Points > 74)
             {
                 Rank rank = _context.Ranks.Where(c => c.Id == 3).Single();
                 currentTitle = rank.Name;
@@ -442,7 +442,7 @@ namespace BeerQuest.Controllers
                 _context.SaveChanges();
                 return member;
             }
-            if (member.Points > 30)
+            if (member.Points > 29)
             {
                 Rank rank = _context.Ranks.Where(c => c.Id == 2).Single();
                 currentTitle = rank.Name;

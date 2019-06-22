@@ -172,25 +172,25 @@ namespace Infrastructure.Data
         public static void RankSeeder(ApplicationDbContext context)
         {
             context.Ranks.Add(
-    new Rank { Name = "Noob Drinker" });
+    new Rank { Name = "Noob Drinker", Points = 0 });
             context.Ranks.Add(
-    new Rank { Name = "Barely Buzzed" });
+    new Rank { Name = "Barely Buzzed", Points = 30 });
             context.Ranks.Add(
-    new Rank { Name = "1 Shot Wonder" });
+    new Rank { Name = "1 Shot Wonder", Points = 75 });
             context.Ranks.Add(
-    new Rank { Name = "Adept Drunk" });
+    new Rank { Name = "Adept Drunk", Points = 175 });
             context.Ranks.Add(
-    new Rank { Name = "Bar Hopper" });
+    new Rank { Name = "Bar Hopper", Points = 300 });
             context.Ranks.Add(
-    new Rank { Name = "No Chasers" });
+    new Rank { Name = "No Chasers", Points = 450 });
             context.Ranks.Add(
-    new Rank { Name = "Beer Bong Pro" });
+    new Rank { Name = "Beer Bong Pro", Points = 650 });
             context.Ranks.Add(
-    new Rank { Name = "BlackOut Fiend" });
+    new Rank { Name = "BlackOut Fiend", Points = 900 });
             context.Ranks.Add(
-    new Rank { Name = "Alcoholic" });
+    new Rank { Name = "Alcoholic", Points = 1200 });
             context.Ranks.Add(
-    new Rank { Name = "Drunken Master" });
+    new Rank { Name = "Drunken Master", Points = 1600 });
             context.SaveChanges();
         }
     }
