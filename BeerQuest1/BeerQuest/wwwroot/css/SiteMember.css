@@ -67,3 +67,8 @@ textarea {
 .whiteText {
     color: floralwhite;
 }
+
+#map {
+    height: 500px;
+    width: 100%;
+}

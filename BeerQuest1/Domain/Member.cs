@@ -23,7 +23,7 @@ namespace Domain
         public virtual Passport Passport { get; set; }
         public int? RankId { get; set; }
         [ForeignKey("RankId")]
-        public virtual Rank Rank { get; set; }
+        public Rank Rank { get; set; }
 
     }
 }

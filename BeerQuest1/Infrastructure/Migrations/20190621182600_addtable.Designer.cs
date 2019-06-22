@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190621142334_initialMigration")]
-    partial class initialMigration
+    [Migration("20190621182600_addtable")]
+    partial class addtable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -131,6 +131,8 @@ namespace Infrastructure.Migrations
 
                     b.Property<double>("Points");
 
+                    b.Property<int?>("RankId");
+
                     b.Property<string>("Title");
 
                     b.Property<string>("UserRole");
@@ -142,6 +144,8 @@ namespace Infrastructure.Migrations
                     b.HasIndex("ApplicationRoleId");
 
                     b.HasIndex("PassportId");
+
+                    b.HasIndex("RankId");
 
                     b.ToTable("Members");
                 });
@@ -157,6 +161,8 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("CurrentDay");
 
                     b.Property<string>("CurrentMember");
+
+                    b.Property<string>("CurrentRank");
 
                     b.Property<bool>("WasFree");
 
@@ -200,6 +206,19 @@ namespace Infrastructure.Migrations
                     b.HasIndex("StopTwoId");
 
                     b.ToTable("Passports");
+                });
+
+            modelBuilder.Entity("Domain.Rank", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Ranks");
                 });
 
             modelBuilder.Entity("Domain.Stop", b =>
@@ -379,6 +398,10 @@ namespace Infrastructure.Migrations
                     b.HasOne("Domain.Passport", "Passport")
                         .WithMany()
                         .HasForeignKey("PassportId");
+
+                    b.HasOne("Domain.Rank", "Rank")
+                        .WithMany()
+                        .HasForeignKey("RankId");
                 });
 
             modelBuilder.Entity("Domain.Passport", b =>
