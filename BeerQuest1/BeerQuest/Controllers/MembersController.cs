@@ -327,13 +327,27 @@ namespace BeerQuest.Controllers
             DateTime now = DateTime.Now;
             message.CurrentRank = member.Title;
             message.CurrentBar = stop.Business.Name;
+            var business = _context.Businesses.First(m => m.Name == stop.Business.Name);
+            CheckFreeEligibility(business);
             message.CurrentDay = now;
             message.CurrentMember = member.Name;
             message.WasFree = stop.IsFree;
             _context.Messages.Add(message);
             _context.SaveChanges(); 
         }
-        
+        public void CheckFreeEligibility(Business business)
+        {
+            business.CheckIns++;
+            //check thatbusinesses eligibility
+            if (business.CheckIns > 10)
+            {
+                //business.FreeBeerEligibilitybool = true; //display eligibility in view
+            }
+            else
+            {
+                //business.FreeBeerEligibility = false;
+            }
+        }
         public Member GetLoggedInMember()
         {
             var currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
