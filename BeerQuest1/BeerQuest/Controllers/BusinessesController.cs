@@ -191,18 +191,6 @@ namespace BeerQuest.Controllers
             }
             return Json(data);
         }
-        /*
-        public void SubtractOldCheckIns()
-        {
-            //------ at the start of every day, subtract the number of checkins 
-            -daystart
-            //that were registered from 8 days ago
-            //messageList.count should == 8
-            //for every business in database
-            //everyBusiness.checkin -= totalcheckins on messageList[8] aka 8 days ago
-            
-        }
-        */
         public List<Message> GetBusinessMessages(Business business)
         {
             List<Message> message = _context.Messages.Where(c => c.CurrentBar == business.Name).ToList();

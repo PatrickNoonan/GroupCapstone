@@ -345,13 +345,14 @@ namespace BeerQuest.Controllers
         {
             int past7DayTotal = 0;
             var messageList = _context.Messages.Where(c => c.CurrentBar == business.Name).ToList();
+
             foreach(Message el in messageList)
             {
                 if ( el.CurrentDay < DateTime.Now && el.CurrentDay > DateTime.Now.AddDays(-7));
                 past7DayTotal++;
             }
 
-            if (past7DayTotal > 10)
+            if (past7DayTotal > 70)
             {
                 business.FreeEligibility = true; 
             }
@@ -370,7 +371,8 @@ namespace BeerQuest.Controllers
 
         public void FreeBeer(Member member, Passport passport, Stop stop)
         {
-            //var member = _context.Members
+            //var member = _context.Members   
+            //
             //    .FirstOrDefaultAsync(m => m.Id == id);
             if (member.ActivePassport == true && passport.CurrentStop == 5)
             {
