@@ -13,7 +13,7 @@ namespace Infrastructure.Data
             context.Businesses.Add(
                new Business { Name = "Milwaukee Ale House", Pin = 1111, Address = "233 N Water St", City = "Milwaukee", State = "WI", lat = 43.0334116, lng = -87.909373, CheckIns = 11, Premium = true });
             context.Businesses.Add(
-             new Business { Name = "Cafe Benelux", Pin = 1111, Address = "346 N Broadway", City = "Milwaukee", State = "WI", lat = 43.0420184, lng = -87.9082236, Premium = true });
+             new Business { Name = "Cafe Benelux", Pin = 1111, Address = "346 N Broadway", City = "Milwaukee", State = "WI", lat = 43.0348922, lng = -87.9069337, Premium = true });
             context.Businesses.Add(
              new Business { Name = "My Office", Pin = 1111, Address = "763 N Milwaukee St", City = "Milwaukee", State = "WI", lat = 43.0403911, lng = -87.9070968, Premium = true });
             context.Businesses.Add(
@@ -31,7 +31,7 @@ namespace Infrastructure.Data
             context.Businesses.Add(
              new Business { Name = "Flannerys MKE", Pin = 1111, Address = "425 E Wells St", City = "Milwaukee", State = "WI", lat = 43.0410744, lng = -87.9059173 });
             context.Businesses.Add(
-             new Business { Name = "Tre Rivali", Pin = 1111, Address = "200 N Broadway", City = "Milwaukee", State = "WI", lat = 43.0420184, lng = -87.9082236 }
+             new Business { Name = "Tre Rivali", Pin = 1111, Address = "200 N Broadway", City = "Milwaukee", State = "WI", lat = 43.0328086, lng = -87.9069583 }
             );
 
             context.SaveChanges();

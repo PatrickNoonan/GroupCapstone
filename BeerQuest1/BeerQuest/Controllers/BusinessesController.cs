@@ -173,6 +173,10 @@ namespace BeerQuest.Controllers
             List<DateTime> allDates = new List<DateTime>();
             Business currentBusiness = GetLoggedInBusiness();
             var messageList = _context.Messages.Where(c => c.CurrentBar == currentBusiness.Name).ToList();
+            if (messageList.Count == 0)
+            {
+                return Json(data);
+            }
             var startDate = messageList[0].CurrentDay;
             DateTime now = DateTime.Now;
             for (DateTime date = startDate; date < now; date = date.AddDays(1))
