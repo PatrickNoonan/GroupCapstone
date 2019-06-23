@@ -197,14 +197,8 @@ textarea {
     padding:20px;
 }
 
-/*
-.line-graph label {
-    font-weight: bold;
-    font-size: 1rem;
-    transform-origin: center;
-}*/
 
-.prem-title, .indexTitle {
+.prem-title {
     color: floralwhite;
     text-decoration: underline;
     background-color: rgba(184, 134, 11, .75);
