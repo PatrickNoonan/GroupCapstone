@@ -6,21 +6,9 @@
 
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="https://d3js.org/d3-selection-multi.v1.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <h2 class="indexTitle">@Html.DisplayFor(model => model.Name)'s Analytics</h2>
-<div class="row floralWhite">
-    <div class="col-xs-4">
-        <h4>Total visits for the past 7 days</h4>
-        <h4 id="past7Total"></h4>
-    </div>
-    <div class="col-xs-4">
-        <h4>Total visits for the past 30 days</h4>
-        <h4 id="past30Total"></h4>
-    </div>
-    <div class="col-xs-4"></div>
-</div>
-
-
 
 <div class="row">
     <div class="col-xs-8">
@@ -51,9 +39,26 @@
         </div>
     </div>
 </div>
-@*<div id="line-graph"></div>*@
 
-<script src="~/js/BusinessSiteBarGraph.js"></script>
-@*<script src="~/js/BusinessSiteLineGraph.js"></script>*@
+<div class="row floralWhite">
+    <div class="col-xs-4">
+        <h4>Total visits for the past 7 days</h4>
+        <h4 id="past7Total"></h4>
+    </div>
+    <div class="col-xs-4">
+        <h4>Total visits for the past 30 days</h4>
+        <h4 id="past30Total"></h4>
+    </div>
+    <div class="col-xs-4">
+        <button onclick="update(pieData1)">Past Seven Days</button>
+        <button onclick="update(pieData2)">Past Thirty Days</button>
+        <div id="pie-chart">
+        </div>
+    </div>
+</div>
+
+<script src="~/js/BusinessSiteVisualization.js"></script>
+    
+
 
 

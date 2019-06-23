@@ -13,24 +13,25 @@
 <body>
     <script src="https://www.paypal.com/sdk/js?client-id=ATJg44gKxTM3q7WKwffM1MYBM0RwrkYzfuGLAgOdxYDHgafE0Ltlui0lw1L0yuKnKa_nZVMcSk3ryb2-">
     </script>
+    <center>
+        <div id="paypal-button-container">
+            <script>
+                paypal.Buttons({
+                    createOrder: function (data, actions) {
+                        // Set up the transaction
 
-    <div id="paypal-button-container">
-        <script>
-            paypal.Buttons({
-                createOrder: function (data, actions) {
-                    // Set up the transaction
-                    
-                    return actions.order.create({
-                        purchase_units: [{
-                            amount: {
-                                value: '20.00'
-                            }                           
-                        }]
-                    });
-                }
-            }).render('#paypal-button-container');
-            
-        </script>
-    </div>
+                        return actions.order.create({
+                            purchase_units: [{
+                                amount: {
+                                    value: '20.00'
+                                }
+                            }]
+                        });
+                    }
+                }).render('#paypal-button-container');
+
+            </script>
+        </div>
+    </center>
 
 </body>
