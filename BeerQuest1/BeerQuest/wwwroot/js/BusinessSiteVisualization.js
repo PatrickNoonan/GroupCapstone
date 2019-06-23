@@ -224,53 +224,107 @@ let pieData2 = { a: 5, b: 10 }
 
 //-------------------------------------------------Pie Chart----------------------------
 
-let width = 200
-height = 200
-margin = 5
+//let width = 200
+//height = 200
+//margin = 5
 
-// The radius of the pieplot is half the width or half the height (smallest one)
-let radius = Math.min(width, height) / 2 - margin
+//// The radius of the pieplot is half the width or half the height (smallest one)
+//let radius = Math.min(width, height) / 2 - margin
 
-let svg = d3.select("#pie-chart")
-    .append("svg")
-    .attr("width", width)
-    .attr("height", height)
-    .append("g")
-    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+//let svg = d3.select("#pie-chart")
+//    .append("svg")
+//    .attr("width", width)
+//    .attr("height", height)
+//    .append("g")
+//    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-let color = d3.scaleOrdinal()
-    .domain(["a", "b"])
-    .range(d3.schemeDark2);
+//let color = d3.scaleOrdinal()
+//    .domain(["a", "b"])
+//    .range(d3.schemeDark2);
 
-function update(data) {
+//function update(data) {
 
-    let pie = d3.pie()
+//    let pie = d3.pie()
+//        .value(function (d) { return d.value; })
+//        .sort(function (a, b) { console.log(a); return d3.ascending(a.key, b.key); }) // This make sure that group order remains the same in the pie chart
+//    let data_ready = pie(d3.entries(data))
+
+//    let u = svg.selectAll("path")
+//        .data(data_ready)
+
+//    u
+//        .enter()
+//        .append('path')
+//        .merge(u)
+//        .transition()
+//        .duration(1000)
+//        .attr('d', d3.arc()
+//            .innerRadius(0)
+//            .outerRadius(radius)
+//        )
+//        .attr('fill', function (d) { return (color(d.data.key)) })
+//        .attr("stroke", "white")
+//        .style("stroke-width", "2px")
+//        .style("opacity", 1)
+
+//    // remove the previous group
+//    u
+//        .exit()
+//        .remove()
+
+//}
+//update(pieData1)
+
+function makePie(data) {
+    $('#pie-chart').empty();
+
+    var width = 200
+    height = 200
+    margin = 5
+
+    // The radius of the pieplot is half the width or half the height (smallest one)
+    var radius = Math.min(width, height) / 2 - margin
+
+    var svg = d3.select("#pie-chart")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")
+        .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+    var color = d3.scaleOrdinal()
+        .domain(data)
+        .range(d3.schemeSet2);
+
+    var pie = d3.pie()
         .value(function (d) { return d.value; })
-        .sort(function (a, b) { console.log(a); return d3.ascending(a.key, b.key); }) // This make sure that group order remains the same in the pie chart
-    let data_ready = pie(d3.entries(data))
+    var data_ready = pie(d3.entries(data))
+    // Now I know that group A goes from 0 degrees to x degrees and so on.
 
-    let u = svg.selectAll("path")
+    var arcGenerator = d3.arc()
+        .innerRadius(0)
+        .outerRadius(radius)
+
+    svg
+        .selectAll('mySlices')
         .data(data_ready)
-
-    u
         .enter()
         .append('path')
-        .merge(u)
-        .transition()
-        .duration(1000)
-        .attr('d', d3.arc()
-            .innerRadius(0)
-            .outerRadius(radius)
-        )
+        .attr('d', arcGenerator)
         .attr('fill', function (d) { return (color(d.data.key)) })
-        .attr("stroke", "white")
+        .attr("stroke", "black")
         .style("stroke-width", "2px")
-        .style("opacity", 1)
+        .style("opacity", 0.85)
 
-    // remove the previous group
-    u
-        .exit()
-        .remove()
-
+    svg
+        .selectAll('mySlices')
+        .data(data_ready)
+        .enter()
+        .append('text')
+        .text(function (d) { return d.data.value })
+        .attr("transform", function (d) { return "translate(" + arcGenerator.centroid(d) + ")"; })
+        .style("text-anchor", "middle")
+        .style("font-size", 17)
 }
-update(pieData1)
+
+makePie(pieData1);
