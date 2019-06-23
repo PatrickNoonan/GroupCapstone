@@ -10,8 +10,9 @@
         let chartDates = [];
         let pastSevenDays = [];
         let pastThirtyData = checkPastThirty();
-        let pieData1 = { a: 5, b: 10 }
-        let pieData2 = { a: 5, b: 10 }
+        let allTimeVisitors = checkAllTime();
+        let daysSinceRegistration = data.length;
+        //let daysSinceRegistration = daysBetween();
 
         for (let i = data.length - 7; i < data.length; i++) {
             chartData.push(data[i].count);
@@ -30,7 +31,6 @@
 
         function checkPastThirty() {
             let pastThirtyArray = [];
-
             if (data.length < 30) {
                 for (let i = 0; i < data.length; i++) {
                     pastThirtyArray.push(data[i].count);
@@ -43,7 +43,34 @@
             return pastThirtyArray;
         }
 
-        //------------make jquery--------
+        function checkAllTime() {
+            let allTimeArray = [];
+            for (let i = 0; i < data.length; i++) {
+                allTimeArray.push(data[i].count);
+            }
+            return allTimeArray;
+        }
+
+        //function daysBetween() {
+        //    let startDay = data[0].date;
+        //    let today = Date.now();
+
+        //    // The number of milliseconds in one day
+        //    let ONE_DAY = 1000 * 60 * 60 * 24;
+
+        //    // Convert both dates to milliseconds
+        //    //let date1_ms = startDay.getTime();
+        //    let date2_ms = today.getTime();
+
+        //    // Calculate the difference in milliseconds
+        //    let difference_ms = Math.abs(date1_ms - date2_ms);
+
+        //    // Convert back to days and return
+        //    return Math.round(difference_ms / ONE_DAY);
+
+        //}
+
+        //------------make jquery?--------
         document.getElementById("past7Total").innerHTML = chartData.reduce(pastSevenTotal);
         function pastSevenTotal(total, num) {
             return total + num;
@@ -52,10 +79,15 @@
         function pastThirtyTotal(total, num) {
             return total + num;
         }
+        document.getElementById("allTimeTotal").innerHTML = allTimeVisitors.reduce(allTimeTotal);
+        function allTimeTotal(total, num) {
+            return total + num;
+        }
+        document.getElementById("registrationDays").innerHTML = daysSinceRegistration;
 
         //----------------------------------------Bar Chart-----------------------------
 
-        function BarChart() {           
+        function BarChart() {
 
             let margin = {
                 top: 30,
@@ -83,7 +115,7 @@
 
             let awesome = d3.select('#bar-chart').append('svg')
                 .attr('width', width + margin.left + margin.right)
-                .attr('height', height + margin.top + margin.bottom)            
+                .attr('height', height + margin.top + margin.bottom)
 
                 .append('g')
                 .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')')
@@ -179,62 +211,66 @@
                     stroke: "#3c763d"
                 });
         }
-
-        //-------------------------------------------------Pie Chart----------------------------
-
-        function PieChart() {
-
-            let width = 225
-            height = 225
-            margin = 20
-
-            // The radius of the pieplot is half the width or half the height (smallest one)
-            let radius = Math.min(width, height) / 2 - margin
-
-            let svg = d3.select("#pie-chart")
-                .append("svg")
-                .attr("width", width)
-                .attr("height", height)
-                .append("g")
-                .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-            let color = d3.scaleOrdinal()
-                .domain(["a", "b", "c", "d", "e", "f"])
-                .range(d3.schemeDark2);
-
-            function update(data) {
-
-                let pie = d3.pie()
-                    .value(function (d) { return d.value; })
-                    .sort(function (a, b) { console.log(a); return d3.ascending(a.key, b.key); }) // This make sure that group order remains the same in the pie chart
-                let data_ready = pie(d3.entries(data))
-
-                let u = svg.selectAll("path")
-                    .data(data_ready)
-
-                u
-                    .enter()
-                    .append('path')
-                    .merge(u)
-                    .transition()
-                    .duration(1000)
-                    .attr('d', d3.arc()
-                        .innerRadius(0)
-                        .outerRadius(radius)
-                    )
-                    .attr('fill', function (d) { return (color(d.data.key)) })
-                    .attr("stroke", "white")
-                    .style("stroke-width", "2px")
-                    .style("opacity", 1)
-
-                // remove the previous group
-                u
-                    .exit()
-                    .remove()
-
-            }
-            update(pieData1)
-        }
         BarChart();
-        PieChart();
     });
+//---------------------------------------end Bar Chart---------------------------
+
+
+
+
+
+let pieData1 = { a: 20, b: 5 }
+let pieData2 = { a: 5, b: 10 }
+
+//-------------------------------------------------Pie Chart----------------------------
+
+let width = 200
+height = 200
+margin = 5
+
+// The radius of the pieplot is half the width or half the height (smallest one)
+let radius = Math.min(width, height) / 2 - margin
+
+let svg = d3.select("#pie-chart")
+    .append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .append("g")
+    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+let color = d3.scaleOrdinal()
+    .domain(["a", "b"])
+    .range(d3.schemeDark2);
+
+function update(data) {
+
+    let pie = d3.pie()
+        .value(function (d) { return d.value; })
+        .sort(function (a, b) { console.log(a); return d3.ascending(a.key, b.key); }) // This make sure that group order remains the same in the pie chart
+    let data_ready = pie(d3.entries(data))
+
+    let u = svg.selectAll("path")
+        .data(data_ready)
+
+    u
+        .enter()
+        .append('path')
+        .merge(u)
+        .transition()
+        .duration(1000)
+        .attr('d', d3.arc()
+            .innerRadius(0)
+            .outerRadius(radius)
+        )
+        .attr('fill', function (d) { return (color(d.data.key)) })
+        .attr("stroke", "white")
+        .style("stroke-width", "2px")
+        .style("opacity", 1)
+
+    // remove the previous group
+    u
+        .exit()
+        .remove()
+
+}
+update(pieData1)

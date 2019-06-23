@@ -195,6 +195,7 @@ namespace BeerQuest.Controllers
             }
             return Json(data);
         }
+
         public List<Message> GetBusinessMessages()
         {
             Business business = GetLoggedInBusiness();

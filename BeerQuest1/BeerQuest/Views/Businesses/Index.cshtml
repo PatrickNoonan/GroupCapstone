@@ -12,13 +12,10 @@
 
 <div class="row">
     <div class="col-xs-8">
-        <div id="bar-chart">
-        </div>
+            <div id="bar-chart">
+            </div>
     </div>
     <div class="col-xs-4 businessInfo">
-        <div>
-            <p>Business: @Html.DisplayFor(model => model.Name) </p>
-        </div>
         <div>
             <p>Address: @Html.DisplayFor(model => model.Address) </p>
         </div>
@@ -41,24 +38,71 @@
 </div>
 
 <div class="row floralWhite">
-    <div class="col-xs-4">
-        <h4>Total visits for the past 7 days</h4>
-        <h4 id="past7Total"></h4>
+    <div class="col-xs-8">
+        <div class="row">
+            <div class="col-xs-4 summaryData">
+                <p>Total visits for the past 7 days</p>
+                <h4 id="past7Total"></h4>
+            </div>
+            <div class="col-xs-4 summaryData">
+                <p>Total visits for the past 30 days</p>
+                <h4 id="past30Total"></h4>
+            </div>
+            <div class="col-xs-4 summaryData">
+                <p>Total visits since registration</p>
+                <h4 id="allTimeTotal"></h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4 summaryData">
+                <p>Total unique visitors</p>
+                <h4 id="totalUnique"></h4>
+            </div>
+            <div class="col-xs-4 summaryData">
+                <p>Total Return visitors</p>
+                <h4 id="totalReturning"></h4>
+            </div>
+            <div class="col-xs-4 summaryData">
+                <p>Total days since registration</p>
+                <h4 id="registrationDays"></h4>
+            </div>
+        </div>
     </div>
     <div class="col-xs-4">
-        <h4>Total visits for the past 30 days</h4>
-        <h4 id="past30Total"></h4>
-    </div>
-    <div class="col-xs-4">
-        <button onclick="update(pieData1)">Past Seven Days</button>
-        <button onclick="update(pieData2)">Past Thirty Days</button>
-        <div id="pie-chart">
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="legend orange"></div>
+                <div class="legendText">
+                    <p>Returning Customers</p>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="legend green"></div>
+                <div class="legendText">
+                    <p>New Customers</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-8 col-md-offset-2">
+                <div id="pie-chart"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6">
+                <button class="btn btn-1" onclick="update(pieData1)">Past Seven Days</button>
+            </div>
+            <div class="col-xs-6">
+                <button class="btn btn-1" onclick="update(pieData2)">Past Thirty Days</button>
+            </div>
         </div>
     </div>
 </div>
+</div>
 
 <script src="~/js/BusinessSiteVisualization.js"></script>
-    
+
 
 
 
