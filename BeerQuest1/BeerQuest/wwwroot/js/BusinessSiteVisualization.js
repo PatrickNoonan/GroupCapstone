@@ -10,7 +10,7 @@
         let chartDates = [];
         let pastSevenDays = [];
         let pastThirtyData = checkPastThirty();
-        let pieData1 = { a: 5, b: 10 }
+        let pieData1 = { a: 20, b: 5 }
         let pieData2 = { a: 5, b: 10 }
 
         for (let i = data.length - 7; i < data.length; i++) {
@@ -184,9 +184,9 @@
 
         function PieChart() {
 
-            let width = 225
-            height = 225
-            margin = 20
+            let width = 200
+            height = 200
+            margin = 5
 
             // The radius of the pieplot is half the width or half the height (smallest one)
             let radius = Math.min(width, height) / 2 - margin
@@ -199,7 +199,7 @@
                 .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
             let color = d3.scaleOrdinal()
-                .domain(["a", "b", "c", "d", "e", "f"])
+                .domain(["a", "b"])
                 .range(d3.schemeDark2);
 
             function update(data) {

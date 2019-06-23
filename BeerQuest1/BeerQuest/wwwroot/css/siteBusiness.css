@@ -151,24 +151,56 @@ textarea {
         box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
     }
 
-/*.line-graph {
-    padding: 5% 10%;
-    margin: 0 auto;
+.legend {
+    float: left;
+    width: 20px;
+    height: 20px;
+    margin: 5px;
+    border: 1px solid rgba(0, 0, 0, .2);
+}
+
+.green {
+    background: #1b9e77;
+}
+
+.orange {
+    background: #d95f02;
+}
+
+.legendText {
+    padding-top: 5px;
+}
+
+.btn {
+    flex: 1 1 auto;
+    margin: 1px;
+    padding: 4px;
     text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
+    box-shadow: 0 0 2.5px #eee;
+    border-radius: 2.5px;
 }
 
-line-graph svg {
-    margin: 2rem 0;
-    font-size: 0.8rem;
-    font-family: 'sans-serif';
-    fill: #222;
+    .btn:hover {
+        background-position: right center;
+    }
+
+.btn-1 {
+    background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
 }
 
+
+/*
 .line-graph label {
     font-weight: bold;
     font-size: 1rem;
     transform-origin: center;
-}*/
+}
+ styling an h2 like this is causing a lot of conlicts, has to be more specific, h2's are everywhere
 h2 {
     color: floralwhite;
     text-decoration: underline;
@@ -182,6 +214,7 @@ h2 {
     display: inline-block;
     overflow: auto;
 }
+     */
 #paypal-button-container{
     padding-top: 50px;
 }

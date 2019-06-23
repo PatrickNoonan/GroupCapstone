@@ -50,15 +50,40 @@
         <h4 id="past30Total"></h4>
     </div>
     <div class="col-xs-4">
-        <button onclick="update(pieData1)">Past Seven Days</button>
-        <button onclick="update(pieData2)">Past Thirty Days</button>
-        <div id="pie-chart">
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="legend orange"></div>
+                <div class="legendText">
+                    <p>Returning Customers</p>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="legend green"></div>
+                <div class="legendText">
+                    <p>New Customers</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-8 col-md-offset-2">
+                <div id="pie-chart"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6">
+                <button class="btn btn-1" onclick="update(pieData1)">Past Seven Days</button>
+            </div>
+            <div class="col-xs-6">
+                <button class="btn btn-1" onclick="update(pieData2)">Past Thirty Days</button>
+            </div>
         </div>
     </div>
 </div>
+</div>
 
 <script src="~/js/BusinessSiteVisualization.js"></script>
-    
+
 
 
 
