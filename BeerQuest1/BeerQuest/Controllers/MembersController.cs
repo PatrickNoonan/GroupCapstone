@@ -405,8 +405,6 @@ namespace BeerQuest.Controllers
             {
                 message.Remove(message[i]);
             }
-
-
             return message;
 
         }

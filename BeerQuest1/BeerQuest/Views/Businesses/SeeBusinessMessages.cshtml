@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Domain.Message>
+
+@{
+    ViewData["Title"] = "MessageBoard";
+}
+
+<h2 class="whiteText littleBox goldBack well">Message Board</h2>
+
+<br />
+
+<body>
+    <div class="bigBox greenBack well">
+        @foreach (var item in Model)
+        {
+            if (item.WasFree == false)
+            {
+                <p class="whiteText" style="font-size: large"> @item.CurrentRank  @item.CurrentMember was at @item.CurrentBar on @item.CurrentDay.ToShortTimeString()</p>
+            }
+            else
+            {
+                <p class="whiteText" style="font-size: large"> @item.CurrentRank  @item.CurrentMember got a FREE BEER at @item.CurrentBar on @item.CurrentDay.ToShortTimeString()</p>
+            }
+        }
+    </div>
+</body>
+
