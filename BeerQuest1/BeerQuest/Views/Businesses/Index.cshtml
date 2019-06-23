@@ -7,7 +7,16 @@
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="https://d3js.org/d3-selection-multi.v1.min.js"></script>
 <script src="~/lib/jquery/dist/jquery.js"></script>
-<h2 class="indexTitle">Verified Visitors</h2>
+<h2 class="indexTitle">@Html.DisplayFor(model => model.Name)'s Analytics</h2>
+<div class="row floralWhite">
+    <div class="col-xs-4">
+        <h4>Total visits for the past 7 days</h4>
+        <h4 id="past7Total"></h4>
+    </div>
+    <div class="col-xs-4"></div>
+    <div class="col-xs-4"></div>
+</div>
+
 
 
 <div class="row">
