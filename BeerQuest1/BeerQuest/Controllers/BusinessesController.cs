@@ -195,13 +195,14 @@ namespace BeerQuest.Controllers
             }
             return Json(data);
         }
-        public List<Message> GetBusinessMessages(Business business)
+        public List<Message> GetBusinessMessages()
         {
+            Business business = GetLoggedInBusiness();
             List<Message> message = _context.Messages.Where(c => c.CurrentBar == business.Name).ToList();
             message.Reverse();
-            if (message.Count > 40)
+            if (message.Count > 14)
             {
-                for (int i = (message.Count - 1); i >= 19; i--)
+                for (int i = (message.Count - 1); i >= 15; i--)
                 {
                     message.Remove(message[i]);
                 }
@@ -209,6 +210,10 @@ namespace BeerQuest.Controllers
 
             return message;
 
+        }
+        public async Task<IActionResult> SeeBusinessMessages()
+        {
+            return View(GetBusinessMessages());
         }
         public async Task<IActionResult> Premium()
         {
