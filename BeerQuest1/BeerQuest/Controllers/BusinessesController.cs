@@ -237,5 +237,12 @@ namespace BeerQuest.Controllers
             return loggedInBusiness;
 
         }
+        public ActionResult GetPieData()
+        {
+            List<Message> data = new List<Message>();
+            Business currentBusiness = GetLoggedInBusiness();
+             data = _context.Messages.Where(c => c.CurrentBar == currentBusiness.Name).ToList();          
+            return Json(data);
+        }
     }
 }

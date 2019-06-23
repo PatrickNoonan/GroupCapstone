@@ -126,3 +126,9 @@ html, body {
 .btn-5 {
     background-image: linear-gradient(to right, #ffecd2 0%, #fcb69f 51%, #ffecd2 100%);
 }
+.newbeerpic {
+    background-image: url('../images/beerImages1.jpg');
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-position: center center;
+}
