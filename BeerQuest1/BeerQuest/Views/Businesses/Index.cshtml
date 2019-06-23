@@ -99,18 +99,21 @@
                 let awesome = d3.select('#bar-chart').append('svg')
                     .attr('width', width + margin.left + margin.right)
                     .attr('height', height + margin.top + margin.bottom)
-                    //.style('background', '#bce8f1')
-                    .append('g')
+                    //.style('background', '#bce8f1')                    
+                    
+                    .append('g')                    
+                    //.text(function (data, i) { return i.count; })
                     .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')')
                     .selectAll('rect').data(chartData)
                     .enter().append('rect')
+                    .attr('title', "Hello" )
                     .styles({
                         'fill': function (data, i) {
                             return colors(i);
                         },
                         'stroke': '#31708f',
                         'stroke-width': '1'
-                    })
+                    })                        
 
                     .attr('width', xScale.bandwidth())
                     .attr('x', function (data, i) {
@@ -118,17 +121,24 @@
                     })
 
                     .attr('height', 0)
-                    .attr('y', height)
-                    .on('mouseover', function (data) {
+                    .attr('y', height) 
+                    //.append('svg:title')
+                    //        .text(function (data, i) { return i.count; })
+                    //        .text("hello")
+                    
+                    .on('mouseover', function (data) {                        
                         dynamicColor = this.style.fill;
                         d3.select(this)
-                            .style('fill', '#3c763d')
+                            .style('fill', '#3c763d')                        
+                            
                     })
 
                     .on('mouseout', function (data) {
                         d3.select(this)
                             .style('fill', dynamicColor)
+                        $('svg.title').remove();
                     })
+                    
 
                 awesome.transition()
                     .attr('height', function (data) {

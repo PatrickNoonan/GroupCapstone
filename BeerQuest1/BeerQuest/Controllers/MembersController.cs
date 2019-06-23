@@ -37,6 +37,10 @@ namespace BeerQuest.Controllers
             }
             else
             {
+                if(loggedInMember.ActivePassport == true && loggedInMember.Passport.CurrentStop == 5)
+                {
+                    return RedirectToAction(nameof(FreeBeerMap));
+                }
                 loggedInMember = GetRank(loggedInMember);
                 return View(loggedInMember);
             }
