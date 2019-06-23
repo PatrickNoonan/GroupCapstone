@@ -2,7 +2,7 @@
     ViewData["Title"] = "Home Page";
 }
 
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
         <ol class="carousel-indicators">
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
             <li data-target="#myCarousel" data-slide-to="1"></li>
@@ -13,7 +13,7 @@
                 <div class="container">
                     <div class="carousel-caption">
                         <h1>Beer Quest</h1>
-                        <p>Get out there and find the best.</p>
+                        <p>Sign up is easy, start your first quest within minutes!</p>
                         <p><a asp-area="Identity" asp-page="/Account/Register" class="btn btn-lg btn-primary" role="button">Sign up today</a></p>
                     </div>
                 </div>
@@ -21,8 +21,8 @@
             <div class="item bg bg2">
                 <div class="container">
                     <div class="carousel-caption">
-                        <h1>Begin your adventure today</h1>
-                        <p>Sign up is easy, start your first quest within minutes!</p>
+                        <h1>Continue your adventure</h1>
+                        <p>Get out there and find the best.</p>                        
                         <p><a asp-area="Identity" asp-page="/Account/Login" class="btn btn-lg btn-primary" role="button">Log in</a></p>
                     </div>
                 </div>
