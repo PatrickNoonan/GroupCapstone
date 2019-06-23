@@ -28,21 +28,20 @@
         </div>
         <br />
         <div>
-            @if(Model.Premium == false)
+            @if (Model.Premium == false)
             {
                 <p>You are a standard member. Consider joining our premium program to increase the likelihood of appearing on our members' passports.</p>
             }
-            @if(Model.Premium == true)
+            @if (Model.Premium == true)
             {
                 <p>Thank you for being a premium member! We hope you've noticed the increase in traffic our program brings.</p>
             }
         </div>
     </div>
 </div>
-<div class="row">
-    <div id="line-graph"></div>
-</div>
+@*<div id="line-graph"></div>*@
 
 <script src="~/js/BusinessSiteBarGraph.js"></script>
+@*<script src="~/js/BusinessSiteLineGraph.js"></script>*@
 
 
