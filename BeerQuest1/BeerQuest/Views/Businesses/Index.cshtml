@@ -77,11 +77,9 @@
                     left: 50
                 }
 
-                let height = 400 - margin.top - margin.bottom;
-                let width = 720 - margin.left - margin.right;
-
-                let barWidth = 40;
-                let barOffset = 20;
+                let height = 300 - margin.top - margin.bottom;
+                let width = 620 - margin.left - margin.right;
+                
                 let dynamicColor;
 
                 let yScale = d3.scaleLinear()
@@ -102,7 +100,6 @@
                     //.style('background', '#bce8f1')                    
                     
                     .append('g')                    
-                    //.text(function (data, i) { return i.count; })
                     .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')')
                     .selectAll('rect').data(chartData)
                     .enter().append('rect')

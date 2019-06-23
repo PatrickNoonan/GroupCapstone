@@ -41,12 +41,15 @@ textarea {
     background-color: #3d77a9;
 }
 
-.navbar-inverse .navbar-nav > li > a {
-    color: #f6efff;
-}
+    .navbar-inverse .navbar-nav > li > a {
+        color: #f6efff;
+    }
 
-.navbar-inverse .navbar-brand {
-    color: #d5ead6;
+    .navbar-inverse .navbar-brand {
+        color: #d5ead6;
+    }
+
+#bar-chart {
 }
 
 #footerD {
@@ -64,8 +67,8 @@ textarea {
 }
 
 .navbar-inverse {
-    background-color: #ffff00;
-    border-color: #ffff00;
+    background-color: #ffff0000;
+    border-color: #ffff0000;
 }
 #map {
     height: 500px;
