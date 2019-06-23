@@ -40,8 +40,10 @@
             @if (Model.ActivePassport == true)
             {
                 <div id="map" class="well"></div>
-                <h4 class="littleBox greenBack well whiteText">Your Passport expires on @Model.Passport.StopDate.ToShortDateString().</h4>
-                <br />
+                
+                    <h4 class="littleBox greenBack well whiteText">Your Passport expires on @Model.Passport.StopDate.ToShortDateString().</h4>
+                    <br />
+                
                 <script>
         var map;
     function initMap() {
