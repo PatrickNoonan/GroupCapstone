@@ -193,6 +193,9 @@ textarea {
     background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
 }
 
+.summaryData {
+    padding:20px;
+}
 
 /*
 .line-graph label {
