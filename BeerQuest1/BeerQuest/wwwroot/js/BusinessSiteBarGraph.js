@@ -8,12 +8,13 @@
     .done(function (data) {
         let chartData = [];
         let chartDates = [];
-        let pastSevenDays = [];  
+        let pastSevenDays = [];
+        let pastThirtyData = checkPastThirty();
 
-        for (let i = data.length-7; i < data.length; i++) {
+        for (let i = data.length - 7; i < data.length; i++) {
             chartData.push(data[i].count);
-        }        
-        
+        }
+
         for (let i = 0; i < 7; i++) {
             let d = new Date();
             d.setDate(d.getDate() - i);
@@ -21,15 +22,33 @@
             pastSevenDays.unshift(dString)
         }
 
-        for (let i = data.length-7; i < data.length; i++) {
+        for (let i = data.length - 7; i < data.length; i++) {
             chartDates.push(data[i].date);
+        }
+
+        function checkPastThirty() {
+            let pastThirtyArray = [];
+
+            if (data.length < 30) {
+                for (let i = 0; i < data.length; i++) {
+                    pastThirtyArray.push(data[i].count);
+                }
+            } else {
+                for (let i = data.length - 30; i < data.length; i++) {
+                    pastThirtyArray.push(data[i].count);
+                }
+            }
+            return pastThirtyArray;
         }
 
         document.getElementById("past7Total").innerHTML = chartData.reduce(pastSevenTotal);
         function pastSevenTotal(total, num) {
             return total + num;
         }
-        let pastThirtyTotal;
+        document.getElementById("past30Total").innerHTML = pastThirtyData.reduce(pastThirtyTotal);
+        function pastThirtyTotal(total, num) {
+            return total + num;
+        }
 
         let margin = {
             top: 30,
