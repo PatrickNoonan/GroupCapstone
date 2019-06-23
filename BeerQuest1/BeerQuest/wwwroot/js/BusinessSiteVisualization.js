@@ -10,6 +10,7 @@
         let chartDates = [];
         let pastSevenDays = [];
         let pastThirtyData = checkPastThirty();
+        let allTimeVisitors = checkAllTime();
         let pieData1 = { a: 20, b: 5 }
         let pieData2 = { a: 5, b: 10 }
 
@@ -30,7 +31,6 @@
 
         function checkPastThirty() {
             let pastThirtyArray = [];
-
             if (data.length < 30) {
                 for (let i = 0; i < data.length; i++) {
                     pastThirtyArray.push(data[i].count);
@@ -43,6 +43,14 @@
             return pastThirtyArray;
         }
 
+        function checkAllTime() {
+            let allTimeArray = [];
+            for (let i = 0; i < data.length; i++) {
+                allTimeArray.push(data[i].count);
+            }
+            return allTimeArray;
+        }
+
         //------------make jquery--------
         document.getElementById("past7Total").innerHTML = chartData.reduce(pastSevenTotal);
         function pastSevenTotal(total, num) {
@@ -50,6 +58,10 @@
         }
         document.getElementById("past30Total").innerHTML = pastThirtyData.reduce(pastThirtyTotal);
         function pastThirtyTotal(total, num) {
+            return total + num;
+        }
+        document.getElementById("allTimeTotal").innerHTML = allTimeVisitors.reduce(allTimeTotal);
+        function allTimeTotal(total, num) {
             return total + num;
         }
 
