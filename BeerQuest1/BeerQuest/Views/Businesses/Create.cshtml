@@ -4,11 +4,9 @@
     ViewData["Title"] = "Create";
 }
 
-
-<h4 class="registerText">Business Information</h4>
-<hr />
+<h3 class="whiteText goldBack littleBox well">Business Information</h3>
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 bigBox greenBack whiteText well">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -37,7 +35,7 @@
                 <span asp-validation-for="Pin" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="button btn btn-default" />
             </div>
         </form>
     </div>
