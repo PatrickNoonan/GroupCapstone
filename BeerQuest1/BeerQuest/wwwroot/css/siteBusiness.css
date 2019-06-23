@@ -67,3 +67,61 @@ textarea {
     background-color: #ffff00;
     border-color: #ffff00;
 }
+#map {
+    height: 500px;
+    width: 100%;
+}
+
+.bigBox {
+    display: inline-block;
+    vertical-align: middle;
+    overflow: auto;
+    padding: 5px 15px 10px;
+}
+
+.littleBox {
+    display: inline-block;
+    vertical-align: middle;
+    overflow: auto;
+    padding: 5px;
+}
+
+
+.greenBack {
+    background-color: rgba(34, 139, 34, .75);
+    border-style: groove;
+}
+
+.goldBack {
+    background-color: rgba(184, 134, 11, .75);
+    border-style: groove;
+}
+
+.rankText {
+    font-size: 20px;
+    line-height: 1.4;
+    color: floralwhite;
+    text-align: left;
+}
+
+.under {
+    text-decoration: underline
+}
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    border-radius: 8px;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+    .button:hover {
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+    }
