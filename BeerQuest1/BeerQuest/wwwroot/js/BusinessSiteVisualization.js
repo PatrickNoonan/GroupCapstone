@@ -19,7 +19,7 @@
         for (let i = 0; i < 7; i++) {
             let d = new Date();
             d.setDate(d.getDate() - i);
-            let dString = (d.getMonth() + "-" + d.getDate());
+            let dString = (d.getMonth() +1  + "-" + d.getDate());
             pastSevenDays.unshift(dString)
         }
 
