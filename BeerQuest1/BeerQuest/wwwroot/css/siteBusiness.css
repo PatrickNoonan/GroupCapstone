@@ -93,6 +93,10 @@ textarea {
     width: 100%;
 }
 
+.whiteText {
+    color: floralwhite;
+}
+
 .bigBox {
     display: inline-block;
     vertical-align: middle;
