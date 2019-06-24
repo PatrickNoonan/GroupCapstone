@@ -211,6 +211,7 @@ function startPie(dayNum) {
                 console.log(namesThisWeek.indexOf(val));
                 return namesThisWeek.indexOf(val) == -1;
             });
+            //let getUnique = namesBeforeThisWeek.filter(function (el) { return namesThisWeek.indexOf(el) == -1; });
             let uniqueNamesThisMonth = namesBeforeThisMonth.filter(function (val) {
                 console.log(namesThisMonth.indexOf(val));
                 return namesThisMonth.indexOf(val) == -1;
@@ -250,12 +251,12 @@ function startPie(dayNum) {
                 }
             }
 
-            let singles = function(array) {
+            let singles = function (array) {
                 for (let i = 0, single = []; i < names.length; i++) {
                     if (names.indexOf(names[i], names.indexOf(names[i]) + 1) == -1) single.push(names[i]);
                 };
                 return single;
-            };
+            };         
 
             let duplicates = names.reduce(function (list, item, index, array) {
                 if (array.indexOf(item, index + 1) !== -1 && list.indexOf(item) === -1) {
@@ -264,11 +265,18 @@ function startPie(dayNum) {
                 return list;
             }, []);
 
+            let returners = function (array) {
+                for (let i = 0, single = []; i < names.length; i++) {
+                    if (names.indexOf(duplicates[i], duplicates.indexOf(duplicates[i]) + 1) == -1) single.push(duplicates[i]);
+                };
+                return single;
+            };        
+
             dateA = moment(dateReg.reduce(function (a, b) { return a < b ? a : b; }));
             let daysSinceRegistration = dateA.diff(now, 'days');
 
             document.getElementById("totalUnique").innerHTML = singles.length;
-            document.getElementById("totalReturning").innerHTML = duplicates.length;
+            document.getElementById("totalReturning").innerHTML = returners.length;
             document.getElementById("registrationDays").innerHTML = -daysSinceRegistration;
 
 
