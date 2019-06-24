@@ -286,30 +286,30 @@ function startPie(dayNum) {
             function makePie(data) {
                 $('#pie-chart').empty();
 
-                var width = 200
+                let width = 200
                 height = 200
                 margin = 5
 
                 //the radius of the pieplot is half the width or half the height (smallest one)
-                var radius = Math.min(width, height) / 2 - margin
+                let radius = Math.min(width, height) / 2 - margin
 
-                var svg = d3.select("#pie-chart")
+                let svg = d3.select("#pie-chart")
                     .append("svg")
                     .attr("width", width)
                     .attr("height", height)
                     .append("g")
                     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-                var color = d3.scaleOrdinal()
+                let color = d3.scaleOrdinal()
                     .domain(data)
                     .range(d3.schemeSet2);
 
-                var pie = d3.pie()
+                let pie = d3.pie()
                     .value(function (d) { return d.value; })
-                var data_ready = pie(d3.entries(data))
+                let data_ready = pie(d3.entries(data))
                 //now I know that group A goes from 0 degrees to x degrees and so on
 
-                var arcGenerator = d3.arc()
+                let arcGenerator = d3.arc()
                     .innerRadius(0)
                     .outerRadius(radius)
 

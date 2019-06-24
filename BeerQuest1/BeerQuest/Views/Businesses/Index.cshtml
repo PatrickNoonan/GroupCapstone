@@ -9,22 +9,35 @@
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
+
 <h2 class="indexTitle">@Html.DisplayFor(model => model.Name)'s Analytics</h2>
 
 <div class="row">
     <div class="col-xs-8">
-            <div id="bar-chart">
-            </div>
+        <div id="bar-chart">
+        </div>
     </div>
     <div class="col-xs-4 businessInfo">
+        <h3 class="pinButton">
+            <label for="menuToggle" class="toggleButton btn btn-4">Show pin</label>
+        </h3>
+        <br/>
+
         <div>
-            <p>Address: @Html.DisplayFor(model => model.Address) </p>
+            <input id="menuToggle" type="checkbox">
+            <div class="infobox md-card">
+                <div class="md-card-content">
+                    <h3>@Html.DisplayFor(model => model.Name)'s PIN</h3>
+                    <h4>@Html.DisplayFor(model => model.Address)</h4>
+                    <p class="md-caption">Your PIN is</p>
+                    <p>@Html.DisplayFor(model => model.Pin)</p>
+                    <p>Make sure your employees know to enter this discreetly.</p>
+                </div>
+                <div class="md-card-btns">
+                    <label for="menuToggle" class="btn btn-5">Close Box</label>
+                </div>
+            </div>
         </div>
-        <div>
-            <p>Your PIN is @Html.DisplayFor(model => model.Pin)</p>
-            <p>Make sure your employees know to enter this discreetly.</p>
-        </div>
-        <br />
         <div>
             @if (Model.Premium == false)
             {
