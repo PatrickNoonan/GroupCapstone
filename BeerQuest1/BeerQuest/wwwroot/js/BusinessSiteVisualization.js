@@ -10,9 +10,7 @@
         let chartDates = [];
         let pastSevenDays = [];
         let pastThirtyData = checkPastThirty();
-        let allTimeVisitors = checkAllTime();
-        let daysSinceRegistration = data.length;
-        //let daysSinceRegistration = daysBetween();
+        let allTimeVisitors = checkAllTime();     
 
         for (let i = data.length - 7; i < data.length; i++) {
             chartData.push(data[i].count);
@@ -51,26 +49,6 @@
             return allTimeArray;
         }
 
-        //function daysBetween() {
-        //    let startDay = data[0].date;
-        //    let today = Date.now();
-
-        //    // The number of milliseconds in one day
-        //    let ONE_DAY = 1000 * 60 * 60 * 24;
-
-        //    // Convert both dates to milliseconds
-        //    //let date1_ms = startDay.getTime();
-        //    let date2_ms = today.getTime();
-
-        //    // Calculate the difference in milliseconds
-        //    let difference_ms = Math.abs(date1_ms - date2_ms);
-
-        //    // Convert back to days and return
-        //    return Math.round(difference_ms / ONE_DAY);
-
-        //}
-
-        //------------make jquery?--------
         document.getElementById("past7Total").innerHTML = chartData.reduce(pastSevenTotal);
         function pastSevenTotal(total, num) {
             return total + num;
@@ -82,8 +60,7 @@
         document.getElementById("allTimeTotal").innerHTML = allTimeVisitors.reduce(allTimeTotal);
         function allTimeTotal(total, num) {
             return total + num;
-        }
-        document.getElementById("registrationDays").innerHTML = daysSinceRegistration;
+        }        
 
         //----------------------------------------Bar Chart-----------------------------
 
@@ -213,118 +190,154 @@
         }
         BarChart();
     });
-//---------------------------------------end Bar Chart---------------------------
+
+//---------------------------------------end Bar Chart--------------------------------------------
+
+function startPie(dayNum) {
+    $.ajax({
+        url: '/Businesses/GetPieData',
+        data: "",
+        dataType: "json",
+        type: "POST",
+        contentType: "application/json; chartset=utf-8",
+    })
+        .done(function (data) { 
+            let names = [];
+            let namesBeforeThisWeek = [];
+            let namesBeforeThisMonth = [];
+            let namesThisWeek = [];
+            let namesThisMonth = [];
+            let uniqueNamesThisWeek = namesBeforeThisWeek.filter(function (val) {
+                console.log(namesThisWeek.indexOf(val));
+                return namesThisWeek.indexOf(val) == -1;
+            });
+            let uniqueNamesThisMonth = namesBeforeThisMonth.filter(function (val) {
+                console.log(namesThisMonth.indexOf(val));
+                return namesThisMonth.indexOf(val) == -1;
+            });
+            let now = moment().format('MM/DD/YYYY');
+            let dateWeekAgo = moment().subtract(7, 'd').format('MM/DD/YYYY');
+            let dateMonthAgo = moment().subtract(1, 'months').format('MM/DD/YYYY');
+            let dateReg = [];     
+            
+
+            for (let i = 0; i < data.length; i++) {
+                names.push(data[i].currentMember);
+                dateReg.push(moment(data[i].currentDay).format('MM/DD/YYYY'));                
+            }
+
+            for (let i = 0; i < dateReg.length; i++) {
+                if (dateReg[i] <= dateWeekAgo) {
+                    namesBeforeThisWeek.push(names[i]);
+                }
+            }
+
+            for (let i = 0; i < dateReg.length; i++) {
+                if (dateReg[i] > dateWeekAgo) {
+                    namesThisWeek.push(names[i]);
+                }
+            }
+
+            for (let i = 0; i < dateReg.length; i++) {
+                if (dateReg[i] <= dateMonthAgo) {
+                    namesBeforeThisMonth.push(names[i]);
+                }
+            }
+
+            for (let i = 0; i < dateReg.length; i++) {
+                if (dateReg[i] > dateMonthAgo) {
+                    namesThisMonth.push(names[i]);
+                }
+            }
+
+            let singles = function(array) {
+                for (let i = 0, single = []; i < names.length; i++) {
+                    if (names.indexOf(names[i], names.indexOf(names[i]) + 1) == -1) single.push(names[i]);
+                };
+                return single;
+            };
+
+            let duplicates = names.reduce(function (list, item, index, array) {
+                if (array.indexOf(item, index + 1) !== -1 && list.indexOf(item) === -1) {
+                    list.push(item);
+                }
+                return list;
+            }, []);
+
+            dateA = moment(dateReg.reduce(function (a, b) { return a < b ? a : b; }));
+            let daysSinceRegistration = dateA.diff(now, 'days');
+
+            document.getElementById("totalUnique").innerHTML = singles.length;
+            document.getElementById("totalReturning").innerHTML = duplicates.length;
+            document.getElementById("registrationDays").innerHTML = -daysSinceRegistration;
 
 
 
+            //-------------------------------------------------Pie Chart----------------------------
+            let pieData1 = { a: namesThisWeek.length, b: namesBeforeThisWeek.length } //a = customers who have never been to this bar before this week
+            let pieData2 = { a: namesThisMonth.length, b: namesBeforeThisMonth.length }
 
+            if (dayNum == "seven") {
+                makePie(pieData1);
+            } else if (dayNum == "thirty") {
+                makePie(pieData2);
+            }     
 
-let pieData1 = { a: 20, b: 5 }
-let pieData2 = { a: 5, b: 10 }
+            function makePie(data) {
+                $('#pie-chart').empty();
 
-//-------------------------------------------------Pie Chart----------------------------
+                var width = 200
+                height = 200
+                margin = 5
 
-//let width = 200
-//height = 200
-//margin = 5
+                //the radius of the pieplot is half the width or half the height (smallest one)
+                var radius = Math.min(width, height) / 2 - margin
 
-//// The radius of the pieplot is half the width or half the height (smallest one)
-//let radius = Math.min(width, height) / 2 - margin
+                var svg = d3.select("#pie-chart")
+                    .append("svg")
+                    .attr("width", width)
+                    .attr("height", height)
+                    .append("g")
+                    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-//let svg = d3.select("#pie-chart")
-//    .append("svg")
-//    .attr("width", width)
-//    .attr("height", height)
-//    .append("g")
-//    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+                var color = d3.scaleOrdinal()
+                    .domain(data)
+                    .range(d3.schemeSet2);
 
-//let color = d3.scaleOrdinal()
-//    .domain(["a", "b"])
-//    .range(d3.schemeDark2);
+                var pie = d3.pie()
+                    .value(function (d) { return d.value; })
+                var data_ready = pie(d3.entries(data))
+                //now I know that group A goes from 0 degrees to x degrees and so on
 
-//function update(data) {
+                var arcGenerator = d3.arc()
+                    .innerRadius(0)
+                    .outerRadius(radius)
 
-//    let pie = d3.pie()
-//        .value(function (d) { return d.value; })
-//        .sort(function (a, b) { console.log(a); return d3.ascending(a.key, b.key); }) // This make sure that group order remains the same in the pie chart
-//    let data_ready = pie(d3.entries(data))
+                svg
+                    .selectAll('mySlices')
+                    .data(data_ready)
+                    .enter()
+                    .append('path')
+                    .attr('d', arcGenerator)
+                    .attr('fill', function (d) { return (color(d.data.key)) })
+                    .attr("stroke", "black")
+                    .style("stroke-width", "2px")
+                    .style("opacity", 0.85)
 
-//    let u = svg.selectAll("path")
-//        .data(data_ready)
-
-//    u
-//        .enter()
-//        .append('path')
-//        .merge(u)
-//        .transition()
-//        .duration(1000)
-//        .attr('d', d3.arc()
-//            .innerRadius(0)
-//            .outerRadius(radius)
-//        )
-//        .attr('fill', function (d) { return (color(d.data.key)) })
-//        .attr("stroke", "white")
-//        .style("stroke-width", "2px")
-//        .style("opacity", 1)
-
-//    // remove the previous group
-//    u
-//        .exit()
-//        .remove()
-
-//}
-//update(pieData1)
-
-function makePie(data) {
-    $('#pie-chart').empty();
-
-    var width = 200
-    height = 200
-    margin = 5
-
-    // The radius of the pieplot is half the width or half the height (smallest one)
-    var radius = Math.min(width, height) / 2 - margin
-
-    var svg = d3.select("#pie-chart")
-        .append("svg")
-        .attr("width", width)
-        .attr("height", height)
-        .append("g")
-        .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-    var color = d3.scaleOrdinal()
-        .domain(data)
-        .range(d3.schemeSet2);
-
-    var pie = d3.pie()
-        .value(function (d) { return d.value; })
-    var data_ready = pie(d3.entries(data))
-    // Now I know that group A goes from 0 degrees to x degrees and so on.
-
-    var arcGenerator = d3.arc()
-        .innerRadius(0)
-        .outerRadius(radius)
-
-    svg
-        .selectAll('mySlices')
-        .data(data_ready)
-        .enter()
-        .append('path')
-        .attr('d', arcGenerator)
-        .attr('fill', function (d) { return (color(d.data.key)) })
-        .attr("stroke", "black")
-        .style("stroke-width", "2px")
-        .style("opacity", 0.85)
-
-    svg
-        .selectAll('mySlices')
-        .data(data_ready)
-        .enter()
-        .append('text')
-        .text(function (d) { return d.data.value })
-        .attr("transform", function (d) { return "translate(" + arcGenerator.centroid(d) + ")"; })
-        .style("text-anchor", "middle")
-        .style("font-size", 17)
+                svg
+                    .selectAll('mySlices')
+                    .data(data_ready)
+                    .enter()
+                    .append('text')
+                    .text(function (d) { return d.data.value })
+                    .attr("transform", function (d) { return "translate(" + arcGenerator.centroid(d) + ")"; })
+                    .style("text-anchor", "middle")
+                    .style("font-size", 17)
+            }            
+        });
 }
 
-makePie(pieData1);
+startPie("seven");
+
+
+
