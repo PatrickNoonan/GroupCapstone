@@ -271,12 +271,16 @@ function startPie(dayNum) {
                 };
                 return single;
             };        
+            let placeholderNew = 56;
+            let placeholderReturn = 23;
 
             dateA = moment(dateReg.reduce(function (a, b) { return a < b ? a : b; }));
             let daysSinceRegistration = dateA.diff(now, 'days');
 
-            document.getElementById("totalUnique").innerHTML = singles.length;
-            document.getElementById("totalReturning").innerHTML = returners.length;
+            //document.getElementById("totalUnique").innerHTML = singles.length;
+            //document.getElementById("totalReturning").innerHTML = returners.length;
+            document.getElementById("totalUnique").innerHTML = placeholderNew;
+            document.getElementById("totalReturning").innerHTML = placeholderReturn;
             document.getElementById("registrationDays").innerHTML = -daysSinceRegistration;
 
 
