@@ -10,9 +10,7 @@
         let chartDates = [];
         let pastSevenDays = [];
         let pastThirtyData = checkPastThirty();
-        let allTimeVisitors = checkAllTime();
-        let daysSinceRegistration = data.length;
-        //let daysSinceRegistration = daysBetween();
+        let allTimeVisitors = checkAllTime();     
 
         for (let i = data.length - 7; i < data.length; i++) {
             chartData.push(data[i].count);
@@ -51,26 +49,6 @@
             return allTimeArray;
         }
 
-        //function daysBetween() {
-        //    let startDay = data[0].date;
-        //    let today = Date.now();
-
-        //    // The number of milliseconds in one day
-        //    let ONE_DAY = 1000 * 60 * 60 * 24;
-
-        //    // Convert both dates to milliseconds
-        //    //let date1_ms = startDay.getTime();
-        //    let date2_ms = today.getTime();
-
-        //    // Calculate the difference in milliseconds
-        //    let difference_ms = Math.abs(date1_ms - date2_ms);
-
-        //    // Convert back to days and return
-        //    return Math.round(difference_ms / ONE_DAY);
-
-        //}
-
-        //------------make jquery?--------
         document.getElementById("past7Total").innerHTML = chartData.reduce(pastSevenTotal);
         function pastSevenTotal(total, num) {
             return total + num;
@@ -82,8 +60,7 @@
         document.getElementById("allTimeTotal").innerHTML = allTimeVisitors.reduce(allTimeTotal);
         function allTimeTotal(total, num) {
             return total + num;
-        }
-        document.getElementById("registrationDays").innerHTML = daysSinceRegistration;
+        }        
 
         //----------------------------------------Bar Chart-----------------------------
 
@@ -241,7 +218,8 @@ function startPie(dayNum) {
             let now = moment().format('MM/DD/YYYY');
             let dateWeekAgo = moment().subtract(7, 'd').format('MM/DD/YYYY');
             let dateMonthAgo = moment().subtract(1, 'months').format('MM/DD/YYYY');
-            let dateReg = [];            
+            let dateReg = [];     
+            
 
             for (let i = 0; i < data.length; i++) {
                 names.push(data[i].currentMember);
@@ -272,16 +250,38 @@ function startPie(dayNum) {
                 }
             }
 
-            let pieData1 = { a: namesThisWeek.length, b: namesBeforeThisWeek.length } //a = customers who have never been to this bar before this week
-            let pieData2 = { a: namesThisMonth.length, b: namesBeforeThisMonth.length }
+            let singles = function(array) {
+                for (let i = 0, single = []; i < names.length; i++) {
+                    if (names.indexOf(names[i], names.indexOf(names[i]) + 1) == -1) single.push(names[i]);
+                };
+                return single;
+            };
 
-            console.log(uniqueNamesThisWeek);
+            let duplicates = names.reduce(function (list, item, index, array) {
+                if (array.indexOf(item, index + 1) !== -1 && list.indexOf(item) === -1) {
+                    list.push(item);
+                }
+                return list;
+            }, []);
 
+            dateA = moment(dateReg.reduce(function (a, b) { return a < b ? a : b; }));
+            let daysSinceRegistration = dateA.diff(now, 'days');
+
+            document.getElementById("totalUnique").innerHTML = singles.length;
+            document.getElementById("totalReturning").innerHTML = duplicates.length;
+            document.getElementById("registrationDays").innerHTML = -daysSinceRegistration;
 
 
 
             //-------------------------------------------------Pie Chart----------------------------
+            let pieData1 = { a: namesThisWeek.length, b: namesBeforeThisWeek.length } //a = customers who have never been to this bar before this week
+            let pieData2 = { a: namesThisMonth.length, b: namesBeforeThisMonth.length }
 
+            if (dayNum == "seven") {
+                makePie(pieData1);
+            } else if (dayNum == "thirty") {
+                makePie(pieData2);
+            }     
 
             function makePie(data) {
                 $('#pie-chart').empty();
@@ -290,7 +290,7 @@ function startPie(dayNum) {
                 height = 200
                 margin = 5
 
-                // The radius of the pieplot is half the width or half the height (smallest one)
+                //the radius of the pieplot is half the width or half the height (smallest one)
                 var radius = Math.min(width, height) / 2 - margin
 
                 var svg = d3.select("#pie-chart")
@@ -307,7 +307,7 @@ function startPie(dayNum) {
                 var pie = d3.pie()
                     .value(function (d) { return d.value; })
                 var data_ready = pie(d3.entries(data))
-                // Now I know that group A goes from 0 degrees to x degrees and so on.
+                //now I know that group A goes from 0 degrees to x degrees and so on
 
                 var arcGenerator = d3.arc()
                     .innerRadius(0)
@@ -333,13 +333,7 @@ function startPie(dayNum) {
                     .attr("transform", function (d) { return "translate(" + arcGenerator.centroid(d) + ")"; })
                     .style("text-anchor", "middle")
                     .style("font-size", 17)
-            }
-
-            if (dayNum == "seven") {
-                makePie(pieData1);
-            } else if (dayNum == "thirty") {
-                makePie(pieData2);
-            }
+            }            
         });
 }
 
