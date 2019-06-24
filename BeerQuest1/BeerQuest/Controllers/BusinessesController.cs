@@ -195,6 +195,14 @@ namespace BeerQuest.Controllers
             }
             return Json(data);
         }
+        [HttpPost]
+        public ActionResult GetPieData()
+        {
+            List<Message> data = new List<Message>();
+            Business currentBusiness = GetLoggedInBusiness();
+            data = _context.Messages.Where(c => c.CurrentBar == currentBusiness.Name).ToList();
+            return Json(data);
+        }
 
         public List<Message> GetBusinessMessages()
         {
@@ -237,13 +245,6 @@ namespace BeerQuest.Controllers
             var loggedInBusiness = _context.Businesses.Where(c => c.ApplicationId == currentUserId).Single();
             return loggedInBusiness;
 
-        }
-        public ActionResult GetPieData()
-        {
-            List<Message> data = new List<Message>();
-            Business currentBusiness = GetLoggedInBusiness();
-             data = _context.Messages.Where(c => c.CurrentBar == currentBusiness.Name).ToList();          
-            return Json(data);
-        }
+        }        
     }
 }

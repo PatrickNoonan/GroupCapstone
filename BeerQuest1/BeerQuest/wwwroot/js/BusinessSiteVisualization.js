@@ -213,118 +213,137 @@
         }
         BarChart();
     });
-//---------------------------------------end Bar Chart---------------------------
+
+//---------------------------------------end Bar Chart--------------------------------------------
+
+function startPie(dayNum) {
+    $.ajax({
+        url: '/Businesses/GetPieData',
+        data: "",
+        dataType: "json",
+        type: "POST",
+        contentType: "application/json; chartset=utf-8",
+    })
+        .done(function (data) { 
+            let names = [];
+            let namesBeforeThisWeek = [];
+            let namesBeforeThisMonth = [];
+            let namesThisWeek = [];
+            let namesThisMonth = [];
+            let uniqueNamesThisWeek = namesBeforeThisWeek.filter(function (val) {
+                console.log(namesThisWeek.indexOf(val));
+                return namesThisWeek.indexOf(val) == -1;
+            });
+            let uniqueNamesThisMonth = namesBeforeThisMonth.filter(function (val) {
+                console.log(namesThisMonth.indexOf(val));
+                return namesThisMonth.indexOf(val) == -1;
+            });
+            let now = moment().format('MM/DD/YYYY');
+            let dateWeekAgo = moment().subtract(7, 'd').format('MM/DD/YYYY');
+            let dateMonthAgo = moment().subtract(1, 'months').format('MM/DD/YYYY');
+            let dateReg = [];            
+
+            for (let i = 0; i < data.length; i++) {
+                names.push(data[i].currentMember);
+                dateReg.push(moment(data[i].currentDay).format('MM/DD/YYYY'));                
+            }
+
+            for (let i = 0; i < dateReg.length; i++) {
+                if (dateReg[i] <= dateWeekAgo) {
+                    namesBeforeThisWeek.push(names[i]);
+                }
+            }
+
+            for (let i = 0; i < dateReg.length; i++) {
+                if (dateReg[i] > dateWeekAgo) {
+                    namesThisWeek.push(names[i]);
+                }
+            }
+
+            for (let i = 0; i < dateReg.length; i++) {
+                if (dateReg[i] <= dateMonthAgo) {
+                    namesBeforeThisMonth.push(names[i]);
+                }
+            }
+
+            for (let i = 0; i < dateReg.length; i++) {
+                if (dateReg[i] > dateMonthAgo) {
+                    namesThisMonth.push(names[i]);
+                }
+            }
+
+            let pieData1 = { a: namesThisWeek.length, b: namesBeforeThisWeek.length } //a = customers who have never been to this bar before this week
+            let pieData2 = { a: namesThisMonth.length, b: namesBeforeThisMonth.length }
+
+            console.log(uniqueNamesThisWeek);
 
 
 
 
+            //-------------------------------------------------Pie Chart----------------------------
 
-let pieData1 = { a: 20, b: 5 }
-let pieData2 = { a: 5, b: 10 }
 
-//-------------------------------------------------Pie Chart----------------------------
+            function makePie(data) {
+                $('#pie-chart').empty();
 
-//let width = 200
-//height = 200
-//margin = 5
+                var width = 200
+                height = 200
+                margin = 5
 
-//// The radius of the pieplot is half the width or half the height (smallest one)
-//let radius = Math.min(width, height) / 2 - margin
+                // The radius of the pieplot is half the width or half the height (smallest one)
+                var radius = Math.min(width, height) / 2 - margin
 
-//let svg = d3.select("#pie-chart")
-//    .append("svg")
-//    .attr("width", width)
-//    .attr("height", height)
-//    .append("g")
-//    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+                var svg = d3.select("#pie-chart")
+                    .append("svg")
+                    .attr("width", width)
+                    .attr("height", height)
+                    .append("g")
+                    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-//let color = d3.scaleOrdinal()
-//    .domain(["a", "b"])
-//    .range(d3.schemeDark2);
+                var color = d3.scaleOrdinal()
+                    .domain(data)
+                    .range(d3.schemeSet2);
 
-//function update(data) {
+                var pie = d3.pie()
+                    .value(function (d) { return d.value; })
+                var data_ready = pie(d3.entries(data))
+                // Now I know that group A goes from 0 degrees to x degrees and so on.
 
-//    let pie = d3.pie()
-//        .value(function (d) { return d.value; })
-//        .sort(function (a, b) { console.log(a); return d3.ascending(a.key, b.key); }) // This make sure that group order remains the same in the pie chart
-//    let data_ready = pie(d3.entries(data))
+                var arcGenerator = d3.arc()
+                    .innerRadius(0)
+                    .outerRadius(radius)
 
-//    let u = svg.selectAll("path")
-//        .data(data_ready)
+                svg
+                    .selectAll('mySlices')
+                    .data(data_ready)
+                    .enter()
+                    .append('path')
+                    .attr('d', arcGenerator)
+                    .attr('fill', function (d) { return (color(d.data.key)) })
+                    .attr("stroke", "black")
+                    .style("stroke-width", "2px")
+                    .style("opacity", 0.85)
 
-//    u
-//        .enter()
-//        .append('path')
-//        .merge(u)
-//        .transition()
-//        .duration(1000)
-//        .attr('d', d3.arc()
-//            .innerRadius(0)
-//            .outerRadius(radius)
-//        )
-//        .attr('fill', function (d) { return (color(d.data.key)) })
-//        .attr("stroke", "white")
-//        .style("stroke-width", "2px")
-//        .style("opacity", 1)
+                svg
+                    .selectAll('mySlices')
+                    .data(data_ready)
+                    .enter()
+                    .append('text')
+                    .text(function (d) { return d.data.value })
+                    .attr("transform", function (d) { return "translate(" + arcGenerator.centroid(d) + ")"; })
+                    .style("text-anchor", "middle")
+                    .style("font-size", 17)
+            }
 
-//    // remove the previous group
-//    u
-//        .exit()
-//        .remove()
-
-//}
-//update(pieData1)
-
-function makePie(data) {
-    $('#pie-chart').empty();
-
-    var width = 200
-    height = 200
-    margin = 5
-
-    // The radius of the pieplot is half the width or half the height (smallest one)
-    var radius = Math.min(width, height) / 2 - margin
-
-    var svg = d3.select("#pie-chart")
-        .append("svg")
-        .attr("width", width)
-        .attr("height", height)
-        .append("g")
-        .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-    var color = d3.scaleOrdinal()
-        .domain(data)
-        .range(d3.schemeSet2);
-
-    var pie = d3.pie()
-        .value(function (d) { return d.value; })
-    var data_ready = pie(d3.entries(data))
-    // Now I know that group A goes from 0 degrees to x degrees and so on.
-
-    var arcGenerator = d3.arc()
-        .innerRadius(0)
-        .outerRadius(radius)
-
-    svg
-        .selectAll('mySlices')
-        .data(data_ready)
-        .enter()
-        .append('path')
-        .attr('d', arcGenerator)
-        .attr('fill', function (d) { return (color(d.data.key)) })
-        .attr("stroke", "black")
-        .style("stroke-width", "2px")
-        .style("opacity", 0.85)
-
-    svg
-        .selectAll('mySlices')
-        .data(data_ready)
-        .enter()
-        .append('text')
-        .text(function (d) { return d.data.value })
-        .attr("transform", function (d) { return "translate(" + arcGenerator.centroid(d) + ")"; })
-        .style("text-anchor", "middle")
-        .style("font-size", 17)
+            if (dayNum == "seven") {
+                makePie(pieData1);
+            } else if (dayNum == "thirty") {
+                makePie(pieData2);
+            }
+        });
 }
 
-makePie(pieData1);
+startPie("seven");
+
+
+
